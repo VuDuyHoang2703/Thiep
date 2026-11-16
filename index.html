@@ -1,0 +1,2069 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Thiệp Mời Lễ Tốt Nghiệp - Trương Thị Cẩm Tiên | BDU 2026</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome & Confetti -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --primary-dark: #0a1e38;
+      --primary-navy: #102e56;
+      --primary-blue: #1c5296;
+      --sky-vivid: #4ba3e3;
+      --sky-light: #bde0fe;
+      --sky-pale: #f0f7ff;
+      --gold-deep: #b8860b;
+      --gold-bright: #d4af37;
+      --gold-soft: #fcf1c5;
+      --gold-grad: linear-gradient(135deg, #c39a26 0%, #fae8a2 50%, #b8860b 100%);
+      --text-dark: #14213d;
+      --text-muted: #4e657e;
+      --white: #ffffff;
+      --shadow-card: 0 16px 40px rgba(10, 30, 56, 0.15);
+      --radius-main: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(180deg, #d3e7fc 0%, #aed5fc 40%, #7dbbf7 100%);
+      color: var(--text-dark);
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Floating Petals Canvas */
+    #petals-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 99;
+    }
+
+    .ambient-sky-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.5) 0%, transparent 60%);
+      z-index: 1;
+    }
+
+    /* ========================================================
+       1. HIỆU ỨNG MỞ BÌ THƯ ĐÔI 2 CÁNH (GATE-FOLD THEO VIDEO MẪU)
+       ======================================================== */
+    .gate-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 999;
+      overflow: hidden;
+      display: flex;
+      cursor: pointer;
+      user-select: none;
+      transition: visibility 1.2s;
+    }
+
+    .gate-overlay.hidden {
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* Cánh cửa bên trái */
+    .gate-door-left {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: calc(50% + 15px);
+      height: 100%;
+      background: linear-gradient(140deg, #091f3c 0%, #0e2a52 45%, #143a6d 100%);
+      z-index: 5;
+      box-shadow: 12px 0 35px rgba(0, 0, 0, 0.6);
+      transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+      will-change: transform;
+      border-right: 2px solid rgba(250, 232, 162, 0.75);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 40px 24px;
+      overflow: hidden;
+    }
+
+    /* Cánh cửa bên phải */
+    .gate-door-right {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(-140deg, #091f3c 0%, #0e2a52 45%, #143a6d 100%);
+      z-index: 4;
+      box-shadow: -12px 0 35px rgba(0, 0, 0, 0.6);
+      transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+      will-change: transform;
+      border-left: 1px solid rgba(250, 232, 162, 0.35);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 40px 24px;
+      overflow: hidden;
+    }
+
+    /* Vân hoa cẩm tú cầu chìm sang trọng trên cánh thư */
+    .gate-watermark-left, .gate-watermark-right {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0.12;
+      background-image: url('assets/hydrangea_banner.jpg');
+      background-size: cover;
+      background-position: center;
+      pointer-events: none;
+    }
+
+    /* Hiệu ứng khi bấm Mở Thư */
+    .gate-overlay.opened .gate-door-left {
+      transform: translateX(-102%);
+    }
+
+    .gate-overlay.opened .gate-door-right {
+      transform: translateX(102%);
+    }
+
+    /* Khối Con Dấu Vàng Trung Tâm */
+    .gate-seal-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+      pointer-events: none;
+      width: 280px;
+      text-align: center;
+    }
+
+    .gate-overlay.opened .gate-seal-center {
+      transform: translate(-50%, -50%) scale(1.35);
+      opacity: 0;
+    }
+
+    /* Con dấu sáp vàng BDU nhấp nháy phát sáng */
+    .gate-seal-img {
+      width: 100px;
+      height: 100px;
+      filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.75)) drop-shadow(0 0 25px rgba(212, 175, 55, 0.7));
+      animation: pulseGlowSeal 2.2s infinite ease-in-out;
+      margin-bottom: 22px;
+    }
+
+    @keyframes pulseGlowSeal {
+      0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.75)) drop-shadow(0 0 20px rgba(212, 175, 55, 0.5));
+      }
+      50% {
+        transform: scale(1.08);
+        filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 35px rgba(250, 232, 162, 0.95));
+      }
+    }
+
+    .gate-btn-open {
+      background: var(--gold-grad);
+      color: #2b1d02;
+      font-size: 14.5px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 14px 34px;
+      border-radius: 50px;
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.55), 0 0 15px rgba(255, 255, 255, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      animation: floatBtnOpen 2s infinite ease-in-out;
+    }
+
+    @keyframes floatBtnOpen {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .gate-open-hint {
+      color: #d8ecff;
+      font-size: 12.5px;
+      margin-top: 14px;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+      font-weight: 300;
+    }
+
+    /* Chữ trang trí trên 2 cánh thư */
+    .gate-tag-left {
+      color: rgba(250, 232, 162, 0.9);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .gate-tag-right {
+      color: rgba(250, 232, 162, 0.9);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-align: right;
+    }
+
+    /* ========================================================
+       2. TẤM THIỆP MỜI CHÍNH
+       ======================================================== */
+    .app-main {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 24px 16px 80px 16px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .invitation-card {
+      width: 100%;
+      max-width: 500px;
+      background: #ffffff;
+      border-radius: var(--radius-main);
+      box-shadow: 0 25px 60px rgba(10, 30, 56, 0.22);
+      border: 1px solid rgba(189, 224, 254, 0.9);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Flower Corner */
+    .flower-decor-top {
+      position: absolute;
+      top: -15px;
+      right: -20px;
+      width: 150px;
+      pointer-events: none;
+      z-index: 15;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+    }
+
+    /* Header Section */
+    .card-header {
+      background: linear-gradient(155deg, #092244 0%, #11386d 55%, #184e96 100%);
+      color: var(--white);
+      padding: 34px 22px 45px 22px;
+      text-align: center;
+      position: relative;
+    }
+
+    .card-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 25px;
+      background: linear-gradient(to top, rgba(255,255,255,0.08), transparent);
+    }
+
+    .bdu-logo {
+      width: 78px;
+      height: 78px;
+      margin: 0 auto 12px;
+      display: block;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.35));
+    }
+
+    .bdu-school-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-soft);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    }
+
+    .invitation-main-heading {
+      font-family: 'Alex Brush', cursive;
+      font-size: 48px;
+      color: #ffffff;
+      line-height: 1.15;
+      margin: 6px 0;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .invitation-motto {
+      font-family: 'Playfair Display', serif;
+      font-size: 14.5px;
+      font-style: italic;
+      color: #c9e2fc;
+      letter-spacing: 0.8px;
+    }
+
+    .badge-class {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(252, 241, 197, 0.35);
+      border-radius: 30px;
+      padding: 5px 16px;
+      margin-top: 14px;
+      font-size: 11.5px;
+      letter-spacing: 1.6px;
+      color: var(--gold-soft);
+      font-weight: 600;
+    }
+
+    /* Hero Portrait Card - HIỂN THỊ ĐẦY ĐỦ 100% ẢNH VÀ DẢI BĂNG DANH DỰ */
+    .hero-frame {
+      position: relative;
+      margin: -25px 18px 24px 18px;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 8px;
+      box-shadow: 0 16px 35px rgba(10, 30, 56, 0.16);
+      border: 1px solid #c9e1fa;
+      z-index: 12;
+    }
+
+    .hero-img-box {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f0f7fe;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .hero-img-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      transition: transform 0.4s ease;
+    }
+
+    .hero-img-box:hover img {
+      transform: scale(1.02);
+    }
+
+    .hero-info-badge {
+      background: linear-gradient(135deg, #ffffff 0%, #f4f9ff 100%);
+      padding: 18px 14px 14px 14px;
+      border-radius: 12px;
+      margin-top: 8px;
+      border: 1px solid #dcebfa;
+      text-align: center;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 25px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      letter-spacing: 0.5px;
+      margin-bottom: 3px;
+    }
+
+    .hero-major {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--primary-blue);
+      letter-spacing: 0.5px;
+    }
+
+    .hero-course-pill {
+      display: inline-block;
+      margin-top: 6px;
+      background: var(--gold-grad);
+      color: #2b1d02;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 14px;
+      border-radius: 12px;
+      letter-spacing: 0.8px;
+    }
+
+    /* Content Area */
+    .card-content {
+      padding: 6px 20px 35px 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Quote Banner */
+    .quote-card {
+      background: linear-gradient(135deg, #f0f7fe 0%, #e2effd 100%);
+      border-left: 4px solid var(--primary-blue);
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 15px rgba(28, 82, 150, 0.06);
+    }
+
+    .quote-statement {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--primary-navy);
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .quote-by {
+      margin-top: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .quote-bdu-pride {
+      text-align: center;
+      font-size: 12px;
+      color: var(--primary-blue);
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    /* Announcement */
+    .invitation-intro {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .intro-salute {
+      font-size: 13.5px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 700;
+      color: var(--primary-blue);
+      margin-bottom: 6px;
+    }
+
+    .intro-audience {
+      font-family: 'Alex Brush', cursive;
+      font-size: 40px;
+      color: #dc2626;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .intro-desc {
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    /* Section Flower Separator */
+    .flower-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 26px 0;
+    }
+
+    .flower-divider::before, .flower-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(28, 82, 150, 0.3), transparent);
+    }
+
+    .flower-divider img {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+    }
+
+    /* Event Date & Venue Card */
+    .event-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 22px 18px;
+      box-shadow: var(--shadow-card);
+      border: 1px solid #d4e8fc;
+      margin-bottom: 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .event-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--gold-grad);
+    }
+
+    .event-pill {
+      display: inline-block;
+      background: #eef6ff;
+      color: var(--primary-navy);
+      font-weight: 700;
+      font-size: 14.5px;
+      padding: 6px 18px;
+      border-radius: 20px;
+      border: 1px solid #bfdbfe;
+      margin-bottom: 14px;
+    }
+
+    .event-date-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      margin-bottom: 16px;
+    }
+
+    .date-sub-col {
+      text-align: center;
+    }
+
+    .date-sub-title {
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .date-sub-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .date-main-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 58px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--primary-blue);
+      text-shadow: 0 4px 10px rgba(28, 82, 150, 0.16);
+    }
+
+    .venue-label {
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--text-muted);
+      margin-top: 14px;
+      margin-bottom: 4px;
+    }
+
+    .venue-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary-navy);
+      margin-bottom: 5px;
+    }
+
+    .venue-addr {
+      font-size: 13px;
+      color: #435b75;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .event-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-card {
+      flex: 1;
+      min-width: 140px;
+      padding: 11px 16px;
+      border-radius: 25px;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-maps {
+      background: linear-gradient(135deg, #18539c 0%, #0d376d 100%);
+      color: #ffffff;
+      box-shadow: 0 5px 15px rgba(24, 83, 156, 0.3);
+    }
+
+    .btn-maps:hover {
+      box-shadow: 0 8px 22px rgba(24, 83, 156, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .btn-cal {
+      background: #f0f7fe;
+      color: var(--primary-navy);
+      border: 1px solid #bfdbfe;
+    }
+
+    .btn-cal:hover {
+      background: #e2f0fd;
+      transform: translateY(-2px);
+    }
+
+    /* Mini Calendar */
+    .calendar-box {
+      background: linear-gradient(to bottom, #ffffff, #f4f8fe);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+      border: 1px solid #d4e8fc;
+    }
+
+    .calendar-header {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary-navy);
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      text-align: center;
+    }
+
+    .cal-weekday {
+      font-size: 11px;
+      font-weight: 700;
+      color: #8da6c2;
+      padding-bottom: 6px;
+    }
+
+    .cal-cell {
+      font-size: 13px;
+      font-weight: 500;
+      padding: 7px 0;
+      border-radius: 9px;
+      color: #3b5370;
+      position: relative;
+    }
+
+    .cal-cell.today-target {
+      background: linear-gradient(135deg, #18539c 0%, #0b2b57 100%);
+      color: #ffffff;
+      font-weight: 700;
+      box-shadow: 0 4px 14px rgba(24, 83, 156, 0.45);
+      transform: scale(1.08);
+      z-index: 2;
+    }
+
+    .cal-cell.today-target::after {
+      content: '❤️';
+      position: absolute;
+      top: -8px;
+      right: -4px;
+      font-size: 11px;
+      animation: pulseHeart 1.5s infinite;
+    }
+
+    @keyframes pulseHeart {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+
+    /* Countdown */
+    .countdown-box {
+      background: linear-gradient(145deg, #092244 0%, #12386e 100%);
+      color: var(--white);
+      border-radius: 16px;
+      padding: 22px 16px;
+      text-align: center;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .countdown-box::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(112, 180, 248, 0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .countdown-heading {
+      font-size: 11.5px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold-soft);
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+
+    .countdown-flex {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .cd-tile {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 10px;
+      padding: 10px 4px;
+    }
+
+    .cd-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .cd-lbl {
+      font-size: 9.5px;
+      text-transform: uppercase;
+      color: #a4c9f2;
+      letter-spacing: 1px;
+    }
+
+    /* Timeline */
+    .timeline-container {
+      margin-bottom: 28px;
+    }
+
+    .title-block {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .subtitle-block {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .timeline-flow {
+      position: relative;
+      padding-left: 26px;
+    }
+
+    .timeline-flow::before {
+      content: '';
+      position: absolute;
+      top: 4px;
+      bottom: 4px;
+      left: 9px;
+      width: 2px;
+      background: linear-gradient(to bottom, #93c5fd, #1d4ed8, #93c5fd);
+    }
+
+    .flow-event {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .flow-event:last-child {
+      margin-bottom: 0;
+    }
+
+    .flow-dot {
+      position: absolute;
+      left: -26px;
+      top: 4px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 3px solid var(--primary-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 8px rgba(28, 82, 150, 0.4);
+    }
+
+    .flow-dot::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold-bright);
+    }
+
+    .flow-time {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary-blue);
+      margin-bottom: 3px;
+    }
+
+    .flow-card {
+      background: #f7faff;
+      border: 1px solid #dcebfa;
+      border-radius: 12px;
+      padding: 12px 15px;
+    }
+
+    .flow-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 2px;
+    }
+
+    .flow-card-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Hành Trình */
+    .journey-block {
+      background: linear-gradient(135deg, #f0f7fe 0%, #e6f2fd 100%);
+      border-radius: 16px;
+      padding: 22px 18px;
+      border: 1px solid #cce3fc;
+      margin-bottom: 28px;
+    }
+
+    .journey-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary-navy);
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .journey-items {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .journey-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #ffffff;
+      padding: 12px 15px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      border-left: 3px solid var(--primary-blue);
+    }
+
+    .journey-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #e4f1fe;
+      color: var(--primary-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .journey-desc {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    /* Poster Preview */
+    .poster-view {
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      border: 1px solid #d4e8fc;
+      margin-bottom: 30px;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .poster-view:hover {
+      transform: translateY(-3px);
+    }
+
+    .poster-view img {
+      width: 100%;
+      display: block;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .poster-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(9, 28, 54, 0.9) 0%, transparent 100%);
+      padding: 18px 16px 12px 16px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* ========================================================
+       ALBUM KỶ NIỆM RẠNG RỠ - HIỂN THỊ TRỌN VẸN 100% ẢNH VÀ CHỮ
+       ======================================================== */
+    .album-section {
+      margin-bottom: 30px;
+    }
+
+    .album-cards-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .album-frame-card {
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(10, 30, 56, 0.1);
+      border: 1px solid #cfe5fc;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .album-frame-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(10, 30, 56, 0.18);
+    }
+
+    .album-img-wrapper {
+      width: 100%;
+      background: #f7fbff;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .album-img-wrapper img {
+      width: 100%;
+      height: auto;
+      max-height: 80vh;
+      display: block;
+      object-fit: contain;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+
+    .album-card-footer {
+      padding: 12px 16px;
+      background: linear-gradient(to right, #ffffff, #f7faff);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid #e2f0fd;
+    }
+
+    .album-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary-navy);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .album-card-zoom-hint {
+      font-size: 11.5px;
+      color: var(--primary-blue);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 600;
+    }
+
+    /* Wishing Wall / Guestbook */
+    .guestbook-box {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 22px 18px;
+      border: 1px solid #d4e8fc;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 30px;
+    }
+
+    .guest-input-row {
+      margin-bottom: 12px;
+    }
+
+    .guest-input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #c4def8;
+      font-family: inherit;
+      font-size: 13.5px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .guest-input:focus {
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 0 3px rgba(28, 82, 150, 0.15);
+    }
+
+    textarea.guest-input {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .btn-submit-guest {
+      width: 100%;
+      background: linear-gradient(135deg, #18539c 0%, #0d376d 100%);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.8px;
+      padding: 13px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 6px 16px rgba(24, 83, 156, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn-submit-guest:hover {
+      box-shadow: 0 8px 22px rgba(24, 83, 156, 0.45);
+      transform: translateY(-2px);
+    }
+
+    .guest-feed {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 280px;
+      overflow-y: auto;
+      padding-right: 2px;
+    }
+
+    .guest-post {
+      background: #f7faff;
+      border-left: 3px solid var(--sky-vivid);
+      border-radius: 8px;
+      padding: 11px 14px;
+      font-size: 13px;
+    }
+
+    .guest-author {
+      font-weight: 700;
+      color: var(--primary-navy);
+      margin-bottom: 3px;
+    }
+
+    .guest-words {
+      color: #3b5066;
+      line-height: 1.5;
+    }
+
+    .guest-timestamp {
+      font-size: 10.5px;
+      color: #8da4be;
+      margin-top: 4px;
+    }
+
+    /* Footer */
+    .card-footer {
+      text-align: center;
+      padding: 25px 18px 45px 18px;
+      position: relative;
+    }
+
+    .footer-emblem {
+      width: 54px;
+      height: 54px;
+      margin: 0 auto 10px;
+      display: block;
+      opacity: 0.9;
+    }
+
+    .footer-thank {
+      font-family: 'Alex Brush', cursive;
+      font-size: 28px;
+      color: var(--primary-blue);
+      margin-bottom: 6px;
+    }
+
+    .footer-note {
+      font-size: 11px;
+      color: #728ca8;
+      letter-spacing: 0.5px;
+    }
+
+    .flower-decor-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 10;
+      opacity: 0.95;
+    }
+
+    /* ========================================================
+       3. FLOATING TOOLBAR
+       ======================================================== */
+    .floating-bar {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 900;
+    }
+
+    .tool-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: #ffffff;
+      color: var(--primary-navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      box-shadow: 0 6px 20px rgba(10, 30, 56, 0.22);
+      border: 1px solid rgba(189, 224, 254, 0.9);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .tool-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 25px rgba(10, 30, 56, 0.3);
+    }
+
+    .tool-btn.music-on {
+      background: var(--gold-grad);
+      color: #2b1d02;
+      animation: spinRecord 4s linear infinite;
+    }
+
+    @keyframes spinRecord {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* ========================================================
+       4. LIGHTBOX TOÀN MÀN HÌNH - XEM TRỌN VẸN 100% ẢNH GỐC
+       ======================================================== */
+    #lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(6, 21, 43, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      padding: 16px;
+    }
+
+    #lightbox.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .lightbox-wrapper {
+      max-width: 95vw;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .lightbox-pic {
+      max-width: 95vw;
+      max-height: 82vh;
+      border-radius: 10px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+      border: 2px solid rgba(250, 232, 162, 0.5);
+      object-fit: contain;
+    }
+
+    .lightbox-hint {
+      color: #e2f0fd;
+      font-size: 13px;
+      margin-top: 10px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .lightbox-x {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      color: #ffffff;
+      font-size: 34px;
+      cursor: pointer;
+      z-index: 1010;
+      transition: transform 0.2s;
+    }
+
+    .lightbox-x:hover {
+      transform: scale(1.15);
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 480px) {
+      .app-main {
+        padding: 0;
+      }
+      .invitation-card {
+        border-radius: 0;
+        border: none;
+        max-width: 100%;
+      }
+      .invitation-main-heading {
+        font-size: 40px;
+      }
+      .intro-audience {
+        font-size: 34px;
+      }
+      .date-main-number {
+        font-size: 50px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Petals Canvas Animation -->
+  <canvas id="petals-canvas"></canvas>
+  <div class="ambient-sky-glow"></div>
+
+  <!-- Background Music from Video Sample -->
+  <audio id="bgm" src="assets/bgm.mp3" loop preload="auto"></audio>
+
+  <!-- ========================================================
+       1. BÌ THƯ ĐÔI 2 CÁNH (GATE-FOLD THEO ĐÚNG VIDEO MẪU)
+       ======================================================== -->
+  <div class="gate-overlay" id="gate-overlay" onclick="handleOpenGate()">
+    <!-- Cánh bên trái -->
+    <div class="gate-door-left">
+      <div class="gate-watermark-left"></div>
+      <div class="gate-tag-left">
+        <i class="fa-solid fa-graduation-cap"></i> TRƯỜNG ĐẠI HỌC BÌNH DƯƠNG
+      </div>
+      <div style="font-family: 'Playfair Display', serif; font-size: 16px; color: #fae8a2; letter-spacing: 1px;">
+        THIỆP MỜI TỐT NGHIỆP
+      </div>
+    </div>
+
+    <!-- Cánh bên phải -->
+    <div class="gate-door-right">
+      <div class="gate-watermark-right"></div>
+      <div class="gate-tag-right">
+        CLASS OF 2026 • K25
+      </div>
+      <div style="font-family: 'Playfair Display', serif; font-size: 16px; color: #fae8a2; letter-spacing: 1px; text-align: right;">
+        TRƯƠNG THỊ CẨM TIÊN
+      </div>
+    </div>
+
+    <!-- Con dấu sáp vàng BDU & Nút Chạm Mở ở giữa -->
+    <div class="gate-seal-center">
+      <img src="assets/seal_gold_transparent.png" class="gate-seal-img" alt="BDU Gold Wax Seal">
+      <div class="gate-btn-open">
+        <i class="fa-solid fa-envelope-open-text"></i> CHẠM ĐỂ MỞ THƯ
+      </div>
+      <div class="gate-open-hint">✦ Chạm vào màn hình để mở thiệp & bật nhạc ✦</div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       2. MAIN INVITATION CARD
+       ======================================================== -->
+  <div class="app-main">
+    <div class="invitation-card" id="invitation-card">
+
+      <!-- Top Flower Corner -->
+      <img src="assets/hydrangea_flower_trans.png" class="flower-decor-top" alt="Hydrangea">
+
+      <!-- Header -->
+      <header class="card-header">
+        <img src="assets/seal_gold_transparent.png" class="bdu-logo" alt="BDU Logo">
+        <div class="bdu-school-title">Trường Đại Học Bình Dương</div>
+        <h1 class="invitation-main-heading">Dấu Ấn Tốt Nghiệp</h1>
+        <div class="invitation-motto">Tri thức mở lối — Tương lai gọi tên</div>
+        
+        <div>
+          <span class="badge-class">
+            <i class="fa-solid fa-graduation-cap"></i> CLASS OF 2026
+          </span>
+        </div>
+      </header>
+
+      <!-- Hero Photo Card - HIỂN THỊ ĐẦY ĐỦ 100% ẢNH VÀ DẢI BĂNG DANH DỰ -->
+      <div class="hero-frame">
+        <div class="hero-img-box" onclick="showLightbox('assets/portrait_main.jpg')">
+          <img src="assets/portrait_main.jpg" alt="Trương Thị Cẩm Tiên Tốt Nghiệp BDU">
+        </div>
+        <div class="hero-info-badge">
+          <h2 class="hero-name">Trương Thị Cẩm Tiên</h2>
+          <div class="hero-major">Cử nhân Quản trị kinh doanh</div>
+          <div class="hero-course-pill">Khóa 2022 – 2026 • K25</div>
+        </div>
+      </div>
+
+      <!-- Card Content -->
+      <div class="card-content">
+
+        <!-- Lời Nhắn Gửi -->
+        <div class="quote-card">
+          <p class="quote-statement">“Nỗ lực hôm nay, tỏa sáng ngày mai.”</p>
+          <div class="quote-by">— Trương Thị Cẩm Tiên —</div>
+          <div class="quote-bdu-pride">“Hôm nay tự hào về BDU, ngày mai BDU tự hào về tôi.”</div>
+        </div>
+
+        <!-- Announcement -->
+        <div class="invitation-intro">
+          <div class="intro-salute">Trân Trọng Kính Mời</div>
+          <div class="intro-audience">Quý Thầy Cô, Gia Đình & Bạn Bè</div>
+          <p class="intro-desc">
+            Đến tham dự Lễ Tốt Nghiệp và chia sẻ niềm vui, cùng ghi dấu cột mốc trưởng thành đầy ý nghĩa trên hành trình tri thức của Cẩm Tiên.
+          </p>
+        </div>
+
+        <!-- Flower Separator -->
+        <div class="flower-divider">
+          <img src="assets/hydrangea_flower_trans.png" alt="divider">
+        </div>
+
+        <!-- Date & Venue -->
+        <div class="event-card">
+          <div class="event-pill">
+            <i class="fa-regular fa-clock"></i> 07:00 SÁNG — THỨ BẢY
+          </div>
+
+          <div class="event-date-row">
+            <div class="date-sub-col">
+              <div class="date-sub-title">Tháng 11</div>
+              <div class="date-sub-val">2026</div>
+            </div>
+            <div class="date-main-number">21</div>
+            <div class="date-sub-col">
+              <div class="date-sub-title">Thứ</div>
+              <div class="date-sub-val">Bảy</div>
+            </div>
+          </div>
+
+          <div class="venue-label">Địa điểm tổ chức</div>
+          <div class="venue-name">Hội Trường A — Trường Đại Học Bình Dương</div>
+          <div class="venue-addr">
+            <i class="fa-solid fa-location-dot" style="color: #dc2626;"></i> 
+            504 Đại lộ Bình Dương, Phường Hiệp Thành, TP. Thủ Dầu Một, Tỉnh Bình Dương
+          </div>
+
+          <div class="event-actions">
+            <a href="https://maps.google.com/?q=Đại+Học+Bình+Dương,+504+Đại+lộ+Bình+Dương" target="_blank" class="btn-card btn-maps">
+              <i class="fa-solid fa-location-arrow"></i> Chỉ Đường Google Maps
+            </a>
+            <button onclick="saveEventCalendar()" class="btn-card btn-cal">
+              <i class="fa-regular fa-calendar-check"></i> Lưu Lịch Hẹn
+            </button>
+          </div>
+        </div>
+
+        <!-- Mini Calendar -->
+        <div class="calendar-box">
+          <div class="calendar-header">
+            <i class="fa-regular fa-calendar-days" style="color: var(--primary-blue);"></i> Tháng 11 — 2026
+          </div>
+          <div class="calendar-grid">
+            <div class="cal-weekday">T2</div>
+            <div class="cal-weekday">T3</div>
+            <div class="cal-weekday">T4</div>
+            <div class="cal-weekday">T5</div>
+            <div class="cal-weekday">T6</div>
+            <div class="cal-weekday">T7</div>
+            <div class="cal-weekday">CN</div>
+
+            <div class="cal-cell" style="opacity: 0.3;">26</div>
+            <div class="cal-cell" style="opacity: 0.3;">27</div>
+            <div class="cal-cell" style="opacity: 0.3;">28</div>
+            <div class="cal-cell" style="opacity: 0.3;">29</div>
+            <div class="cal-cell" style="opacity: 0.3;">30</div>
+            <div class="cal-cell" style="opacity: 0.3;">31</div>
+            <div class="cal-cell">1</div>
+
+            <div class="cal-cell">2</div>
+            <div class="cal-cell">3</div>
+            <div class="cal-cell">4</div>
+            <div class="cal-cell">5</div>
+            <div class="cal-cell">6</div>
+            <div class="cal-cell">7</div>
+            <div class="cal-cell">8</div>
+
+            <div class="cal-cell">9</div>
+            <div class="cal-cell">10</div>
+            <div class="cal-cell">11</div>
+            <div class="cal-cell">12</div>
+            <div class="cal-cell">13</div>
+            <div class="cal-cell">14</div>
+            <div class="cal-cell">15</div>
+
+            <div class="cal-cell">16</div>
+            <div class="cal-cell">17</div>
+            <div class="cal-cell">18</div>
+            <div class="cal-cell">19</div>
+            <div class="cal-cell">20</div>
+            <div class="cal-cell today-target" title="Lễ Tốt Nghiệp!">21</div>
+            <div class="cal-cell">22</div>
+
+            <div class="cal-cell">23</div>
+            <div class="cal-cell">24</div>
+            <div class="cal-cell">25</div>
+            <div class="cal-cell">26</div>
+            <div class="cal-cell">27</div>
+            <div class="cal-cell">28</div>
+            <div class="cal-cell">29</div>
+            
+            <div class="cal-cell">30</div>
+          </div>
+        </div>
+
+        <!-- Countdown -->
+        <div class="countdown-box">
+          <div class="countdown-heading">
+            <i class="fa-solid fa-hourglass-half"></i> ĐẾM NGƯỢC ĐẾN NGÀY TỐT NGHIỆP
+          </div>
+          <div class="countdown-flex">
+            <div class="cd-tile">
+              <div class="cd-val" id="val-days">00</div>
+              <div class="cd-lbl">Ngày</div>
+            </div>
+            <div class="cd-tile">
+              <div class="cd-val" id="val-hours">00</div>
+              <div class="cd-lbl">Giờ</div>
+            </div>
+            <div class="cd-tile">
+              <div class="cd-val" id="val-mins">00</div>
+              <div class="cd-lbl">Phút</div>
+            </div>
+            <div class="cd-tile">
+              <div class="cd-val" id="val-secs">00</div>
+              <div class="cd-lbl">Giây</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline-container">
+          <h3 class="title-block">Lịch Trình Buổi Lễ</h3>
+          <div class="subtitle-block">Thời gian biểu chi tiết sáng ngày 21/11/2026</div>
+          <div class="timeline-flow">
+            
+            <div class="flow-event">
+              <div class="flow-dot"></div>
+              <div class="flow-time">06:30 — 07:00</div>
+              <div class="flow-card">
+                <div class="flow-card-title">Đón Tiếp Khách Quý & Chụp Hình Lưu Niệm</div>
+                <div class="flow-card-desc">Chào đón gia đình, người thân và bạn bè tại tiền sảnh Hội trường A.</div>
+              </div>
+            </div>
+
+            <div class="flow-event">
+              <div class="flow-dot"></div>
+              <div class="flow-time">07:00 — 07:30</div>
+              <div class="flow-card">
+                <div class="flow-card-title">Khai Mạc & Nghi Thức Chào Cờ</div>
+                <div class="flow-card-desc">Phát biểu của Ban Giám Hiệu Trường Đại Học Bình Dương và Ban Chủ Nhiệm Khoa.</div>
+              </div>
+            </div>
+
+            <div class="flow-event">
+              <div class="flow-dot"></div>
+              <div class="flow-time">07:30 — 09:30</div>
+              <div class="flow-card">
+                <div class="flow-card-title">Vinh Danh & Trao Bằng Tốt Nghiệp</div>
+                <div class="flow-card-desc">Khoảnh khắc bước lên bục danh dự nhận Bằng Cử nhân Quản trị kinh doanh.</div>
+              </div>
+            </div>
+
+            <div class="flow-event">
+              <div class="flow-dot"></div>
+              <div class="flow-time">09:30 — 11:30</div>
+              <div class="flow-card">
+                <div class="flow-card-title">Giao Lưu & Chụp Hình Kỷ Niệm Khuôn Viên</div>
+                <div class="flow-card-desc">Chụp hình cùng thầy cô, bạn bè tại khuôn viên trường BDU và sảnh hoa cẩm tú cầu.</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Hành Trình -->
+        <div class="journey-block">
+          <div class="journey-title">Hành Trình Của Mình</div>
+          <div class="journey-items">
+            <div class="journey-row">
+              <div class="journey-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+              <div class="journey-desc">Vượt qua giới hạn — Kiến tạo thành công.</div>
+            </div>
+            <div class="journey-row">
+              <div class="journey-icon"><i class="fa-solid fa-trophy"></i></div>
+              <div class="journey-desc">Tự tin bước tiếp — Vươn tới ước mơ.</div>
+            </div>
+            <div class="journey-row">
+              <div class="journey-icon"><i class="fa-solid fa-paper-plane"></i></div>
+              <div class="journey-desc">Cùng BDU, viết tiếp hành trình phía trước.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dấu Ấn Poster Preview -->
+        <div style="text-align: center; margin-bottom: 8px;">
+          <h3 class="title-block">Dấu Ấn Kỷ Niệm</h3>
+          <div class="subtitle-block">Bản thiết kế lưu giữ dấu ấn thời sinh viên BDU</div>
+        </div>
+        <div class="poster-view" onclick="showLightbox('assets/dau_an_poster.jpg')">
+          <img src="assets/dau_an_poster.jpg" alt="Dấu Ấn Tốt Nghiệp BDU">
+          <div class="poster-caption">
+            <span><i class="fa-solid fa-magnifying-glass-plus"></i> Xem trọn vẹn Dấu Ấn Tốt Nghiệp</span>
+            <span style="font-size: 11px; background: rgba(255,255,255,0.25); padding: 3px 8px; border-radius: 6px;">Phóng to</span>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             ALBUM KỶ NIỆM RẠNG RỠ - HIỂN THỊ TRỌN VẸN 100% ẢNH VÀ CHỮ
+             ======================================================== -->
+        <div class="album-section">
+          <div style="text-align: center; margin-bottom: 8px;">
+            <h3 class="title-block">Album Kỷ Niệm Rạng Rỡ</h3>
+            <div class="subtitle-block">✦ Toàn bộ ảnh được hiển thị trọn vẹn 100%, chạm vào ảnh để phóng to sắc nét ✦</div>
+          </div>
+
+          <div class="album-cards-flow">
+            
+            <!-- Ảnh 1: Chân dung dải băng danh dự đầy đủ tên và ngành -->
+            <div class="album-frame-card" onclick="showLightbox('assets/gallery_1.jpg')">
+              <div class="album-img-wrapper">
+                <img src="assets/gallery_1.jpg" alt="Cẩm Tiên - Cử nhân Quản trị kinh doanh" loading="lazy">
+              </div>
+              <div class="album-card-footer">
+                <div class="album-card-title">
+                  <i class="fa-solid fa-graduation-cap" style="color: var(--primary-blue);"></i> 
+                  Trương Thị Cẩm Tiên • Quản trị kinh doanh
+                </div>
+                <div class="album-card-zoom-hint">
+                  <i class="fa-solid fa-expand"></i> Phóng to
+                </div>
+              </div>
+            </div>
+
+            <!-- Ảnh 2: Góc nghiêng thướt tha với voan trắng & vương miện -->
+            <div class="album-frame-card" onclick="showLightbox('assets/gallery_2.jpg')">
+              <div class="album-img-wrapper">
+                <img src="assets/gallery_2.jpg" alt="Khoảnh khắc thanh xuân rực rỡ" loading="lazy">
+              </div>
+              <div class="album-card-footer">
+                <div class="album-card-title">
+                  <i class="fa-solid fa-sparkles" style="color: var(--gold-deep);"></i> 
+                  Tà áo trắng & Vương miện danh dự K25
+                </div>
+                <div class="album-card-zoom-hint">
+                  <i class="fa-solid fa-expand"></i> Phóng to
+                </div>
+              </div>
+            </div>
+
+            <!-- Ảnh 3: Toàn cảnh sân thượng ngắm trọn khuôn viên trường BDU -->
+            <div class="album-frame-card" onclick="showLightbox('assets/gallery_3.jpg')">
+              <div class="album-img-wrapper">
+                <img src="assets/gallery_3.jpg" alt="Toàn cảnh khuôn viên Đại học Bình Dương" loading="lazy">
+              </div>
+              <div class="album-card-footer">
+                <div class="album-card-title">
+                  <i class="fa-solid fa-building-columns" style="color: var(--primary-blue);"></i> 
+                  Bao quát toàn cảnh khuôn viên trường BDU
+                </div>
+                <div class="album-card-zoom-hint">
+                  <i class="fa-solid fa-expand"></i> Phóng to
+                </div>
+              </div>
+            </div>
+
+            <!-- Ảnh 4: Góc nhìn trời mây hoàng hôn rực rỡ -->
+            <div class="album-frame-card" onclick="showLightbox('assets/gallery_4.jpg')">
+              <div class="album-img-wrapper">
+                <img src="assets/gallery_4.jpg" alt="Bầu trời thanh xuân BDU" loading="lazy">
+              </div>
+              <div class="album-card-footer">
+                <div class="album-card-title">
+                  <i class="fa-solid fa-cloud-sun" style="color: var(--sky-vivid);"></i> 
+                  Bầu trời thanh xuân & Khát vọng tương lai
+                </div>
+                <div class="album-card-zoom-hint">
+                  <i class="fa-solid fa-expand"></i> Phóng to
+                </div>
+              </div>
+            </div>
+
+            <!-- Ảnh 5: Nụ cười rạng ngời tại góc ban công BDU -->
+            <div class="album-frame-card" onclick="showLightbox('assets/gallery_5.jpg')">
+              <div class="album-img-wrapper">
+                <img src="assets/gallery_5.jpg" alt="Kỷ niệm ngày tốt nghiệp" loading="lazy">
+              </div>
+              <div class="album-card-footer">
+                <div class="album-card-title">
+                  <i class="fa-solid fa-heart" style="color: #dc2626;"></i> 
+                  Nụ cười rạng ngời ngày nhận bằng tốt nghiệp
+                </div>
+                <div class="album-card-zoom-hint">
+                  <i class="fa-solid fa-expand"></i> Phóng to
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Sổ Lưu Bút -->
+        <div class="guestbook-box">
+          <h3 class="title-block" style="margin-bottom: 6px;">Sổ Lưu Bút Chúc Mừng</h3>
+          <p style="text-align: center; font-size: 12.5px; color: var(--text-muted); margin-bottom: 16px;">
+            Gửi gắm lời chúc thân thương đến tân Cử nhân Cẩm Tiên nhé!
+          </p>
+
+          <form id="guest-form" onsubmit="handleSendWish(event)">
+            <div class="guest-input-row">
+              <input type="text" id="g-name" class="guest-input" placeholder="Tên của bạn..." required>
+            </div>
+            <div class="guest-input-row">
+              <textarea id="g-msg" class="guest-input" placeholder="Viết lời chúc mừng tốt nghiệp tại đây..." required></textarea>
+            </div>
+            <button type="submit" class="btn-submit-guest">
+              <i class="fa-solid fa-heart" style="color: #fca5a5;"></i> Gửi Lời Chúc Mừng
+            </button>
+          </form>
+
+          <div class="guest-feed" id="guest-feed"></div>
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <footer class="card-footer">
+        <img src="assets/seal_gold_transparent.png" class="footer-emblem" alt="BDU Seal">
+        <div class="footer-thank">Sự hiện diện của bạn là niềm vinh hạnh của Cẩm Tiên!</div>
+        <div class="footer-note">Trường Đại Học Bình Dương • Niên khóa 2022 - 2026</div>
+      </footer>
+
+      <!-- Bottom Hydrangea Flowers -->
+      <img src="assets/hydrangea_banner.jpg" class="flower-decor-bottom" alt="Hydrangea banner">
+    </div>
+  </div>
+
+  <!-- ========================================================
+       3. FLOATING TOOLBAR
+       ======================================================== -->
+  <div class="floating-bar">
+    <button class="tool-btn" id="btn-audio" onclick="toggleAudio()" title="Bật/Tắt nhạc nền">
+      <i class="fa-solid fa-music"></i>
+    </button>
+    <button class="tool-btn" onclick="replayGateAnimation()" title="Xem lại hiệu ứng mở thư">
+      <i class="fa-solid fa-envelope"></i>
+    </button>
+    <button class="tool-btn" id="btn-petals" onclick="togglePetalFlow()" title="Bật/Tắt hoa rơi">
+      <i class="fa-solid fa-wand-magic-sparkles"></i>
+    </button>
+    <button class="tool-btn" onclick="shareInvitation()" title="Chia sẻ thiệp">
+      <i class="fa-solid fa-share-nodes"></i>
+    </button>
+  </div>
+
+  <!-- ========================================================
+       4. LIGHTBOX
+       ======================================================== -->
+  <div id="lightbox" onclick="hideLightbox()">
+    <div class="lightbox-x">&times;</div>
+    <div class="lightbox-wrapper" onclick="event.stopPropagation()">
+      <img id="lightbox-zoom" class="lightbox-pic" src="" alt="Zoom">
+      <div class="lightbox-hint">✦ Chạm vào bên ngoài để đóng ✦</div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       5. JAVASCRIPT
+       ======================================================== -->
+  <script>
+    // Audio Player
+    const bgm = document.getElementById('bgm');
+    const audioBtn = document.getElementById('btn-audio');
+    let isPlaying = false;
+
+    function toggleAudio() {
+      if (isPlaying) {
+        bgm.pause();
+        audioBtn.classList.remove('music-on');
+        audioBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+        isPlaying = false;
+      } else {
+        bgm.play().then(() => {
+          audioBtn.classList.add('music-on');
+          audioBtn.innerHTML = '<i class="fa-solid fa-music"></i>';
+          isPlaying = true;
+        }).catch(err => console.log('Audio playback prevented:', err));
+      }
+    }
+
+    // Hiệu ứng mở bì thư đôi 2 cánh (Gate-fold Envelope)
+    let gateOpened = false;
+
+    function handleOpenGate() {
+      if (gateOpened) return;
+      gateOpened = true;
+
+      const overlay = document.getElementById('gate-overlay');
+      overlay.classList.add('opened');
+      fireConfetti();
+
+      // Bật nhạc nền ngay khi người dùng chạm mở
+      bgm.play().then(() => {
+        audioBtn.classList.add('music-on');
+        isPlaying = true;
+      }).catch(e => console.log('Autoplay audio:', e));
+
+      // Ẩn lớp phủ sau khi 2 cánh cửa đã trượt hoàn toàn ra khỏi màn hình
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+      }, 1250);
+    }
+
+    // Xem lại hiệu ứng mở thư
+    function replayGateAnimation() {
+      gateOpened = false;
+      const overlay = document.getElementById('gate-overlay');
+      overlay.classList.remove('hidden');
+      // Cho phép render lại trước khi bỏ opened class
+      setTimeout(() => {
+        overlay.classList.remove('opened');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 50);
+    }
+
+    function fireConfetti() {
+      const colors = ['#18539c', '#70b4f8', '#c7d2fe', '#d4af37', '#fae8a2', '#ffffff'];
+      confetti({
+        particleCount: 90,
+        spread: 85,
+        origin: { y: 0.55 },
+        colors: colors
+      });
+      setTimeout(() => {
+        confetti({
+          particleCount: 50,
+          angle: 60,
+          spread: 60,
+          origin: { x: 0 },
+          colors: colors
+        });
+        confetti({
+          particleCount: 50,
+          angle: 120,
+          spread: 60,
+          origin: { x: 1 },
+          colors: colors
+        });
+      }, 300);
+    }
+
+    // Đếm ngược đến 07:00 ngày 21/11/2026
+    const targetDate = new Date('2026-11-21T07:00:00+07:00').getTime();
+
+    function refreshCountdown() {
+      const diff = targetDate - new Date().getTime();
+      if (diff <= 0) {
+        document.getElementById('val-days').innerText = '00';
+        document.getElementById('val-hours').innerText = '00';
+        document.getElementById('val-mins').innerText = '00';
+        document.getElementById('val-secs').innerText = '00';
+        return;
+      }
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('val-days').innerText = String(d).padStart(2, '0');
+      document.getElementById('val-hours').innerText = String(h).padStart(2, '0');
+      document.getElementById('val-mins').innerText = String(m).padStart(2, '0');
+      document.getElementById('val-secs').innerText = String(s).padStart(2, '0');
+    }
+    setInterval(refreshCountdown, 1000);
+    refreshCountdown();
+
+    // Cánh hoa cẩm tú cầu bay lượn
+    const canvas = document.getElementById('petals-canvas');
+    const ctx = canvas.getContext('2d');
+    let petalsRunning = true;
+    let petals = [];
+
+    function setupCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', setupCanvas);
+    setupCanvas();
+
+    const petalPalette = [
+      'rgba(147, 197, 253, 0.75)',
+      'rgba(96, 165, 250, 0.8)',
+      'rgba(196, 181, 253, 0.75)',
+      'rgba(224, 242, 254, 0.8)',
+      'rgba(250, 232, 162, 0.6)'
+    ];
+
+    class HydrangeaPetal {
+      constructor() {
+        this.reinit();
+      }
+      reinit() {
+        this.x = Math.random() * canvas.width;
+        this.y = -20 - Math.random() * 40;
+        this.radius = 7 + Math.random() * 11;
+        this.vx = -1 + Math.random() * 2;
+        this.vy = 1.1 + Math.random() * 1.7;
+        this.deg = Math.random() * 360;
+        this.spin = -2 + Math.random() * 4;
+        this.shade = petalPalette[Math.floor(Math.random() * petalPalette.length)];
+        this.alpha = 0.5 + Math.random() * 0.45;
+      }
+      step() {
+        this.y += this.vy;
+        this.x += Math.sin(this.y * 0.02) + this.vx * 0.4;
+        this.deg += this.spin;
+        if (this.y > canvas.height + 25) this.reinit();
+      }
+      paint() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.deg * Math.PI) / 180);
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = this.shade;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, this.radius * 0.75, this.radius * 0.45, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 35; i++) {
+      petals.push(new HydrangeaPetal());
+    }
+
+    function renderPetals() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (petalsRunning) {
+        petals.forEach(p => {
+          p.step();
+          p.paint();
+        });
+      }
+      requestAnimationFrame(renderPetals);
+    }
+    renderPetals();
+
+    function togglePetalFlow() {
+      petalsRunning = !petalsRunning;
+      document.getElementById('btn-petals').style.color = petalsRunning ? 'var(--primary-navy)' : '#94a3b8';
+    }
+
+    // Tải file nhắc lịch (.ics)
+    function saveEventCalendar() {
+      const ics = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//BDU//Cam Tien Graduation//VI',
+        'BEGIN:VEVENT',
+        'SUMMARY:Lễ Tốt Nghiệp Cử Nhân - Trương Thị Cẩm Tiên (ĐH Bình Dương)',
+        'DESCRIPTION:Tham dự Lễ tốt nghiệp Cử nhân Quản trị kinh doanh của Trương Thị Cẩm Tiên tại Hội trường A, Trường Đại Học Bình Dương.',
+        'LOCATION:Trường Đại học Bình Dương, 504 Đại lộ Bình Dương, Hiệp Thành, Thủ Dầu Một, Bình Dương',
+        'DTSTART:20261121T000000Z',
+        'DTEND:20261121T050000Z',
+        'STATUS:CONFIRMED',
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+
+      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+      const dlLink = document.createElement('a');
+      dlLink.href = window.URL.createObjectURL(blob);
+      dlLink.setAttribute('download', 'LeTotNghiep_CamTien_21-11-2026.ics');
+      document.body.appendChild(dlLink);
+      dlLink.click();
+      document.body.removeChild(dlLink);
+    }
+
+    // Lightbox
+    function showLightbox(src) {
+      document.getElementById('lightbox-zoom').src = src;
+      document.getElementById('lightbox').classList.add('active');
+    }
+    function hideLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    // Guestbook
+    const presetWishes = [
+      {
+        name: "Gia đình yêu thương ❤️",
+        msg: "Chúc mừng con gái Cẩm Tiên đã hoàn thành xuất sắc chặng đường 4 năm đại học! Chúc con luôn vững vàng, tự tin và gặt hái thật nhiều thành công mới!",
+        time: "16/11/2026 21:30"
+      },
+      {
+        name: "Hội bạn thân K25 Quản Trị Kinh Doanh",
+        msg: "Chúc mừng tân Cử nhân Cẩm Tiên! Chúc cậu luôn rạng rỡ, xinh đẹp và tỏa sáng trên con đường sự nghiệp phía trước!",
+        time: "16/11/2026 22:15"
+      }
+    ];
+
+    function renderWishes() {
+      const feed = document.getElementById('guest-feed');
+      const saved = localStorage.getItem('camtien_graduation_wishes');
+      const wishes = saved ? JSON.parse(saved) : presetWishes;
+
+      feed.innerHTML = wishes.map(w => `
+        <div class="guest-post">
+          <div class="guest-author"><i class="fa-solid fa-heart" style="color: #dc2626; font-size: 11px;"></i> ${cleanStr(w.name)}</div>
+          <div class="guest-words">${cleanStr(w.msg)}</div>
+          <div class="guest-timestamp">${w.time}</div>
+        </div>
+      `).join('');
+    }
+
+    function handleSendWish(e) {
+      e.preventDefault();
+      const n = document.getElementById('g-name');
+      const m = document.getElementById('g-msg');
+      const name = n.value.trim();
+      const msg = m.value.trim();
+      if (!name || !msg) return;
+
+      const timeStr = new Date().toLocaleString('vi-VN', {
+        day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
+      });
+
+      const saved = localStorage.getItem('camtien_graduation_wishes');
+      const wishes = saved ? JSON.parse(saved) : presetWishes;
+      wishes.unshift({ name, msg, time: timeStr });
+      localStorage.setItem('camtien_graduation_wishes', JSON.stringify(wishes));
+
+      n.value = '';
+      m.value = '';
+      renderWishes();
+      fireConfetti();
+      alert('Cảm ơn bạn rất nhiều! Lời chúc đã được gửi đến Cẩm Tiên ❤️');
+    }
+
+    function cleanStr(text) {
+      return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function shareInvitation() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Thiệp Mời Lễ Tốt Nghiệp - Trương Thị Cẩm Tiên',
+          text: 'Trân trọng kính mời bạn tham dự Lễ Tốt Nghiệp của Trương Thị Cẩm Tiên vào 07:00 ngày 21/11/2026 tại Đại học Bình Dương!',
+          url: window.location.href
+        }).catch(e => console.log(e));
+      } else {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          alert('Đã sao chép liên kết thiệp mời vào bộ nhớ tạm!');
+        });
+      }
+    }
+
+    // Khởi tạo
+    renderWishes();
+  </script>
+</body>
+</html>
