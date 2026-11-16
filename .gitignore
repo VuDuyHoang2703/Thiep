@@ -1,0 +1,4 @@
+assets_raw_original/
+*.py
+*.mp3
+!assets/bgm.mp3
