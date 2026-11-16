@@ -962,23 +962,15 @@
     .album-card-footer {
       padding: 12px 16px;
       background: linear-gradient(to right, #ffffff, #f7faff);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      text-align: center;
       border-top: 1px solid #e2f0fd;
     }
 
     .album-card-title {
-      font-size: 13px;
-      font-weight: 700;
+      font-size: 13.5px;
+      font-weight: 600;
       color: var(--primary-navy);
       letter-spacing: 0.3px;
-    }
-
-    .album-card-zoom-hint {
-      font-size: 11.5px;
-      color: var(--primary-blue);
-      font-weight: 600;
     }
 
     /* Wishing Wall / Guestbook */
@@ -1127,45 +1119,69 @@
     }
 
     /* ========================================================
-       3. FLOATING TOOLBAR - NÚT BẤM CHỮ TINH TẾ (KHÔNG DÙNG ICON)
+       3. FLOATING TOOLBAR - NÚT ICON TRÒN SANG TRỌNG TIỆN ÍCH
        ======================================================== */
     .floating-bar {
       position: fixed;
-      bottom: 18px;
-      right: 18px;
+      bottom: 20px;
+      right: 16px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
       z-index: 900;
     }
 
     .tool-btn {
-      min-width: 44px;
+      width: 44px;
       height: 44px;
-      padding: 0 14px;
-      border-radius: 22px;
+      padding: 0;
+      border-radius: 50%;
       background: #ffffff;
       color: var(--primary-navy);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11.5px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      box-shadow: 0 6px 20px rgba(10, 30, 56, 0.22);
-      border: 1px solid rgba(189, 224, 254, 0.9);
+      box-shadow: 0 4px 16px rgba(10, 30, 56, 0.22);
+      border: 1px solid rgba(189, 224, 254, 0.95);
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      position: relative;
+    }
+
+    .tool-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+      transition: transform 0.2s ease;
     }
 
     .tool-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 25px rgba(10, 30, 56, 0.3);
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(10, 30, 56, 0.32);
+    }
+
+    .tool-btn:active {
+      transform: scale(0.92);
     }
 
     .tool-btn.music-on {
       background: var(--gold-grad);
       color: #2b1d02;
+      border-color: rgba(212, 175, 55, 0.8);
+      box-shadow: 0 4px 18px rgba(212, 175, 55, 0.55);
+    }
+
+    .tool-btn.music-on svg {
+      animation: rotateMusic 4s linear infinite;
+    }
+
+    @keyframes rotateMusic {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .tool-btn.off {
+      opacity: 0.5;
     }
 
     /* ========================================================
@@ -1544,10 +1560,6 @@
         </div>
         <div class="poster-view" onclick="showLightbox('assets/dau_an_poster.jpg')">
           <img src="assets/dau_an_poster.jpg" alt="Dấu Ấn Kỷ Niệm Tốt Nghiệp BDU" loading="lazy">
-          <div class="poster-caption">
-            <span>Dấu Ấn Tốt Nghiệp BDU</span>
-            <span style="font-size: 11px; background: rgba(255,255,255,0.25); padding: 3px 8px; border-radius: 6px;">Chạm để phóng to</span>
-          </div>
         </div>
 
         <!-- ========================================================
@@ -1569,9 +1581,6 @@
                 <div class="album-card-title">
                   Trương Thị Cẩm Tiên — Quản trị kinh doanh
                 </div>
-                <div class="album-card-zoom-hint">
-                  Phóng to
-                </div>
               </div>
             </div>
 
@@ -1583,9 +1592,6 @@
               <div class="album-card-footer">
                 <div class="album-card-title">
                   Tà áo trắng & Vương miện danh dự K25
-                </div>
-                <div class="album-card-zoom-hint">
-                  Phóng to
                 </div>
               </div>
             </div>
@@ -1599,9 +1605,6 @@
                 <div class="album-card-title">
                   Bao quát toàn cảnh khuôn viên trường BDU
                 </div>
-                <div class="album-card-zoom-hint">
-                  Phóng to
-                </div>
               </div>
             </div>
 
@@ -1614,9 +1617,6 @@
                 <div class="album-card-title">
                   Bầu trời thanh xuân & Khát vọng tương lai
                 </div>
-                <div class="album-card-zoom-hint">
-                  Phóng to
-                </div>
               </div>
             </div>
 
@@ -1628,9 +1628,6 @@
               <div class="album-card-footer">
                 <div class="album-card-title">
                   Nụ cười rạng ngời ngày nhận bằng tốt nghiệp
-                </div>
-                <div class="album-card-zoom-hint">
-                  Phóng to
                 </div>
               </div>
             </div>
@@ -1674,20 +1671,35 @@
   </div>
 
   <!-- ========================================================
-       3. FLOATING TOOLBAR - NÚT BẤM CHỮ GỌN GÀNG (KHÔNG ICON)
+       3. FLOATING TOOLBAR - NÚT ICON TRÒN SANG TRỌNG
        ======================================================== -->
   <div class="floating-bar">
-    <button class="tool-btn" id="btn-audio" onclick="toggleAudio()" title="Bật hoặc Tắt nhạc nền">
-      Nhạc
+    <!-- Nút Bật/Tắt Nhạc (Biểu tượng nốt nhạc) -->
+    <button class="tool-btn" id="btn-audio" onclick="toggleAudio()" title="Bật hoặc Tắt nhạc nền" aria-label="Bật hoặc Tắt nhạc nền">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+      </svg>
     </button>
-    <button class="tool-btn" onclick="replayGateAnimation()" title="Xem lại hiệu ứng mở thư">
-      Mở Thư
+    
+    <!-- Nút Mở Lại Thư (Biểu tượng phong bì thư) -->
+    <button class="tool-btn" onclick="replayGateAnimation()" title="Mở lại bì thư" aria-label="Mở lại bì thư">
+      <svg viewBox="0 0 24 24">
+        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+      </svg>
     </button>
-    <button class="tool-btn" id="btn-petals" onclick="togglePetalFlow()" title="Bật hoặc Tắt hoa rơi">
-      Hoa Rơi
+
+    <!-- Nút Bật/Tắt Hoa Rơi (Biểu tượng hoa tú cầu) -->
+    <button class="tool-btn" id="btn-petals" onclick="togglePetalFlow()" title="Bật hoặc Tắt hoa rơi" aria-label="Bật hoặc Tắt hoa rơi">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 2a4 4 0 0 0-4 4c0 1.1.45 2.1 1.17 2.83A4 4 0 0 0 6 12a4 4 0 0 0 2.83 3.83A4 4 0 0 0 8 18a4 4 0 0 0 4 4 4 4 0 0 0 4-4c0-.7-.18-1.36-.5-1.94A4 4 0 0 0 18 12a4 4 0 0 0-2.5-3.69c.32-.58.5-1.24.5-1.94a4 4 0 0 0-4-4zm0 8a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/>
+      </svg>
     </button>
-    <button class="tool-btn" onclick="shareInvitation()" title="Chia sẻ thiệp">
-      Chia Sẻ
+
+    <!-- Nút Chia Sẻ Thiệp (Biểu tượng chia sẻ) -->
+    <button class="tool-btn" onclick="shareInvitation()" title="Chia sẻ thiệp mời" aria-label="Chia sẻ thiệp mời">
+      <svg viewBox="0 0 24 24">
+        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92z"/>
+      </svg>
     </button>
   </div>
 
@@ -1715,12 +1727,10 @@
       if (isPlaying) {
         bgm.pause();
         audioBtn.classList.remove('music-on');
-        audioBtn.innerText = 'Tắt Nhạc';
         isPlaying = false;
       } else {
         bgm.play().then(() => {
           audioBtn.classList.add('music-on');
-          audioBtn.innerText = 'Nhạc';
           isPlaying = true;
         }).catch(err => console.log('Audio playback prevented:', err));
       }
@@ -1899,7 +1909,11 @@
     function togglePetalFlow() {
       petalsRunning = !petalsRunning;
       const btn = document.getElementById('btn-petals');
-      btn.innerText = petalsRunning ? 'Hoa Rơi' : 'Tắt Hoa';
+      if (petalsRunning) {
+        btn.classList.remove('off');
+      } else {
+        btn.classList.add('off');
+      }
     }
 
     // Lightbox
