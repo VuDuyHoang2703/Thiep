@@ -2,3 +2,6 @@ assets_raw_original/
 *.py
 *.mp3
 !assets/bgm.mp3
+*.exe
+.DS_Store
+Thumbs.db
