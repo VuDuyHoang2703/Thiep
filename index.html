@@ -2219,27 +2219,23 @@
     // Google Sheets API endpoint cho Sổ Lưu Bút
     const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycbwZACnZQ43Wen0I0DFiZwwC_Wi8nBxBR3DvhzgzrtThp6vHBwxsW-CsNpjGwKeecO1h/exec";
 
-    // Preset mẫu khi chưa có dữ liệu hoặc offline
-    const presetWishes = [
-      {
-        name: "Gia đình yêu thương",
-        msg: "Chúc mừng con gái Cẩm Tiên đã hoàn thành xuất sắc chặng đường 4 năm đại học! Chúc con luôn vững vàng, tự tin và gặt hái thật nhiều thành công mới!",
-        time: "16/11/2026 21:30"
-      },
-      {
-        name: "Hội bạn thân K25 Quản Trị Kinh Doanh",
-        msg: "Chúc mừng tân Cử nhân Cẩm Tiên! Chúc cậu luôn rạng rỡ, xinh đẹp và tỏa sáng trên con đường sự nghiệp phía trước!",
-        time: "16/11/2026 22:15"
-      }
-    ];
-
     let cachedWishes = [];
 
     async function renderWishes() {
       const feed = document.getElementById('guest-feed');
-      // Hiển thị trước từ cache hoặc preset để người xem không phải chờ đợi
+      // Lấy từ cache cục bộ và lọc sạch các lời chúc mẫu cũ
       const saved = localStorage.getItem('camtien_graduation_wishes');
-      cachedWishes = saved ? JSON.parse(saved) : presetWishes;
+      let localWishes = [];
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          localWishes = parsed.filter(w => 
+            w.name !== "Gia đình yêu thương" && 
+            w.name !== "Hội bạn thân K25 Quản Trị Kinh Doanh"
+          );
+        } catch(e) {}
+      }
+      cachedWishes = localWishes;
       renderWishesUI(cachedWishes);
 
       // Tải dữ liệu đám mây mới nhất từ Google Sheets
@@ -2248,7 +2244,7 @@
           const res = await fetch(GOOGLE_SHEET_API);
           if (res.ok) {
             const data = await res.json();
-            if (Array.isArray(data) && data.length > 0) {
+            if (Array.isArray(data)) {
               cachedWishes = data;
               localStorage.setItem('camtien_graduation_wishes', JSON.stringify(data));
               renderWishesUI(cachedWishes);
@@ -2263,6 +2259,14 @@
     function renderWishesUI(wishes) {
       const feed = document.getElementById('guest-feed');
       if (!feed) return;
+      if (!wishes || wishes.length === 0) {
+        feed.innerHTML = `
+          <div style="text-align: center; padding: 20px 14px; color: #5f7d9e; font-size: 13px; font-style: italic; background: rgba(238, 246, 255, 0.6); border-radius: 12px; border: 1px dashed #bddcf9;">
+            Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc mừng đến tân Cử nhân Cẩm Tiên nhé!
+          </div>
+        `;
+        return;
+      }
       feed.innerHTML = wishes.map(w => `
         <div class="guest-post">
           <div class="guest-author">${cleanStr(w.name)}</div>
