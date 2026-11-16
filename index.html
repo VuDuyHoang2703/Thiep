@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Thiệp Mời Lễ Tốt Nghiệp - Trương Thị Cẩm Tiên | BDU 2026</title>
   
-  <!-- Fonts -->
+  <!-- Google Fonts: Sang trọng & Trang nhã -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
   
-  <!-- FontAwesome & Confetti -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Canvas Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 
   <style>
@@ -49,7 +48,7 @@
       position: relative;
     }
 
-    /* Floating Petals Canvas */
+    /* Falling Petals Canvas */
     #petals-canvas {
       position: fixed;
       top: 0;
@@ -93,7 +92,6 @@
       pointer-events: none;
     }
 
-    /* Cánh cửa bên trái */
     .gate-door-left {
       position: absolute;
       top: 0;
@@ -113,7 +111,6 @@
       overflow: hidden;
     }
 
-    /* Cánh cửa bên phải */
     .gate-door-right {
       position: absolute;
       top: 0;
@@ -133,7 +130,6 @@
       overflow: hidden;
     }
 
-    /* Vân hoa cẩm tú cầu chìm sang trọng trên cánh thư */
     .gate-watermark-left, .gate-watermark-right {
       position: absolute;
       width: 100%;
@@ -147,7 +143,6 @@
       pointer-events: none;
     }
 
-    /* Khi mở: 2 cánh cửa lướt sang 2 bên hoàn toàn */
     .gate-overlay.opened .gate-door-left {
       transform: translateX(-105%);
     }
@@ -156,7 +151,6 @@
       transform: translateX(105%);
     }
 
-    /* Khối Con Dấu Vàng Trung Tâm */
     .gate-seal-center {
       position: absolute;
       top: 50%;
@@ -178,7 +172,6 @@
       opacity: 0;
     }
 
-    /* Con dấu sáp vàng BDU nhấp nháy phát sáng */
     .gate-seal-img {
       width: 100px;
       height: 100px;
@@ -203,14 +196,14 @@
       color: #2b1d02;
       font-size: 14.5px;
       font-weight: 700;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
       text-transform: uppercase;
       padding: 14px 34px;
       border-radius: 50px;
       box-shadow: 0 8px 25px rgba(212, 175, 55, 0.55), 0 0 15px rgba(255, 255, 255, 0.4);
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      justify-content: center;
       animation: floatBtnOpen 2s infinite ease-in-out;
     }
 
@@ -223,7 +216,7 @@
       color: #d8ecff;
       font-size: 12.5px;
       margin-top: 14px;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.8px;
       text-shadow: 0 2px 4px rgba(0,0,0,0.6);
       font-weight: 300;
     }
@@ -257,7 +250,6 @@
       z-index: 5;
     }
 
-    /* Ban đầu thiệp ẩn hoàn toàn, đợi thư ngoài mở xong 100% mới xuất hiện */
     .invitation-card {
       width: 100%;
       max-width: 500px;
@@ -273,29 +265,17 @@
       pointer-events: none;
     }
 
-    /* Sau khi thư ngoài mở xong: Thiệp mời mới bung lên trang trọng & sang chảnh */
     .invitation-card.revealed {
       opacity: 1;
       transform: scale(1) translateY(0);
       pointer-events: auto;
     }
 
-    /* Flower Corner */
-    .flower-decor-top {
-      position: absolute;
-      top: -15px;
-      right: -20px;
-      width: 150px;
-      pointer-events: none;
-      z-index: 15;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
-    }
-
     /* Header Section */
     .card-header {
       background: linear-gradient(155deg, #092244 0%, #11386d 55%, #184e96 100%);
       color: var(--white);
-      padding: 34px 22px 45px 22px;
+      padding: 38px 22px 48px 22px;
       text-align: center;
       position: relative;
     }
@@ -311,17 +291,17 @@
     }
 
     .bdu-logo {
-      width: 78px;
-      height: 78px;
-      margin: 0 auto 12px;
+      width: 82px;
+      height: 82px;
+      margin: 0 auto 14px;
       display: block;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.35));
+      filter: drop-shadow(0 4px 14px rgba(0,0,0,0.35));
     }
 
     .bdu-school-title {
-      font-size: 13.5px;
+      font-size: 14px;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 2.2px;
       text-transform: uppercase;
       color: var(--gold-soft);
       text-shadow: 0 2px 4px rgba(0,0,0,0.4);
@@ -329,38 +309,37 @@
 
     .invitation-main-heading {
       font-family: 'Alex Brush', cursive;
-      font-size: 48px;
+      font-size: clamp(38px, 8.5vw, 48px);
       color: #ffffff;
-      line-height: 1.15;
-      margin: 6px 0;
+      line-height: 1.25;
+      margin: 8px 0 10px 0;
       text-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+      padding: 0 8px;
     }
 
     .invitation-motto {
       font-family: 'Playfair Display', serif;
-      font-size: 14.5px;
+      font-size: 15px;
       font-style: italic;
       color: #c9e2fc;
       letter-spacing: 0.8px;
     }
 
     .badge-class {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
+      display: inline-block;
       background: rgba(255, 255, 255, 0.12);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(252, 241, 197, 0.35);
       border-radius: 30px;
-      padding: 5px 16px;
-      margin-top: 14px;
-      font-size: 11.5px;
-      letter-spacing: 1.6px;
+      padding: 6px 20px;
+      margin-top: 15px;
+      font-size: 12px;
+      letter-spacing: 2px;
       color: var(--gold-soft);
       font-weight: 600;
     }
 
-    /* Hero Portrait Card - HIỂN THỊ ĐẦY ĐỦ 100% ẢNH VÀ DẢI BĂNG DANH DỰ */
+    /* Hero Portrait Card */
     .hero-frame {
       position: relative;
       margin: -25px 18px 24px 18px;
@@ -425,9 +404,9 @@
       color: #2b1d02;
       font-size: 11px;
       font-weight: 700;
-      padding: 3px 14px;
+      padding: 4px 16px;
       border-radius: 12px;
-      letter-spacing: 0.8px;
+      letter-spacing: 1px;
     }
 
     /* Content Area */
@@ -491,7 +470,7 @@
 
     .intro-audience {
       font-family: 'Alex Brush', cursive;
-      font-size: 40px;
+      font-size: 42px;
       color: #dc2626;
       line-height: 1.2;
       margin-bottom: 8px;
@@ -505,33 +484,19 @@
       margin: 0 auto;
     }
 
-    /* Section Flower Separator */
-    .flower-divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin: 26px 0;
-    }
-
-    .flower-divider::before, .flower-divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(28, 82, 150, 0.3), transparent);
-    }
-
-    .flower-divider img {
-      width: 26px;
-      height: 26px;
-      object-fit: contain;
+    /* Elegant Clean Divider */
+    .clean-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--primary-blue), transparent);
+      margin: 24px auto;
     }
 
     /* Event Date & Venue Card */
     .event-card {
       background: #ffffff;
       border-radius: 16px;
-      padding: 22px 18px;
+      padding: 24px 20px;
       box-shadow: var(--shadow-card);
       border: 1px solid #d4e8fc;
       margin-bottom: 24px;
@@ -556,10 +521,11 @@
       color: var(--primary-navy);
       font-weight: 700;
       font-size: 14.5px;
-      padding: 6px 18px;
+      padding: 7px 20px;
       border-radius: 20px;
       border: 1px solid #bfdbfe;
-      margin-bottom: 14px;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
     }
 
     .event-date-row {
@@ -591,7 +557,7 @@
 
     .date-main-number {
       font-family: 'Playfair Display', serif;
-      font-size: 58px;
+      font-size: 60px;
       font-weight: 700;
       line-height: 1;
       color: var(--primary-blue);
@@ -619,52 +585,37 @@
       font-size: 13px;
       color: #435b75;
       line-height: 1.5;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
 
     .event-actions {
       display: flex;
-      gap: 10px;
       justify-content: center;
-      flex-wrap: wrap;
+      width: 100%;
     }
 
-    .btn-card {
-      flex: 1;
-      min-width: 140px;
-      padding: 11px 16px;
-      border-radius: 25px;
-      font-size: 13px;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
+    /* Nút Dẫn Đường Trang Trọng Rộng Rãi */
+    .btn-maps-formal {
+      width: 100%;
+      max-width: 340px;
+      padding: 13px 24px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-align: center;
       text-decoration: none;
       cursor: pointer;
       transition: all 0.3s ease;
-      border: none;
-    }
-
-    .btn-maps {
       background: linear-gradient(135deg, #18539c 0%, #0d376d 100%);
       color: #ffffff;
-      box-shadow: 0 5px 15px rgba(24, 83, 156, 0.3);
+      box-shadow: 0 6px 18px rgba(24, 83, 156, 0.35);
+      border: none;
+      display: inline-block;
     }
 
-    .btn-maps:hover {
-      box-shadow: 0 8px 22px rgba(24, 83, 156, 0.45);
-      transform: translateY(-2px);
-    }
-
-    .btn-cal {
-      background: #f0f7fe;
-      color: var(--primary-navy);
-      border: 1px solid #bfdbfe;
-    }
-
-    .btn-cal:hover {
-      background: #e2f0fd;
+    .btn-maps-formal:hover {
+      box-shadow: 0 8px 24px rgba(24, 83, 156, 0.5);
       transform: translateY(-2px);
     }
 
@@ -684,6 +635,7 @@
       color: var(--primary-navy);
       text-align: center;
       margin-bottom: 14px;
+      letter-spacing: 0.5px;
     }
 
     .calendar-grid {
@@ -716,20 +668,7 @@
       box-shadow: 0 4px 14px rgba(24, 83, 156, 0.45);
       transform: scale(1.08);
       z-index: 2;
-    }
-
-    .cal-cell.today-target::after {
-      content: '❤️';
-      position: absolute;
-      top: -8px;
-      right: -4px;
-      font-size: 11px;
-      animation: pulseHeart 1.5s infinite;
-    }
-
-    @keyframes pulseHeart {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.3); }
+      border: 1px solid rgba(250, 232, 162, 0.8);
     }
 
     /* Countdown */
@@ -757,7 +696,7 @@
     }
 
     .countdown-heading {
-      font-size: 11.5px;
+      font-size: 12px;
       letter-spacing: 2.5px;
       text-transform: uppercase;
       color: var(--gold-soft);
@@ -805,13 +744,6 @@
       font-size: 22px;
       font-weight: 700;
       color: var(--primary-dark);
-      text-align: center;
-      margin-bottom: 6px;
-    }
-
-    .subtitle-block {
-      font-size: 12px;
-      color: var(--text-muted);
       text-align: center;
       margin-bottom: 18px;
     }
@@ -917,25 +849,21 @@
     .journey-row {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       background: #ffffff;
-      padding: 12px 15px;
+      padding: 12px 16px;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.03);
       border-left: 3px solid var(--primary-blue);
     }
 
-    .journey-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: #e4f1fe;
-      color: var(--primary-blue);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .journey-num {
+      font-family: 'Playfair Display', serif;
       font-size: 14px;
+      font-weight: 700;
+      color: var(--primary-blue);
       flex-shrink: 0;
+      width: 24px;
     }
 
     .journey-desc {
@@ -984,7 +912,7 @@
     }
 
     /* ========================================================
-       ALBUM KỶ NIỆM RẠNG RỠ - HIỂN THỊ TRỌN VẸN 100% ẢNH VÀ CHỮ
+       ALBUM KỶ NIỆM RẠNG RỠ - HIỂN THỊ TRỌN VẸN 100%
        ======================================================== */
     .album-section {
       margin-bottom: 30px;
@@ -1044,17 +972,12 @@
       font-size: 13px;
       font-weight: 700;
       color: var(--primary-navy);
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      letter-spacing: 0.3px;
     }
 
     .album-card-zoom-hint {
       font-size: 11.5px;
       color: var(--primary-blue);
-      display: flex;
-      align-items: center;
-      gap: 5px;
       font-weight: 600;
     }
 
@@ -1099,7 +1022,7 @@
       color: #ffffff;
       font-weight: 700;
       font-size: 14px;
-      letter-spacing: 0.8px;
+      letter-spacing: 1px;
       padding: 13px;
       border-radius: 30px;
       border: none;
@@ -1107,7 +1030,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
       box-shadow: 0 6px 16px rgba(24, 83, 156, 0.3);
       transition: all 0.3s ease;
     }
@@ -1155,64 +1077,81 @@
     /* Footer */
     .card-footer {
       text-align: center;
-      padding: 25px 18px 45px 18px;
+      padding: 40px 20px 0 20px;
       position: relative;
+      background: linear-gradient(180deg, #ffffff 0%, #f4f8fe 60%, #eaf3fe 100%);
+      border-top: 1px solid #dcebfa;
+      overflow: hidden;
     }
 
     .footer-emblem {
-      width: 54px;
-      height: 54px;
-      margin: 0 auto 10px;
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 14px;
       display: block;
-      opacity: 0.9;
+      filter: drop-shadow(0 4px 10px rgba(212, 175, 55, 0.35));
     }
 
     .footer-thank {
       font-family: 'Alex Brush', cursive;
-      font-size: 28px;
-      color: var(--primary-blue);
-      margin-bottom: 6px;
+      font-size: 32px;
+      color: var(--primary-navy);
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .footer-divider {
+      width: 50px;
+      height: 2px;
+      background: var(--gold-grad);
+      margin: 10px auto 12px;
+      border-radius: 2px;
     }
 
     .footer-note {
-      font-size: 11px;
-      color: #728ca8;
-      letter-spacing: 0.5px;
+      font-size: 11.5px;
+      color: #5c7591;
+      letter-spacing: 1px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 22px;
     }
 
     .flower-decor-bottom {
-      position: absolute;
-      bottom: 0;
-      left: 0;
+      display: block;
       width: 100%;
+      height: auto;
       pointer-events: none;
-      z-index: 10;
-      opacity: 0.95;
+      margin-top: 5px;
+      vertical-align: bottom;
     }
 
     /* ========================================================
-       3. FLOATING TOOLBAR
+       3. FLOATING TOOLBAR - NÚT BẤM CHỮ TINH TẾ (KHÔNG DÙNG ICON)
        ======================================================== */
     .floating-bar {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      bottom: 18px;
+      right: 18px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       z-index: 900;
     }
 
     .tool-btn {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
+      min-width: 44px;
+      height: 44px;
+      padding: 0 14px;
+      border-radius: 22px;
       background: #ffffff;
       color: var(--primary-navy);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 17px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
       box-shadow: 0 6px 20px rgba(10, 30, 56, 0.22);
       border: 1px solid rgba(189, 224, 254, 0.9);
       cursor: pointer;
@@ -1220,18 +1159,13 @@
     }
 
     .tool-btn:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
       box-shadow: 0 8px 25px rgba(10, 30, 56, 0.3);
     }
 
     .tool-btn.music-on {
       background: var(--gold-grad);
       color: #2b1d02;
-      animation: spinRecord 4s linear infinite;
-    }
-
-    @keyframes spinRecord {
-      100% { transform: rotate(360deg); }
     }
 
     /* ========================================================
@@ -1292,7 +1226,7 @@
       top: 18px;
       right: 22px;
       color: #ffffff;
-      font-size: 34px;
+      font-size: 32px;
       cursor: pointer;
       z-index: 1010;
       transition: transform 0.2s;
@@ -1321,6 +1255,10 @@
       .date-main-number {
         font-size: 50px;
       }
+      .floating-bar {
+        bottom: 12px;
+        right: 12px;
+      }
     }
   </style>
 </head>
@@ -1341,7 +1279,7 @@
     <div class="gate-door-left">
       <div class="gate-watermark-left"></div>
       <div class="gate-tag-left">
-        <i class="fa-solid fa-graduation-cap"></i> TRƯỜNG ĐẠI HỌC BÌNH DƯƠNG
+        TRƯỜNG ĐẠI HỌC BÌNH DƯƠNG
       </div>
       <div style="font-family: 'Playfair Display', serif; font-size: 16px; color: #fae8a2; letter-spacing: 1px;">
         THIỆP MỜI TỐT NGHIỆP
@@ -1363,9 +1301,9 @@
     <div class="gate-seal-center">
       <img src="assets/seal_gold_transparent.png" class="gate-seal-img" alt="BDU Gold Wax Seal">
       <div class="gate-btn-open">
-        <i class="fa-solid fa-envelope-open-text"></i> CHẠM ĐỂ MỞ THƯ
+        CHẠM ĐỂ MỞ THƯ
       </div>
-      <div class="gate-open-hint">✦ Chạm vào màn hình để mở thiệp & bật nhạc ✦</div>
+      <div class="gate-open-hint">Chạm vào màn hình để mở thiệp & bật nhạc</div>
     </div>
   </div>
 
@@ -1375,19 +1313,16 @@
   <div class="app-main">
     <div class="invitation-card" id="invitation-card">
 
-      <!-- Top Flower Corner -->
-      <img src="assets/hydrangea_flower_trans.png" class="flower-decor-top" alt="Hydrangea">
-
       <!-- Header -->
       <header class="card-header">
         <img src="assets/seal_gold_transparent.png" class="bdu-logo" alt="BDU Logo">
         <div class="bdu-school-title">Trường Đại Học Bình Dương</div>
-        <h1 class="invitation-main-heading">Dấu Ấn Tốt Nghiệp</h1>
+        <h1 class="invitation-main-heading">Thiệp Mời Lễ Tốt Nghiệp</h1>
         <div class="invitation-motto">Tri thức mở lối — Tương lai gọi tên</div>
         
         <div>
           <span class="badge-class">
-            <i class="fa-solid fa-graduation-cap"></i> CLASS OF 2026
+            CLASS OF 2026
           </span>
         </div>
       </header>
@@ -1423,15 +1358,13 @@
           </p>
         </div>
 
-        <!-- Flower Separator -->
-        <div class="flower-divider">
-          <img src="assets/hydrangea_flower_trans.png" alt="divider">
-        </div>
+        <!-- Clean Subtle Divider -->
+        <div class="clean-divider"></div>
 
         <!-- Date & Venue -->
         <div class="event-card">
           <div class="event-pill">
-            <i class="fa-regular fa-clock"></i> 07:00 SÁNG — THỨ BẢY
+            07:00 SÁNG — THỨ BẢY
           </div>
 
           <div class="event-date-row">
@@ -1449,24 +1382,20 @@
           <div class="venue-label">Địa điểm tổ chức</div>
           <div class="venue-name">Hội Trường A — Trường Đại Học Bình Dương</div>
           <div class="venue-addr">
-            <i class="fa-solid fa-location-dot" style="color: #dc2626;"></i> 
             504 Đại lộ Bình Dương, Phường Hiệp Thành, TP. Thủ Dầu Một, Tỉnh Bình Dương
           </div>
 
           <div class="event-actions">
-            <a href="https://maps.google.com/?q=Đại+Học+Bình+Dương,+504+Đại+lộ+Bình+Dương" target="_blank" class="btn-card btn-maps">
-              <i class="fa-solid fa-location-arrow"></i> Chỉ Đường Google Maps
+            <a href="https://maps.google.com/?q=Đại+Học+Bình+Dương,+504+Đại+lộ+Bình+Dương" target="_blank" class="btn-maps-formal">
+              Dẫn Đường Đến Hội Trường
             </a>
-            <button onclick="saveEventCalendar()" class="btn-card btn-cal">
-              <i class="fa-regular fa-calendar-check"></i> Lưu Lịch Hẹn
-            </button>
           </div>
         </div>
 
         <!-- Mini Calendar -->
         <div class="calendar-box">
           <div class="calendar-header">
-            <i class="fa-regular fa-calendar-days" style="color: var(--primary-blue);"></i> Tháng 11 — 2026
+            Tháng 11 — 2026
           </div>
           <div class="calendar-grid">
             <div class="cal-weekday">T2</div>
@@ -1524,7 +1453,7 @@
         <!-- Countdown -->
         <div class="countdown-box">
           <div class="countdown-heading">
-            <i class="fa-solid fa-hourglass-half"></i> ĐẾM NGƯỢC ĐẾN NGÀY TỐT NGHIỆP
+            ĐẾM NGƯỢC ĐẾN NGÀY TỐT NGHIỆP
           </div>
           <div class="countdown-flex">
             <div class="cd-tile">
@@ -1549,7 +1478,6 @@
         <!-- Timeline -->
         <div class="timeline-container">
           <h3 class="title-block">Lịch Trình Buổi Lễ</h3>
-          <div class="subtitle-block">Thời gian biểu chi tiết sáng ngày 21/11/2026</div>
           <div class="timeline-flow">
             
             <div class="flow-event">
@@ -1596,30 +1524,29 @@
           <div class="journey-title">Hành Trình Của Mình</div>
           <div class="journey-items">
             <div class="journey-row">
-              <div class="journey-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+              <div class="journey-num">I.</div>
               <div class="journey-desc">Vượt qua giới hạn — Kiến tạo thành công.</div>
             </div>
             <div class="journey-row">
-              <div class="journey-icon"><i class="fa-solid fa-trophy"></i></div>
+              <div class="journey-num">II.</div>
               <div class="journey-desc">Tự tin bước tiếp — Vươn tới ước mơ.</div>
             </div>
             <div class="journey-row">
-              <div class="journey-icon"><i class="fa-solid fa-paper-plane"></i></div>
+              <div class="journey-num">III.</div>
               <div class="journey-desc">Cùng BDU, viết tiếp hành trình phía trước.</div>
             </div>
           </div>
         </div>
 
-        <!-- Dấu Ấn Poster Preview -->
-        <div style="text-align: center; margin-bottom: 8px;">
-          <h3 class="title-block">Dấu Ấn Kỷ Niệm</h3>
-          <div class="subtitle-block">Bản thiết kế lưu giữ dấu ấn thời sinh viên BDU</div>
+        <!-- Dấu Ấn Kỷ Niệm Poster Preview -->
+        <div style="text-align: center; margin-bottom: 14px;">
+          <h3 class="title-block" style="margin-bottom: 0;">Dấu Ấn Kỷ Niệm</h3>
         </div>
         <div class="poster-view" onclick="showLightbox('assets/dau_an_poster.jpg')">
-          <img src="assets/dau_an_poster.jpg" alt="Dấu Ấn Tốt Nghiệp BDU">
+          <img src="assets/dau_an_poster.jpg" alt="Dấu Ấn Kỷ Niệm Tốt Nghiệp BDU" loading="lazy">
           <div class="poster-caption">
-            <span><i class="fa-solid fa-magnifying-glass-plus"></i> Xem trọn vẹn Dấu Ấn Tốt Nghiệp</span>
-            <span style="font-size: 11px; background: rgba(255,255,255,0.25); padding: 3px 8px; border-radius: 6px;">Phóng to</span>
+            <span>Dấu Ấn Tốt Nghiệp BDU</span>
+            <span style="font-size: 11px; background: rgba(255,255,255,0.25); padding: 3px 8px; border-radius: 6px;">Chạm để phóng to</span>
           </div>
         </div>
 
@@ -1627,9 +1554,8 @@
              ALBUM KỶ NIỆM RẠNG RỠ - HIỂN THỊ TRỌN VẸN 100% ẢNH VÀ CHỮ
              ======================================================== -->
         <div class="album-section">
-          <div style="text-align: center; margin-bottom: 8px;">
-            <h3 class="title-block">Album Kỷ Niệm Rạng Rỡ</h3>
-            <div class="subtitle-block">✦ Toàn bộ ảnh được hiển thị trọn vẹn 100%, chạm vào ảnh để phóng to sắc nét ✦</div>
+          <div style="text-align: center; margin-bottom: 16px;">
+            <h3 class="title-block" style="margin-bottom: 0;">Album Kỷ Niệm Rạng Rỡ</h3>
           </div>
 
           <div class="album-cards-flow">
@@ -1641,11 +1567,10 @@
               </div>
               <div class="album-card-footer">
                 <div class="album-card-title">
-                  <i class="fa-solid fa-graduation-cap" style="color: var(--primary-blue);"></i> 
-                  Trương Thị Cẩm Tiên • Quản trị kinh doanh
+                  Trương Thị Cẩm Tiên — Quản trị kinh doanh
                 </div>
                 <div class="album-card-zoom-hint">
-                  <i class="fa-solid fa-expand"></i> Phóng to
+                  Phóng to
                 </div>
               </div>
             </div>
@@ -1657,11 +1582,10 @@
               </div>
               <div class="album-card-footer">
                 <div class="album-card-title">
-                  <i class="fa-solid fa-sparkles" style="color: var(--gold-deep);"></i> 
                   Tà áo trắng & Vương miện danh dự K25
                 </div>
                 <div class="album-card-zoom-hint">
-                  <i class="fa-solid fa-expand"></i> Phóng to
+                  Phóng to
                 </div>
               </div>
             </div>
@@ -1673,11 +1597,10 @@
               </div>
               <div class="album-card-footer">
                 <div class="album-card-title">
-                  <i class="fa-solid fa-building-columns" style="color: var(--primary-blue);"></i> 
                   Bao quát toàn cảnh khuôn viên trường BDU
                 </div>
                 <div class="album-card-zoom-hint">
-                  <i class="fa-solid fa-expand"></i> Phóng to
+                  Phóng to
                 </div>
               </div>
             </div>
@@ -1689,11 +1612,10 @@
               </div>
               <div class="album-card-footer">
                 <div class="album-card-title">
-                  <i class="fa-solid fa-cloud-sun" style="color: var(--sky-vivid);"></i> 
                   Bầu trời thanh xuân & Khát vọng tương lai
                 </div>
                 <div class="album-card-zoom-hint">
-                  <i class="fa-solid fa-expand"></i> Phóng to
+                  Phóng to
                 </div>
               </div>
             </div>
@@ -1705,11 +1627,10 @@
               </div>
               <div class="album-card-footer">
                 <div class="album-card-title">
-                  <i class="fa-solid fa-heart" style="color: #dc2626;"></i> 
                   Nụ cười rạng ngời ngày nhận bằng tốt nghiệp
                 </div>
                 <div class="album-card-zoom-hint">
-                  <i class="fa-solid fa-expand"></i> Phóng to
+                  Phóng to
                 </div>
               </div>
             </div>
@@ -1732,7 +1653,7 @@
               <textarea id="g-msg" class="guest-input" placeholder="Viết lời chúc mừng tốt nghiệp tại đây..." required></textarea>
             </div>
             <button type="submit" class="btn-submit-guest">
-              <i class="fa-solid fa-heart" style="color: #fca5a5;"></i> Gửi Lời Chúc Mừng
+              Gửi Lời Chúc Mừng
             </button>
           </form>
 
@@ -1745,45 +1666,44 @@
       <footer class="card-footer">
         <img src="assets/seal_gold_transparent.png" class="footer-emblem" alt="BDU Seal">
         <div class="footer-thank">Sự hiện diện của bạn là niềm vinh hạnh của Cẩm Tiên!</div>
-        <div class="footer-note">Trường Đại Học Bình Dương • Niên khóa 2022 - 2026</div>
+        <div class="footer-divider"></div>
+        <div class="footer-note">Trường Đại Học Bình Dương • Niên khóa 2022 – 2026</div>
+        <img src="assets/hydrangea_footer_clean.png" class="flower-decor-bottom" alt="Hoa cẩm tú cầu chân thiệp">
       </footer>
-
-      <!-- Bottom Hydrangea Flowers -->
-      <img src="assets/hydrangea_banner.jpg" class="flower-decor-bottom" alt="Hydrangea banner">
     </div>
   </div>
 
   <!-- ========================================================
-       3. FLOATING TOOLBAR
+       3. FLOATING TOOLBAR - NÚT BẤM CHỮ GỌN GÀNG (KHÔNG ICON)
        ======================================================== -->
   <div class="floating-bar">
-    <button class="tool-btn" id="btn-audio" onclick="toggleAudio()" title="Bật/Tắt nhạc nền">
-      <i class="fa-solid fa-music"></i>
+    <button class="tool-btn" id="btn-audio" onclick="toggleAudio()" title="Bật hoặc Tắt nhạc nền">
+      Nhạc
     </button>
     <button class="tool-btn" onclick="replayGateAnimation()" title="Xem lại hiệu ứng mở thư">
-      <i class="fa-solid fa-envelope"></i>
+      Mở Thư
     </button>
-    <button class="tool-btn" id="btn-petals" onclick="togglePetalFlow()" title="Bật/Tắt hoa rơi">
-      <i class="fa-solid fa-wand-magic-sparkles"></i>
+    <button class="tool-btn" id="btn-petals" onclick="togglePetalFlow()" title="Bật hoặc Tắt hoa rơi">
+      Hoa Rơi
     </button>
     <button class="tool-btn" onclick="shareInvitation()" title="Chia sẻ thiệp">
-      <i class="fa-solid fa-share-nodes"></i>
+      Chia Sẻ
     </button>
   </div>
 
   <!-- ========================================================
-       4. LIGHTBOX
+       4. LIGHTBOX TOÀN MÀN HÌNH - XEM TRỌN VẸN 100% ẢNH GỐC
        ======================================================== -->
   <div id="lightbox" onclick="hideLightbox()">
     <div class="lightbox-x">&times;</div>
     <div class="lightbox-wrapper" onclick="event.stopPropagation()">
       <img id="lightbox-zoom" class="lightbox-pic" src="" alt="Zoom">
-      <div class="lightbox-hint">✦ Chạm vào bên ngoài để đóng ✦</div>
+      <div class="lightbox-hint">Chạm vào bên ngoài để đóng</div>
     </div>
   </div>
 
   <!-- ========================================================
-       5. JAVASCRIPT - ĐIỀU KHIỂN THỨ TỰ 2 GIAI ĐOẠN RÕ RÀNG
+       5. JAVASCRIPT
        ======================================================== -->
   <script>
     // Audio Player
@@ -1795,20 +1715,18 @@
       if (isPlaying) {
         bgm.pause();
         audioBtn.classList.remove('music-on');
-        audioBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+        audioBtn.innerText = 'Tắt Nhạc';
         isPlaying = false;
       } else {
         bgm.play().then(() => {
           audioBtn.classList.add('music-on');
-          audioBtn.innerHTML = '<i class="fa-solid fa-music"></i>';
+          audioBtn.innerText = 'Nhạc';
           isPlaying = true;
         }).catch(err => console.log('Audio playback prevented:', err));
       }
     }
 
-    /* ========================================================
-       QUY TRÌNH 2 BƯỚC: THƯ MỞ XONG HẲN -> THIỆP MỚI BẬT LÊN
-       ======================================================== */
+    // Hiệu ứng mở bì thư đôi 2 cánh
     let gateOpened = false;
     let isOpening = false;
 
@@ -1819,46 +1737,37 @@
       const overlay = document.getElementById('gate-overlay');
       const card = document.getElementById('invitation-card');
 
-      // BƯỚC 1: Bì thư ngoài bắt đầu trượt mở 2 cánh sang hai bên
-      // (Lúc này thiệp bên trong vẫn ẩn hoàn toàn, KHÔNG bị hiển thị chồng đè)
+      // GIAI ĐOẠN 1: Bì thư mở hoàn toàn ra hai bên
       overlay.classList.add('opened');
 
-      // Khởi động nhạc nền
+      // Phát nhạc nền
       bgm.play().then(() => {
         audioBtn.classList.add('music-on');
         isPlaying = true;
       }).catch(e => console.log('Autoplay audio:', e));
 
-      // BƯỚC 2: Đợi đúng 950ms (khi 2 cánh thư ngoài đã trượt hoàn tất ra khỏi mép màn hình)
+      // GIAI ĐOẠN 2: Sau 950ms khi thư ngoài mở xong, thiệp bên trong mới bật lên
       setTimeout(() => {
-        // Tấm thiệp mời mới chính thức bung nở & bật lên từ giữa màn hình!
         card.classList.add('revealed');
-
-        // Bắn pháo hoa rực rỡ ăn mừng khoảnh khắc thiệp xuất hiện
         fireConfetti();
-
         gateOpened = true;
         isOpening = false;
 
-        // Ẩn lớp phủ hoàn toàn để giải phóng không gian cuộn trang
         setTimeout(() => {
           overlay.classList.add('hidden');
         }, 500);
       }, 950);
     }
 
-    // Xem lại hiệu ứng mở thư
     function replayGateAnimation() {
       gateOpened = false;
       isOpening = false;
       const overlay = document.getElementById('gate-overlay');
       const card = document.getElementById('invitation-card');
 
-      // Thu thiệp lại về trạng thái ban đầu
       card.classList.remove('revealed');
       overlay.classList.remove('hidden');
 
-      // Đóng 2 cánh thư lại
       setTimeout(() => {
         overlay.classList.remove('opened');
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1989,33 +1898,8 @@
 
     function togglePetalFlow() {
       petalsRunning = !petalsRunning;
-      document.getElementById('btn-petals').style.color = petalsRunning ? 'var(--primary-navy)' : '#94a3b8';
-    }
-
-    // Tải file nhắc lịch (.ics)
-    function saveEventCalendar() {
-      const ics = [
-        'BEGIN:VCALENDAR',
-        'VERSION:2.0',
-        'PRODID:-//BDU//Cam Tien Graduation//VI',
-        'BEGIN:VEVENT',
-        'SUMMARY:Lễ Tốt Nghiệp Cử Nhân - Trương Thị Cẩm Tiên (ĐH Bình Dương)',
-        'DESCRIPTION:Tham dự Lễ tốt nghiệp Cử nhân Quản trị kinh doanh của Trương Thị Cẩm Tiên tại Hội trường A, Trường Đại Học Bình Dương.',
-        'LOCATION:Trường Đại học Bình Dương, 504 Đại lộ Bình Dương, Hiệp Thành, Thủ Dầu Một, Bình Dương',
-        'DTSTART:20261121T000000Z',
-        'DTEND:20261121T050000Z',
-        'STATUS:CONFIRMED',
-        'END:VEVENT',
-        'END:VCALENDAR'
-      ].join('\r\n');
-
-      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-      const dlLink = document.createElement('a');
-      dlLink.href = window.URL.createObjectURL(blob);
-      dlLink.setAttribute('download', 'LeTotNghiep_CamTien_21-11-2026.ics');
-      document.body.appendChild(dlLink);
-      dlLink.click();
-      document.body.removeChild(dlLink);
+      const btn = document.getElementById('btn-petals');
+      btn.innerText = petalsRunning ? 'Hoa Rơi' : 'Tắt Hoa';
     }
 
     // Lightbox
@@ -2030,7 +1914,7 @@
     // Guestbook
     const presetWishes = [
       {
-        name: "Gia đình yêu thương ❤️",
+        name: "Gia đình yêu thương",
         msg: "Chúc mừng con gái Cẩm Tiên đã hoàn thành xuất sắc chặng đường 4 năm đại học! Chúc con luôn vững vàng, tự tin và gặt hái thật nhiều thành công mới!",
         time: "16/11/2026 21:30"
       },
@@ -2048,7 +1932,7 @@
 
       feed.innerHTML = wishes.map(w => `
         <div class="guest-post">
-          <div class="guest-author"><i class="fa-solid fa-heart" style="color: #dc2626; font-size: 11px;"></i> ${cleanStr(w.name)}</div>
+          <div class="guest-author">${cleanStr(w.name)}</div>
           <div class="guest-words">${cleanStr(w.msg)}</div>
           <div class="guest-timestamp">${w.time}</div>
         </div>
@@ -2076,7 +1960,7 @@
       m.value = '';
       renderWishes();
       fireConfetti();
-      alert('Cảm ơn bạn rất nhiều! Lời chúc đã được gửi đến Cẩm Tiên ❤️');
+      alert('Cảm ơn bạn rất nhiều! Lời chúc đã được gửi đến Cẩm Tiên.');
     }
 
     function cleanStr(text) {
