@@ -1268,6 +1268,14 @@
       flex-direction: column;
       gap: 10px;
       z-index: 900;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .floating-bar.active {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .tool-btn {
@@ -1434,7 +1442,7 @@
   <div class="ambient-sky-glow"></div>
 
   <!-- Background Music from Video Sample -->
-  <audio id="bgm" src="assets/bgm.mp3" loop preload="auto"></audio>
+  <audio id="bgm" src="assets/bgm.mp3" loop preload="none"></audio>
 
   <!-- ========================================================
        1. BÌ THƯ ĐÔI 2 CÁNH (GATE-FOLD THEO ĐÚNG VIDEO MẪU)
@@ -1834,7 +1842,7 @@
   <!-- ========================================================
        3. FLOATING TOOLBAR - NÚT ICON TRÒN SANG TRỌNG
        ======================================================== -->
-  <div class="floating-bar">
+  <div class="floating-bar" id="floating-bar">
     <!-- Nút Bật/Tắt Nhạc (Biểu tượng nốt nhạc) -->
     <button class="tool-btn" id="btn-audio" onclick="toggleAudio()" title="Bật hoặc Tắt nhạc nền" aria-label="Bật hoặc Tắt nhạc nền">
       <svg viewBox="0 0 24 24">
@@ -1882,7 +1890,15 @@
     // Audio Player
     const bgm = document.getElementById('bgm');
     const audioBtn = document.getElementById('btn-audio');
+    const floatingBar = document.getElementById('floating-bar');
     let isPlaying = false;
+
+    // Ban đầu khi thư còn đang đóng bìa: đảm bảo nhạc tắt 100%
+    bgm.pause();
+    bgm.currentTime = 0;
+    bgm.muted = false;
+    isPlaying = false;
+    audioBtn.classList.remove('music-on');
 
     function toggleAudio() {
       if (isPlaying) {
@@ -1890,6 +1906,7 @@
         audioBtn.classList.remove('music-on');
         isPlaying = false;
       } else {
+        bgm.muted = false;
         bgm.play().then(() => {
           audioBtn.classList.add('music-on');
           isPlaying = true;
@@ -1908,26 +1925,33 @@
       const overlay = document.getElementById('gate-overlay');
       const card = document.getElementById('invitation-card');
 
-      // GIAI ĐOẠN 1: Bì thư mở hoàn toàn ra hai bên
+      // GIAI ĐOẠN 1: Bì thư bắt đầu mở hoàn toàn ra hai bên
       overlay.classList.add('opened');
 
-      // Phát nhạc nền
-      bgm.play().then(() => {
-        audioBtn.classList.add('music-on');
-        isPlaying = true;
-      }).catch(e => console.log('Autoplay audio:', e));
+      // Kích hoạt audio ngầm (muted) trong gesture của người dùng để iOS/Android cho phép
+      bgm.muted = true;
+      bgm.play().catch(e => console.log('Audio gesture primed:', e));
 
-      // GIAI ĐOẠN 2: Sau 950ms khi thư ngoài mở xong, thiệp bên trong mới bật lên
+      // GIAI ĐOẠN 2: Sau 900ms khi 2 cánh thư mở xong hoàn toàn, thiệp bật lên thì NHẠC MỚI BẮT ĐẦU CẤT LÊN
       setTimeout(() => {
         card.classList.add('revealed');
+        floatingBar.classList.add('active');
         fireConfetti();
         gateOpened = true;
         isOpening = false;
 
+        // Bật tiếng và phát nhạc khi thiệp đã mở hoàn toàn
+        bgm.muted = false;
+        bgm.currentTime = 0;
+        bgm.play().then(() => {
+          audioBtn.classList.add('music-on');
+          isPlaying = true;
+        }).catch(e => console.log('Autoplay audio:', e));
+
         setTimeout(() => {
           overlay.classList.add('hidden');
         }, 500);
-      }, 950);
+      }, 900);
     }
 
     function replayGateAnimation() {
@@ -1935,6 +1959,14 @@
       isOpening = false;
       const overlay = document.getElementById('gate-overlay');
       const card = document.getElementById('invitation-card');
+
+      // Khi đóng bì thư lại: DỪNG NHẠC NGAY LẬP TỨC và ẩn thanh công cụ nổi
+      bgm.pause();
+      bgm.currentTime = 0;
+      bgm.muted = false;
+      audioBtn.classList.remove('music-on');
+      isPlaying = false;
+      floatingBar.classList.remove('active');
 
       card.classList.remove('revealed');
       overlay.classList.remove('hidden');
@@ -2134,9 +2166,6 @@
       n.value = '';
       m.value = '';
       renderWishes();
-    if (new URLSearchParams(window.location.search).get('open') === '1') {
-      setTimeout(handleOpenGate, 100);
-    }
       fireConfetti();
       alert('Cảm ơn bạn rất nhiều! Lời chúc đã được gửi đến Cẩm Tiên.');
     }
