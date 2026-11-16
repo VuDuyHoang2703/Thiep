@@ -72,7 +72,7 @@
     }
 
     /* ========================================================
-       1. HIỆU ỨNG MỞ BÌ THƯ ĐÔI 2 CÁNH (GATE-FOLD THEO VIDEO MẪU)
+       1. GIAI ĐOẠN 1: BÌ THƯ ĐÔI 2 CÁNH (GATE-FOLD THEO VIDEO MẪU)
        ======================================================== */
     .gate-overlay {
       position: fixed;
@@ -85,7 +85,7 @@
       display: flex;
       cursor: pointer;
       user-select: none;
-      transition: visibility 1.2s;
+      transition: visibility 1.4s;
     }
 
     .gate-overlay.hidden {
@@ -103,7 +103,7 @@
       background: linear-gradient(140deg, #091f3c 0%, #0e2a52 45%, #143a6d 100%);
       z-index: 5;
       box-shadow: 12px 0 35px rgba(0, 0, 0, 0.6);
-      transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: transform 1.1s cubic-bezier(0.25, 1, 0.5, 1);
       will-change: transform;
       border-right: 2px solid rgba(250, 232, 162, 0.75);
       display: flex;
@@ -123,7 +123,7 @@
       background: linear-gradient(-140deg, #091f3c 0%, #0e2a52 45%, #143a6d 100%);
       z-index: 4;
       box-shadow: -12px 0 35px rgba(0, 0, 0, 0.6);
-      transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: transform 1.1s cubic-bezier(0.25, 1, 0.5, 1);
       will-change: transform;
       border-left: 1px solid rgba(250, 232, 162, 0.35);
       display: flex;
@@ -147,13 +147,13 @@
       pointer-events: none;
     }
 
-    /* Hiệu ứng khi bấm Mở Thư */
+    /* Khi mở: 2 cánh cửa lướt sang 2 bên hoàn toàn */
     .gate-overlay.opened .gate-door-left {
-      transform: translateX(-102%);
+      transform: translateX(-105%);
     }
 
     .gate-overlay.opened .gate-door-right {
-      transform: translateX(102%);
+      transform: translateX(105%);
     }
 
     /* Khối Con Dấu Vàng Trung Tâm */
@@ -167,7 +167,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
       pointer-events: none;
       width: 280px;
       text-align: center;
@@ -228,7 +228,6 @@
       font-weight: 300;
     }
 
-    /* Chữ trang trí trên 2 cánh thư */
     .gate-tag-left {
       color: rgba(250, 232, 162, 0.9);
       font-size: 11px;
@@ -247,7 +246,7 @@
     }
 
     /* ========================================================
-       2. TẤM THIỆP MỜI CHÍNH
+       2. GIAI ĐOẠN 2: TẤM THIỆP MỜI BẬT LÊN SAU KHI THƯ ĐÃ MỞ XONG
        ======================================================== */
     .app-main {
       width: 100%;
@@ -258,6 +257,7 @@
       z-index: 5;
     }
 
+    /* Ban đầu thiệp ẩn hoàn toàn, đợi thư ngoài mở xong 100% mới xuất hiện */
     .invitation-card {
       width: 100%;
       max-width: 500px;
@@ -267,6 +267,17 @@
       border: 1px solid rgba(189, 224, 254, 0.9);
       overflow: hidden;
       position: relative;
+      opacity: 0;
+      transform: scale(0.88) translateY(60px);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    /* Sau khi thư ngoài mở xong: Thiệp mời mới bung lên trang trọng & sang chảnh */
+    .invitation-card.revealed {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      pointer-events: auto;
     }
 
     /* Flower Corner */
@@ -1359,7 +1370,7 @@
   </div>
 
   <!-- ========================================================
-       2. MAIN INVITATION CARD
+       2. TẤM THIỆP MỜI CHÍNH (ĐỢI THƯ MỞ XONG MỚI BẬT LÊN)
        ======================================================== -->
   <div class="app-main">
     <div class="invitation-card" id="invitation-card">
@@ -1772,7 +1783,7 @@
   </div>
 
   <!-- ========================================================
-       5. JAVASCRIPT
+       5. JAVASCRIPT - ĐIỀU KHIỂN THỨ TỰ 2 GIAI ĐOẠN RÕ RÀNG
        ======================================================== -->
   <script>
     // Audio Player
@@ -1795,35 +1806,59 @@
       }
     }
 
-    // Hiệu ứng mở bì thư đôi 2 cánh (Gate-fold Envelope)
+    /* ========================================================
+       QUY TRÌNH 2 BƯỚC: THƯ MỞ XONG HẲN -> THIỆP MỚI BẬT LÊN
+       ======================================================== */
     let gateOpened = false;
+    let isOpening = false;
 
     function handleOpenGate() {
-      if (gateOpened) return;
-      gateOpened = true;
+      if (gateOpened || isOpening) return;
+      isOpening = true;
 
       const overlay = document.getElementById('gate-overlay');
-      overlay.classList.add('opened');
-      fireConfetti();
+      const card = document.getElementById('invitation-card');
 
-      // Bật nhạc nền ngay khi người dùng chạm mở
+      // BƯỚC 1: Bì thư ngoài bắt đầu trượt mở 2 cánh sang hai bên
+      // (Lúc này thiệp bên trong vẫn ẩn hoàn toàn, KHÔNG bị hiển thị chồng đè)
+      overlay.classList.add('opened');
+
+      // Khởi động nhạc nền
       bgm.play().then(() => {
         audioBtn.classList.add('music-on');
         isPlaying = true;
       }).catch(e => console.log('Autoplay audio:', e));
 
-      // Ẩn lớp phủ sau khi 2 cánh cửa đã trượt hoàn toàn ra khỏi màn hình
+      // BƯỚC 2: Đợi đúng 950ms (khi 2 cánh thư ngoài đã trượt hoàn tất ra khỏi mép màn hình)
       setTimeout(() => {
-        overlay.classList.add('hidden');
-      }, 1250);
+        // Tấm thiệp mời mới chính thức bung nở & bật lên từ giữa màn hình!
+        card.classList.add('revealed');
+
+        // Bắn pháo hoa rực rỡ ăn mừng khoảnh khắc thiệp xuất hiện
+        fireConfetti();
+
+        gateOpened = true;
+        isOpening = false;
+
+        // Ẩn lớp phủ hoàn toàn để giải phóng không gian cuộn trang
+        setTimeout(() => {
+          overlay.classList.add('hidden');
+        }, 500);
+      }, 950);
     }
 
     // Xem lại hiệu ứng mở thư
     function replayGateAnimation() {
       gateOpened = false;
+      isOpening = false;
       const overlay = document.getElementById('gate-overlay');
+      const card = document.getElementById('invitation-card');
+
+      // Thu thiệp lại về trạng thái ban đầu
+      card.classList.remove('revealed');
       overlay.classList.remove('hidden');
-      // Cho phép render lại trước khi bỏ opened class
+
+      // Đóng 2 cánh thư lại
       setTimeout(() => {
         overlay.classList.remove('opened');
         window.scrollTo({ top: 0, behavior: 'smooth' });
