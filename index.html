@@ -1223,7 +1223,9 @@
 
     .guest-words {
       color: #3b5066;
-      line-height: 1.5;
+      line-height: 1.6;
+      white-space: pre-line;
+      word-break: break-word;
     }
 
     .guest-timestamp {
@@ -2464,7 +2466,8 @@
     }
 
     function cleanStr(text) {
-      return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      if (text === null || text === undefined) return '';
+      return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
     function shareInvitation() {
