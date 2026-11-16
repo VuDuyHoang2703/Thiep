@@ -2390,6 +2390,17 @@
       }
     }
 
+    function formatWishTime(timeStr) {
+      if (!timeStr) return '';
+      if (/^\d{1,2}\/\d{1,2}\/\d{4}/.test(timeStr)) return timeStr;
+      const d = new Date(timeStr);
+      if (!isNaN(d.getTime())) {
+        const pad = n => String(n).padStart(2, '0');
+        return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+      }
+      return timeStr;
+    }
+
     function renderWishesUI(wishes) {
       const feed = document.getElementById('guest-feed');
       if (!feed) return;
@@ -2405,7 +2416,7 @@
         <div class="guest-post">
           <div class="guest-author">${cleanStr(w.name)}</div>
           <div class="guest-words">${cleanStr(w.msg)}</div>
-          <div class="guest-timestamp">${w.time || ''}</div>
+          <div class="guest-timestamp">${formatWishTime(w.time)}</div>
         </div>
       `).join('');
     }
