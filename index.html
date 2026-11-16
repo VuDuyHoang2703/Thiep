@@ -1170,8 +1170,11 @@
     }
 
     textarea.guest-input {
-      resize: vertical;
-      min-height: 80px;
+      resize: none;
+      min-height: 125px;
+      line-height: 1.5;
+      overflow-y: hidden;
+      transition: height 0.1s ease;
     }
 
     .btn-submit-guest {
@@ -2008,7 +2011,7 @@
               <input type="text" id="g-name" class="guest-input" placeholder="Tên của bạn..." required>
             </div>
             <div class="guest-input-row">
-              <textarea id="g-msg" class="guest-input" placeholder="Viết lời chúc mừng tốt nghiệp tại đây..."
+              <textarea id="g-msg" rows="5" class="guest-input" placeholder="Viết lời chúc mừng tốt nghiệp tại đây..."
                 required></textarea>
             </div>
             <button type="submit" class="btn-submit-guest">
@@ -2441,6 +2444,7 @@
 
       n.value = '';
       m.value = '';
+      if (m) m.style.height = 'auto';
       fireConfetti();
       showWishModal();
 
@@ -2479,6 +2483,15 @@
           alert('Đã sao chép liên kết thiệp mời vào bộ nhớ tạm!');
         });
       }
+    }
+
+    // Tự động kéo dài ô nhập lời chúc theo nội dung (mặc định 5 dòng, không cần kéo tay)
+    const msgTextarea = document.getElementById('g-msg');
+    if (msgTextarea) {
+      msgTextarea.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = Math.max(this.scrollHeight, 125) + 'px';
+      });
     }
 
     // Khởi tạo
