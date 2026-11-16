@@ -2216,7 +2216,10 @@
       document.getElementById('lightbox').classList.remove('active');
     }
 
-    // Guestbook
+    // Google Sheets API endpoint cho Sổ Lưu Bút
+    const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycbwZACnZQ43Wen0I0DFiZwwC_Wi8nBxBR3DvhzgzrtThp6vHBwxsW-CsNpjGwKeecO1h/exec";
+
+    // Preset mẫu khi chưa có dữ liệu hoặc offline
     const presetWishes = [
       {
         name: "Gia đình yêu thương",
@@ -2230,24 +2233,50 @@
       }
     ];
 
-    function renderWishes() {
-      const feed = document.getElementById('guest-feed');
-      const saved = localStorage.getItem('camtien_graduation_wishes');
-      const wishes = saved ? JSON.parse(saved) : presetWishes;
+    let cachedWishes = [];
 
+    async function renderWishes() {
+      const feed = document.getElementById('guest-feed');
+      // Hiển thị trước từ cache hoặc preset để người xem không phải chờ đợi
+      const saved = localStorage.getItem('camtien_graduation_wishes');
+      cachedWishes = saved ? JSON.parse(saved) : presetWishes;
+      renderWishesUI(cachedWishes);
+
+      // Tải dữ liệu đám mây mới nhất từ Google Sheets
+      if (GOOGLE_SHEET_API) {
+        try {
+          const res = await fetch(GOOGLE_SHEET_API);
+          if (res.ok) {
+            const data = await res.json();
+            if (Array.isArray(data) && data.length > 0) {
+              cachedWishes = data;
+              localStorage.setItem('camtien_graduation_wishes', JSON.stringify(data));
+              renderWishesUI(cachedWishes);
+            }
+          }
+        } catch (err) {
+          console.log("Load cloud wishes:", err);
+        }
+      }
+    }
+
+    function renderWishesUI(wishes) {
+      const feed = document.getElementById('guest-feed');
+      if (!feed) return;
       feed.innerHTML = wishes.map(w => `
         <div class="guest-post">
           <div class="guest-author">${cleanStr(w.name)}</div>
           <div class="guest-words">${cleanStr(w.msg)}</div>
-          <div class="guest-timestamp">${w.time}</div>
+          <div class="guest-timestamp">${w.time || ''}</div>
         </div>
       `).join('');
     }
 
-    function handleSendWish(e) {
+    async function handleSendWish(e) {
       e.preventDefault();
       const n = document.getElementById('g-name');
       const m = document.getElementById('g-msg');
+      const submitBtn = document.querySelector('.btn-submit-guest');
       const name = n.value.trim();
       const msg = m.value.trim();
       if (!name || !msg) return;
@@ -2256,16 +2285,33 @@
         day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
       });
 
-      const saved = localStorage.getItem('camtien_graduation_wishes');
-      const wishes = saved ? JSON.parse(saved) : presetWishes;
-      wishes.unshift({ name, msg, time: timeStr });
-      localStorage.setItem('camtien_graduation_wishes', JSON.stringify(wishes));
+      // Đưa lời chúc mới lên đầu danh sách ngay lập tức trên màn hình
+      const newWish = { name, msg, time: timeStr };
+      cachedWishes.unshift(newWish);
+      renderWishesUI(cachedWishes);
+      localStorage.setItem('camtien_graduation_wishes', JSON.stringify(cachedWishes));
 
       n.value = '';
       m.value = '';
-      renderWishes();
       fireConfetti();
       alert('Cảm ơn bạn rất nhiều! Lời chúc đã được gửi đến Cẩm Tiên.');
+
+      // Đồng bộ ngầm lên Google Sheets
+      if (GOOGLE_SHEET_API) {
+        try {
+          if (submitBtn) submitBtn.disabled = true;
+          await fetch(GOOGLE_SHEET_API, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(newWish)
+          });
+        } catch (err) {
+          console.log("Send to cloud:", err);
+        } finally {
+          if (submitBtn) submitBtn.disabled = false;
+        }
+      }
     }
 
     function cleanStr(text) {
