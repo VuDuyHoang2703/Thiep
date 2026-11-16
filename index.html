@@ -170,33 +170,131 @@
       transform: translateX(105%);
     }
 
-    .gate-seal-center {
+    .gate-cover-center {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: 20;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 42px 18px 36px 18px;
+      pointer-events: none;
+      text-align: center;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.45s ease;
+    }
+
+    .gate-overlay.opened .gate-cover-center {
+      transform: scale(1.15);
+      opacity: 0;
+    }
+
+    .gate-cover-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .gate-school-name {
+      color: rgba(250, 232, 162, 0.95);
+      font-size: clamp(10.5px, 2.9vw, 13px);
+      font-weight: 700;
+      letter-spacing: clamp(1.2px, 0.4vw, 2.2px);
+      text-transform: uppercase;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+      white-space: nowrap;
+    }
+
+    .gate-title-main {
+      font-family: 'Charm', cursive;
+      font-size: clamp(28px, 7.8vw, 42px);
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 175, 55, 0.4);
+      white-space: nowrap;
+    }
+
+    .gate-major-sub {
+      color: #cde4fe;
+      font-size: clamp(10px, 2.7vw, 12px);
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+      background: rgba(10, 30, 60, 0.55);
+      padding: 4px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(250, 232, 162, 0.35);
+      white-space: nowrap;
+    }
+
+    .gate-seal-center {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
-      pointer-events: none;
       width: 280px;
       text-align: center;
-    }
-
-    .gate-overlay.opened .gate-seal-center {
-      transform: translate(-50%, -50%) scale(1.35);
-      opacity: 0;
+      margin: 10px 0;
     }
 
     .gate-seal-img {
-      width: 100px;
-      height: 100px;
+      width: 96px;
+      height: 96px;
       filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.75)) drop-shadow(0 0 25px rgba(212, 175, 55, 0.7));
       animation: pulseGlowSeal 2.2s infinite ease-in-out;
-      margin-bottom: 22px;
+      margin-bottom: 18px;
+    }
+
+    .gate-cover-footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      background: rgba(6, 20, 42, 0.7);
+      backdrop-filter: blur(8px);
+      padding: 12px 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(250, 232, 162, 0.35);
+      max-width: 92%;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .gate-student-label {
+      color: var(--gold-soft);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .gate-student-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(18px, 5vw, 24px);
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+      white-space: nowrap;
+    }
+
+    .gate-event-time {
+      color: #e2f0fd;
+      font-size: clamp(11.5px, 3.2vw, 13px);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .gate-event-venue {
+      color: #a8cdfc;
+      font-size: clamp(10px, 2.8vw, 11.5px);
+      white-space: nowrap;
     }
 
     @keyframes pulseGlowSeal {
@@ -1345,32 +1443,38 @@
     <!-- Cánh bên trái -->
     <div class="gate-door-left">
       <div class="gate-watermark-left"></div>
-      <div class="gate-tag-left">
-        TRƯỜNG ĐẠI HỌC BÌNH DƯƠNG
-      </div>
-      <div style="font-family: 'Playfair Display', serif; font-size: clamp(12.5px, 3.4vw, 16px); color: #fae8a2; letter-spacing: 1px; white-space: nowrap;">
-        THIỆP MỜI TỐT NGHIỆP
-      </div>
     </div>
 
     <!-- Cánh bên phải -->
     <div class="gate-door-right">
       <div class="gate-watermark-right"></div>
-      <div class="gate-tag-right">
-        CLASS OF 2026 • K25
-      </div>
-      <div style="font-family: 'Playfair Display', serif; font-size: clamp(12.5px, 3.4vw, 16px); color: #fae8a2; letter-spacing: 1px; text-align: right; white-space: nowrap;">
-        TRƯƠNG THỊ CẨM TIÊN
-      </div>
     </div>
 
-    <!-- Con dấu sáp vàng BDU & Nút Chạm Mở ở giữa -->
-    <div class="gate-seal-center">
-      <img src="assets/seal_gold_transparent.png" class="gate-seal-img" alt="BDU Gold Wax Seal">
-      <div class="gate-btn-open">
-        CHẠM ĐỂ MỞ THƯ
+    <!-- Toàn bộ thông tin trang trọng trên bìa thiệp -->
+    <div class="gate-cover-center">
+      <!-- Header thông tin trường & buổi lễ -->
+      <div class="gate-cover-header">
+        <div class="gate-school-name">TRƯỜNG ĐẠI HỌC BÌNH DƯƠNG</div>
+        <div class="gate-title-main">Thiệp Mời Lễ Tốt Nghiệp</div>
+        <div class="gate-major-sub">CỬ NHÂN QUẢN TRỊ KINH DOANH • K25</div>
       </div>
-      <div class="gate-open-hint">Chạm vào màn hình để mở thiệp & bật nhạc</div>
+
+      <!-- Con dấu sáp vàng BDU & Nút Chạm Mở ở giữa -->
+      <div class="gate-seal-center">
+        <img src="assets/seal_gold_transparent.png" class="gate-seal-img" alt="BDU Gold Wax Seal">
+        <div class="gate-btn-open">
+          CHẠM ĐỂ MỞ THƯ
+        </div>
+        <div class="gate-open-hint">Chạm vào màn hình để mở thiệp & bật nhạc</div>
+      </div>
+
+      <!-- Footer thông tin nhân vật chính & thời gian, địa điểm -->
+      <div class="gate-cover-footer">
+        <div class="gate-student-label">TÂN CỬ NHÂN</div>
+        <div class="gate-student-name">Trương Thị Cẩm Tiên</div>
+        <div class="gate-event-time">07:00 SÁNG — THỨ BẢY, 21.11.2026</div>
+        <div class="gate-event-venue">Hội Trường A — Đại Học Bình Dương</div>
+      </div>
     </div>
   </div>
 
