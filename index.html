@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Thiệp Mời Lễ Tốt Nghiệp - Trương Thị Cẩm Tiên | BDU 2026</title>
-  
+
   <!-- Google Fonts: Sang trọng & Trang nhã (Hỗ trợ tiếng Việt 100% không lỗi dấu) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap"
+    rel="stylesheet">
+
   <!-- Canvas Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 
@@ -155,14 +158,15 @@
         background-image: url('assets/envelope_desktop_left.jpg');
         background-position: right center;
       }
+
       .gate-watermark-right {
         background-image: url('assets/envelope_desktop_right.jpg');
         background-position: left center;
       }
     }
 
-    .gate-door-left > div:not(.gate-watermark-left),
-    .gate-door-right > div:not(.gate-watermark-right) {
+    .gate-door-left>div:not(.gate-watermark-left),
+    .gate-door-right>div:not(.gate-watermark-right) {
       position: relative;
       z-index: 2;
     }
@@ -313,10 +317,13 @@
     }
 
     @keyframes pulseGlowSeal {
-      0%, 100% {
+
+      0%,
+      100% {
         transform: scale(1);
         filter: drop-shadow(0 8px 20px rgba(16, 59, 115, 0.35)) drop-shadow(0 0 20px rgba(212, 175, 55, 0.6));
       }
+
       50% {
         transform: scale(1.08);
         filter: drop-shadow(0 12px 28px rgba(16, 59, 115, 0.45)) drop-shadow(0 0 35px rgba(250, 232, 162, 0.95));
@@ -340,8 +347,15 @@
     }
 
     @keyframes floatBtnOpen {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
     }
 
     .gate-open-hint {
@@ -425,7 +439,7 @@
       left: 0;
       right: 0;
       height: 25px;
-      background: linear-gradient(to top, rgba(255,255,255,0.08), transparent);
+      background: linear-gradient(to top, rgba(255, 255, 255, 0.08), transparent);
     }
 
     .bdu-logo {
@@ -433,7 +447,7 @@
       height: 82px;
       margin: 0 auto 14px;
       display: block;
-      filter: drop-shadow(0 4px 14px rgba(0,0,0,0.35));
+      filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.35));
     }
 
     .nobrk {
@@ -447,7 +461,7 @@
       letter-spacing: clamp(1px, 0.4vw, 2px);
       text-transform: uppercase;
       color: var(--gold-soft);
-      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
       white-space: nowrap;
     }
 
@@ -1005,7 +1019,7 @@
       background: #ffffff;
       padding: 12px 16px;
       border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
       border-left: 3px solid var(--primary-blue);
     }
 
@@ -1338,8 +1352,13 @@
     }
 
     @keyframes rotateMusic {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .tool-btn.off {
@@ -1386,7 +1405,7 @@
       max-width: 95vw;
       max-height: 82vh;
       border-radius: 10px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
       border: 2px solid rgba(250, 232, 162, 0.5);
       object-fit: contain;
     }
@@ -1419,30 +1438,37 @@
       .app-main {
         padding: 0;
       }
+
       .invitation-card {
         border-radius: 0;
         border: none;
         max-width: 100%;
       }
+
       .invitation-main-heading {
         font-size: clamp(21px, 6.4vw, 32px);
         white-space: nowrap;
       }
+
       .intro-audience {
         font-size: clamp(20px, 5.8vw, 28px);
       }
+
       .date-main-number {
         font-size: 46px;
       }
+
       .floating-bar {
         bottom: 12px;
         right: 12px;
         gap: 8px;
       }
+
       .tool-btn {
         width: 38px;
         height: 38px;
       }
+
       .tool-btn svg {
         width: 17px;
         height: 17px;
@@ -1450,6 +1476,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- Petals Canvas Animation -->
@@ -1488,7 +1515,7 @@
         <div class="gate-btn-open">
           CHẠM ĐỂ MỞ THƯ
         </div>
-        <div class="gate-open-hint">Chạm vào màn hình để mở thiệp & bật nhạc</div>
+        <div class="gate-open-hint">Chạm vào màn hình để mở thiệp</div>
       </div>
 
       <!-- Footer thông tin nhân vật chính & thời gian, địa điểm -->
@@ -1513,7 +1540,7 @@
         <div class="bdu-school-title">Trường Đại Học Bình Dương</div>
         <h1 class="invitation-main-heading">Thiệp Mời Lễ Tốt Nghiệp</h1>
         <div class="invitation-motto">Tri thức mở lối — Tương lai gọi tên</div>
-        
+
         <div>
           <span class="badge-class">
             CLASS OF 2026
@@ -1550,7 +1577,8 @@
             <span class="nobrk">Quý Thầy Cô,</span> <span class="nobrk">Gia Đình & Bạn Bè</span>
           </div>
           <p class="intro-desc">
-            Đến tham dự Lễ Tốt Nghiệp và chia sẻ niềm vui, cùng ghi dấu cột mốc trưởng thành đầy ý nghĩa trên hành trình tri thức của Cẩm Tiên.
+            Đến tham dự Lễ Tốt Nghiệp và chia sẻ niềm vui, cùng ghi dấu cột mốc trưởng thành đầy ý nghĩa trên hành trình
+            tri thức của Cẩm Tiên.
           </p>
         </div>
 
@@ -1584,7 +1612,8 @@
           </div>
 
           <div class="event-actions">
-            <a href="https://maps.google.com/?q=Đại+Học+Bình+Dương,+504+Đại+lộ+Bình+Dương" target="_blank" class="btn-maps-formal">
+            <a href="https://maps.google.com/?q=Đại+Học+Bình+Dương,+504+Đại+lộ+Bình+Dương" target="_blank"
+              class="btn-maps-formal">
               Dẫn Đường Đến Hội Trường
             </a>
           </div>
@@ -1643,7 +1672,7 @@
             <div class="cal-cell">27</div>
             <div class="cal-cell">28</div>
             <div class="cal-cell">29</div>
-            
+
             <div class="cal-cell">30</div>
           </div>
         </div>
@@ -1677,7 +1706,7 @@
         <div class="timeline-container">
           <h3 class="title-block">Lịch Trình Buổi Lễ</h3>
           <div class="timeline-flow">
-            
+
             <div class="flow-event">
               <div class="flow-dot"></div>
               <div class="flow-time">06:30 — 07:00</div>
@@ -1692,7 +1721,8 @@
               <div class="flow-time">07:00 — 07:30</div>
               <div class="flow-card">
                 <div class="flow-card-title">Khai Mạc & Nghi Thức Chào Cờ</div>
-                <div class="flow-card-desc">Phát biểu của Ban Giám Hiệu Trường Đại Học Bình Dương và Ban Chủ Nhiệm Khoa.</div>
+                <div class="flow-card-desc">Phát biểu của Ban Giám Hiệu Trường Đại Học Bình Dương và Ban Chủ Nhiệm Khoa.
+                </div>
               </div>
             </div>
 
@@ -1701,7 +1731,8 @@
               <div class="flow-time">07:30 — 09:30</div>
               <div class="flow-card">
                 <div class="flow-card-title">Vinh Danh & Trao Bằng Tốt Nghiệp</div>
-                <div class="flow-card-desc">Khoảnh khắc bước lên bục danh dự nhận Bằng Cử nhân Quản trị kinh doanh.</div>
+                <div class="flow-card-desc">Khoảnh khắc bước lên bục danh dự nhận Bằng Cử nhân Quản trị kinh doanh.
+                </div>
               </div>
             </div>
 
@@ -1710,7 +1741,8 @@
               <div class="flow-time">09:30 — 11:30</div>
               <div class="flow-card">
                 <div class="flow-card-title">Giao Lưu & Chụp Hình Kỷ Niệm Khuôn Viên</div>
-                <div class="flow-card-desc">Chụp hình cùng thầy cô, bạn bè tại khuôn viên trường BDU và sảnh hoa cẩm tú cầu.</div>
+                <div class="flow-card-desc">Chụp hình cùng thầy cô, bạn bè tại khuôn viên trường BDU và sảnh hoa cẩm tú
+                  cầu.</div>
               </div>
             </div>
 
@@ -1753,8 +1785,12 @@
           </div>
 
           <div class="album-cards-flow">
-            
-            <!-- Ảnh 1: Chân dung dải băng danh dự, nón cử nhân & vương miện rạng ngời (Mới) -->
+
+            <!-- ==============================================
+                 1. NHÓM ẢNH NGANG (LANDSCAPE) - ĐỒNG BỘ GÓC NHÌN RỘNG
+                 ============================================== -->
+
+            <!-- Ảnh Ngang 1: Chân dung dải băng danh dự, nón cử nhân & vương miện rạng ngời -->
             <div class="album-frame-card" onclick="showLightbox('assets/DSCF0281.JPG')">
               <div class="album-img-wrapper">
                 <img src="assets/DSCF0281.JPG" alt="Trương Thị Cẩm Tiên — Cử nhân Quản trị kinh doanh" loading="lazy">
@@ -1766,31 +1802,7 @@
               </div>
             </div>
 
-            <!-- Ảnh 2: Góc nghiêng thướt tha với voan trắng & vương miện dưới tán cây xanh -->
-            <div class="album-frame-card" onclick="showLightbox('assets/gallery_2.jpg')">
-              <div class="album-img-wrapper">
-                <img src="assets/gallery_2.jpg" alt="Khoảnh khắc thanh xuân rực rỡ" loading="lazy">
-              </div>
-              <div class="album-card-footer">
-                <div class="album-card-title">
-                  Tà áo trắng & Vương miện danh dự K25
-                </div>
-              </div>
-            </div>
-
-            <!-- Ảnh 3: Góc nhìn từ phía sau tôn vinh dải băng CLASS OF 2026 & nón cử nhân (Mới) -->
-            <div class="album-frame-card" onclick="showLightbox('assets/DSCF0264.JPG')">
-              <div class="album-img-wrapper">
-                <img src="assets/DSCF0264.JPG" alt="Khắc ghi niên khóa 2022 – 2026 và dải voan bay trong gió" loading="lazy">
-              </div>
-              <div class="album-card-footer">
-                <div class="album-card-title">
-                  Khắc ghi niên khóa 2022 – 2026 & Dải voan bồng bềnh
-                </div>
-              </div>
-            </div>
-
-            <!-- Ảnh 4: Toàn cảnh sân thượng ngắm trọn khuôn viên trường Đại học Bình Dương (Mới) -->
+            <!-- Ảnh Ngang 2: Toàn cảnh sân thượng ngắm trọn khuôn viên trường Đại học Bình Dương -->
             <div class="album-frame-card" onclick="showLightbox('assets/DSCF0247.JPG')">
               <div class="album-img-wrapper">
                 <img src="assets/DSCF0247.JPG" alt="Toàn cảnh khuôn viên trường Đại học Bình Dương" loading="lazy">
@@ -1802,31 +1814,7 @@
               </div>
             </div>
 
-            <!-- Ảnh 5: Dáng hình cử nhân thanh lịch đón ánh hoàng hôn trên sân thượng (Mới) -->
-            <div class="album-frame-card" onclick="showLightbox('assets/DSCF0243.JPG')">
-              <div class="album-img-wrapper">
-                <img src="assets/DSCF0243.JPG" alt="Dáng hình cử nhân kiêu hãnh đón ánh hoàng hôn" loading="lazy">
-              </div>
-              <div class="album-card-footer">
-                <div class="album-card-title">
-                  Dáng hình cử nhân kiêu hãnh đón ánh hoàng hôn
-                </div>
-              </div>
-            </div>
-
-            <!-- Ảnh 6: Hướng về tương lai rạng rỡ giữa áng mây trời BDU (Mới) -->
-            <div class="album-frame-card" onclick="showLightbox('assets/DSCF0259.JPG')">
-              <div class="album-img-wrapper">
-                <img src="assets/DSCF0259.JPG" alt="Hướng về tương lai rạng rỡ giữa bầu trời BDU" loading="lazy">
-              </div>
-              <div class="album-card-footer">
-                <div class="album-card-title">
-                  Hướng về tương lai rạng rỡ giữa bầu trời BDU
-                </div>
-              </div>
-            </div>
-
-            <!-- Ảnh 7: Góc nhìn trời mây thanh xuân khát vọng -->
+            <!-- Ảnh Ngang 3: Góc nhìn trời mây thanh xuân khát vọng -->
             <div class="album-frame-card" onclick="showLightbox('assets/gallery_4.jpg')">
               <div class="album-img-wrapper">
                 <img src="assets/gallery_4.jpg" alt="Bầu trời thanh xuân BDU" loading="lazy">
@@ -1838,7 +1826,7 @@
               </div>
             </div>
 
-            <!-- Ảnh 8: Nụ cười rạng ngời tại góc ban công BDU -->
+            <!-- Ảnh Ngang 4: Nụ cười rạng ngời tại góc ban công BDU -->
             <div class="album-frame-card" onclick="showLightbox('assets/gallery_5.jpg')">
               <div class="album-img-wrapper">
                 <img src="assets/gallery_5.jpg" alt="Kỷ niệm ngày tốt nghiệp" loading="lazy">
@@ -1846,6 +1834,59 @@
               <div class="album-card-footer">
                 <div class="album-card-title">
                   Nụ cười rạng ngời ngày nhận bằng tốt nghiệp
+                </div>
+              </div>
+            </div>
+
+            <!-- ==============================================
+                 2. NHÓM ẢNH DỌC (PORTRAIT) - TÔN DÁNG THƯỚT THA & CHI TIẾT
+                 ============================================== -->
+
+            <!-- Ảnh Dọc 1: Góc nghiêng thướt tha với voan trắng & vương miện dưới tán cây xanh -->
+            <div class="album-frame-card" onclick="showLightbox('assets/gallery_2.jpg')">
+              <div class="album-img-wrapper">
+                <img src="assets/gallery_2.jpg" alt="Khoảnh khắc thanh xuân rực rỡ" loading="lazy">
+              </div>
+              <div class="album-card-footer">
+                <div class="album-card-title">
+                  Tà áo trắng & Vương miện danh dự K25
+                </div>
+              </div>
+            </div>
+
+            <!-- Ảnh Dọc 2: Góc nhìn từ phía sau tôn vinh dải băng CLASS OF 2026 & nón cử nhân -->
+            <div class="album-frame-card" onclick="showLightbox('assets/DSCF0264.JPG')">
+              <div class="album-img-wrapper">
+                <img src="assets/DSCF0264.JPG" alt="Khắc ghi niên khóa 2022 – 2026 và dải voan bay trong gió"
+                  loading="lazy">
+              </div>
+              <div class="album-card-footer">
+                <div class="album-card-title">
+                  Khắc ghi niên khóa 2022 – 2026 & Dải voan bồng bềnh
+                </div>
+              </div>
+            </div>
+
+            <!-- Ảnh Dọc 3: Dáng hình cử nhân thanh lịch đón ánh hoàng hôn trên sân thượng -->
+            <div class="album-frame-card" onclick="showLightbox('assets/DSCF0243.JPG')">
+              <div class="album-img-wrapper">
+                <img src="assets/DSCF0243.JPG" alt="Dáng hình cử nhân kiêu hãnh đón ánh hoàng hôn" loading="lazy">
+              </div>
+              <div class="album-card-footer">
+                <div class="album-card-title">
+                  Dáng hình cử nhân kiêu hãnh đón ánh hoàng hôn
+                </div>
+              </div>
+            </div>
+
+            <!-- Ảnh Dọc 4: Hướng về tương lai rạng rỡ giữa áng mây trời BDU -->
+            <div class="album-frame-card" onclick="showLightbox('assets/DSCF0259.JPG')">
+              <div class="album-img-wrapper">
+                <img src="assets/DSCF0259.JPG" alt="Hướng về tương lai rạng rỡ giữa bầu trời BDU" loading="lazy">
+              </div>
+              <div class="album-card-footer">
+                <div class="album-card-title">
+                  Hướng về tương lai rạng rỡ giữa bầu trời BDU
                 </div>
               </div>
             </div>
@@ -1865,7 +1906,8 @@
               <input type="text" id="g-name" class="guest-input" placeholder="Tên của bạn..." required>
             </div>
             <div class="guest-input-row">
-              <textarea id="g-msg" class="guest-input" placeholder="Viết lời chúc mừng tốt nghiệp tại đây..." required></textarea>
+              <textarea id="g-msg" class="guest-input" placeholder="Viết lời chúc mừng tốt nghiệp tại đây..."
+                required></textarea>
             </div>
             <button type="submit" class="btn-submit-guest">
               Gửi Lời Chúc Mừng
@@ -1895,30 +1937,35 @@
        ======================================================== -->
   <div class="floating-bar" id="floating-bar">
     <!-- Nút Bật/Tắt Nhạc (Biểu tượng nốt nhạc) -->
-    <button class="tool-btn" id="btn-audio" onclick="toggleAudio()" title="Bật hoặc Tắt nhạc nền" aria-label="Bật hoặc Tắt nhạc nền">
+    <button class="tool-btn" id="btn-audio" onclick="toggleAudio()" title="Bật hoặc Tắt nhạc nền"
+      aria-label="Bật hoặc Tắt nhạc nền">
       <svg viewBox="0 0 24 24">
-        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
       </svg>
     </button>
-    
+
     <!-- Nút Mở Lại Thư (Biểu tượng phong bì thư) -->
     <button class="tool-btn" onclick="replayGateAnimation()" title="Mở lại bì thư" aria-label="Mở lại bì thư">
       <svg viewBox="0 0 24 24">
-        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+        <path
+          d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
       </svg>
     </button>
 
     <!-- Nút Bật/Tắt Hoa Rơi (Biểu tượng hoa tú cầu) -->
-    <button class="tool-btn" id="btn-petals" onclick="togglePetalFlow()" title="Bật hoặc Tắt hoa rơi" aria-label="Bật hoặc Tắt hoa rơi">
+    <button class="tool-btn" id="btn-petals" onclick="togglePetalFlow()" title="Bật hoặc Tắt hoa rơi"
+      aria-label="Bật hoặc Tắt hoa rơi">
       <svg viewBox="0 0 24 24">
-        <path d="M12 2a4 4 0 0 0-4 4c0 1.1.45 2.1 1.17 2.83A4 4 0 0 0 6 12a4 4 0 0 0 2.83 3.83A4 4 0 0 0 8 18a4 4 0 0 0 4 4 4 4 0 0 0 4-4c0-.7-.18-1.36-.5-1.94A4 4 0 0 0 18 12a4 4 0 0 0-2.5-3.69c.32-.58.5-1.24.5-1.94a4 4 0 0 0-4-4zm0 8a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"/>
+        <path
+          d="M12 2a4 4 0 0 0-4 4c0 1.1.45 2.1 1.17 2.83A4 4 0 0 0 6 12a4 4 0 0 0 2.83 3.83A4 4 0 0 0 8 18a4 4 0 0 0 4 4 4 4 0 0 0 4-4c0-.7-.18-1.36-.5-1.94A4 4 0 0 0 18 12a4 4 0 0 0-2.5-3.69c.32-.58.5-1.24.5-1.94a4 4 0 0 0-4-4zm0 8a2 2 0 1 1 0 4 2 2 0 0 1 0-4z" />
       </svg>
     </button>
 
     <!-- Nút Chia Sẻ Thiệp (Biểu tượng chia sẻ) -->
     <button class="tool-btn" onclick="shareInvitation()" title="Chia sẻ thiệp mời" aria-label="Chia sẻ thiệp mời">
       <svg viewBox="0 0 24 24">
-        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92z"/>
+        <path
+          d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92z" />
       </svg>
     </button>
   </div>
@@ -2243,4 +2290,5 @@
     renderWishes();
   </script>
 </body>
+
 </html>
