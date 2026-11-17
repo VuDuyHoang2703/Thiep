@@ -2348,6 +2348,30 @@
 
     let cachedWishes = [];
 
+    function parseWishDate(timeStr) {
+      if (!timeStr) return 0;
+      const m1 = String(timeStr).match(/^(\d{1,2}):(\d{1,2})\s+(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+      if (m1) {
+        return new Date(m1[5], m1[4] - 1, m1[3], m1[1], m1[2]).getTime();
+      }
+      const m2 = String(timeStr).match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})\s+(\d{1,2}):(\d{1,2})/);
+      if (m2) {
+        return new Date(m2[3], m2[2] - 1, m2[1], m2[4], m2[5]).getTime();
+      }
+      const d = new Date(timeStr);
+      return isNaN(d.getTime()) ? 0 : d.getTime();
+    }
+
+    function sortWishesChronological(list) {
+      if (!Array.isArray(list)) return [];
+      return list.slice().sort((a, b) => {
+        const ta = parseWishDate(a.time);
+        const tb = parseWishDate(b.time);
+        if (ta && tb) return ta - tb;
+        return 0;
+      });
+    }
+
     async function renderWishes() {
       const feed = document.getElementById('guest-feed');
       // Lấy từ cache cục bộ và lọc sạch các lời chúc mẫu cũ
@@ -2356,10 +2380,10 @@
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
-          localWishes = parsed.filter(w => 
+          localWishes = sortWishesChronological(parsed.filter(w => 
             w.name !== "Gia đình yêu thương" && 
             w.name !== "Hội bạn thân K25 Quản Trị Kinh Doanh"
-          );
+          ));
         } catch(e) {}
       }
       cachedWishes = localWishes;
@@ -2372,8 +2396,9 @@
           if (res.ok) {
             const data = await res.json();
             if (Array.isArray(data)) {
-              cachedWishes = data;
-              localStorage.setItem('camtien_graduation_wishes', JSON.stringify(data));
+              // Sắp xếp thứ tự thời gian: Lời chúc gửi trước ở trên, gửi sau nối tiếp ở dưới
+              cachedWishes = sortWishesChronological(data);
+              localStorage.setItem('camtien_graduation_wishes', JSON.stringify(cachedWishes));
               renderWishesUI(cachedWishes);
             }
           }
@@ -2427,9 +2452,9 @@
         day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
       });
 
-      // Đưa lời chúc mới lên đầu danh sách ngay lập tức trên màn hình
+      // Đưa lời chúc mới nối tiếp vào cuối danh sách (người gửi trước ở trên, gửi sau ở dưới)
       const newWish = { name, msg, time: timeStr };
-      cachedWishes.unshift(newWish);
+      cachedWishes.push(newWish);
       renderWishesUI(cachedWishes);
       localStorage.setItem('camtien_graduation_wishes', JSON.stringify(cachedWishes));
 

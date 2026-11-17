@@ -3,5 +3,6 @@ assets_raw_original/
 *.mp3
 !assets/bgm.mp3
 *.exe
+*.mp4
 .DS_Store
 Thumbs.db
