@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thiệp Mời Lễ Tốt Nghiệp Cử Nhân - Trương Thị Cẩm Tiên (Bản Ngang Kỷ Niệm)</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Cinzel:wght@500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --primary-navy: #0e2a4a;
+      --deep-blue: #123765;
+      --sky-light: #e8f3fe;
+      --sky-pastel: #d7eafc;
+      --sky-accent: #3a86ff;
+      --gold-primary: #d4af37;
+      --gold-light: #fae8a2;
+      --gold-grad: linear-gradient(135deg, #bf953f 0%, #fcf6ba 35%, #b38728 70%, #fbf5b7 100%);
+      --text-dark: #1b324d;
+      --text-muted: #536f8f;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-title: 'Cinzel', serif;
+      --font-script: 'Charm', cursive;
+      --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: radial-gradient(circle at 50% 30%, #eaf4fd 0%, #d4e8fa 50%, #bcdbf7 100%);
+      color: var(--text-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Ambient Desktop Background */
+    .desktop-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.8) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(189, 220, 249, 0.5) 0%, transparent 50%);
+      z-index: 0;
+    }
+
+    /* Floating Top Status Bar */
+    .desktop-topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 38px;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      font-size: 13px;
+      color: var(--primary-navy);
+      font-weight: 500;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(14, 42, 74, 0.04);
+    }
+
+    .topbar-left, .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .topbar-logo {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .topbar-logo span {
+      background: var(--gold-grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Stage Container */
+    .scene-container {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px 30px;
+      z-index: 10;
+    }
+
+    /* =========================================================
+       SCENE 1: CỬA SỔ LỊCH MÁY TÍNH (COMPUTER CALENDAR WINDOW)
+       ========================================================= */
+    .calendar-window {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      box-shadow: 
+        0 24px 60px rgba(14, 42, 74, 0.16),
+        0 4px 16px rgba(58, 134, 255, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 1);
+      width: 100%;
+      max-width: 820px;
+      padding: 0 0 24px;
+      overflow: hidden;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-origin: center center;
+    }
+
+    .calendar-window.zoom-out {
+      opacity: 0;
+      transform: scale(1.15);
+      pointer-events: none;
+      position: absolute;
+    }
+
+    /* Window Header / Titlebar */
+    .window-header {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 246, 254, 0.9) 100%);
+      padding: 14px 20px;
+      border-bottom: 1px solid #dcebfa;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .window-dots {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+
+    .window-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--primary-navy);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .calendar-body {
+      padding: 24px 36px 10px;
+    }
+
+    .calendar-month-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #eef5fc;
+      padding-bottom: 14px;
+    }
+
+    .calendar-month-name {
+      font-family: var(--font-title);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--primary-navy);
+      letter-spacing: 1px;
+    }
+
+    .calendar-year-sub {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--sky-accent);
+      background: #eaf3fe;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    /* Days Grid */
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      text-align: center;
+    }
+
+    .cal-header-day {
+      font-size: 13px;
+      font-weight: 700;
+      color: #728da8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding-bottom: 8px;
+    }
+    .cal-header-day.weekend {
+      color: #e06d53;
+    }
+
+    .cal-cell {
+      height: 68px;
+      background: rgba(247, 251, 255, 0.7);
+      border: 1px solid #e1edfa;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 600;
+      color: #334e68;
+      position: relative;
+      transition: all 0.25s ease;
+      cursor: default;
+      user-select: none;
+    }
+
+    .cal-cell.empty {
+      background: transparent;
+      border: none;
+    }
+
+    .cal-cell:not(.empty):hover {
+      background: #ffffff;
+      border-color: #bfdbfe;
+      transform: translateY(-2px);
+    }
+
+    /* NGÀY ĐẶC BIỆT 21/11/2026 */
+    .cal-cell.event-day-21 {
+      background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+      color: #ffffff;
+      border: 2px solid #ffd700;
+      box-shadow: 
+        0 10px 25px rgba(30, 64, 175, 0.35),
+        0 0 0 4px rgba(255, 215, 0, 0.25);
+      cursor: pointer;
+      transform: scale(1.04);
+      position: relative;
+      animation: pulseEventDay 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseEventDay {
+      0%, 100% {
+        box-shadow: 0 10px 25px rgba(30, 64, 175, 0.35), 0 0 0 3px rgba(255, 215, 0, 0.3);
+      }
+      50% {
+        box-shadow: 0 14px 32px rgba(30, 64, 175, 0.5), 0 0 0 8px rgba(255, 215, 0, 0.15);
+      }
+    }
+
+    .cal-cell.event-day-21 .cal-num {
+      font-size: 20px;
+      font-weight: 800;
+      font-family: var(--font-title);
+      color: #fff9d6;
+    }
+
+    .event-badge {
+      font-size: 9.5px;
+      font-weight: 700;
+      background: var(--gold-grad);
+      color: #0b2347;
+      padding: 2px 6px;
+      border-radius: 8px;
+      margin-top: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    /* Hand pointer hint */
+    .click-hint-banner {
+      margin-top: 20px;
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: 1px dashed #93c5fd;
+      border-radius: 14px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: #1e40af;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .click-hint-banner:hover {
+      background: #dbeafe;
+      transform: scale(1.02);
+      border-color: #3b82f6;
+    }
+
+    .click-hint-banner svg {
+      animation: bounceHand 1.5s infinite ease-in-out;
+    }
+
+    @keyframes bounceHand {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    /* =========================================================
+       SCENE 2: THIỆP MỜI NGANG CAO CẤP (HORIZONTAL LUXURY CARD)
+       ========================================================= */
+    .horizontal-invitation-wrap {
+      width: 100%;
+      max-width: 1240px;
+      display: none;
+      opacity: 0;
+      transform: scale(0.92) translateY(20px);
+      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .horizontal-invitation-wrap.active {
+      display: block;
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    /* Dual-Spread Folio Layout (Thiết kế 2 trang mở ngang) */
+    .folio-card {
+      background: #ffffff;
+      border-radius: 26px;
+      box-shadow: 
+        0 28px 70px rgba(11, 29, 58, 0.18),
+        0 6px 20px rgba(0, 0, 0, 0.05),
+        0 0 0 1px rgba(189, 220, 249, 0.6);
+      display: grid;
+      grid-template-columns: 44% 56%;
+      overflow: hidden;
+      position: relative;
+      border: 2px solid #e1effa;
+    }
+
+    /* Spine divider line in center */
+    .folio-spine {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 44%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent 0%, rgba(212, 175, 55, 0.6) 20%, rgba(212, 175, 55, 0.6) 80%, transparent 100%);
+      z-index: 10;
+      box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+    }
+
+    /* LEFT PANEL: CHÂN DUNG & TÂN CỬ NHÂN */
+    .folio-left {
+      background: linear-gradient(160deg, #f3f8fe 0%, #e8f2fc 50%, #daf0fb 100%);
+      padding: 38px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .folio-left::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 18px;
+      pointer-events: none;
+    }
+
+    /* Portrait Image Frame */
+    .portrait-box-horizontal {
+      width: 220px;
+      height: 290px;
+      border-radius: 18px;
+      padding: 6px;
+      background: linear-gradient(135deg, #ffffff 0%, #fbf5b7 50%, #bf953f 100%);
+      box-shadow: 0 16px 36px rgba(14, 42, 74, 0.18);
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .portrait-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 14px;
+      display: block;
+    }
+
+    .seal-floating-mini {
+      position: absolute;
+      bottom: -15px;
+      right: -12px;
+      width: 54px;
+      height: 54px;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2));
+    }
+
+    .grad-title-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #bf8f2c;
+      margin-bottom: 6px;
+    }
+
+    .candidate-name-horizontal {
+      font-family: var(--font-title);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--primary-navy);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .candidate-major-horizontal {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #2b5584;
+      margin-bottom: 14px;
+      padding: 3px 14px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 20px;
+      display: inline-block;
+      border: 1px solid #c8e0f6;
+    }
+
+    .quote-text-horizontal {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #486581;
+      max-width: 340px;
+      position: relative;
+      padding: 0 10px;
+    }
+
+    /* RIGHT PANEL: NỘI DUNG THIỆP MỜI TRANG TRỌNG */
+    .folio-right {
+      background: #ffffff;
+      padding: 40px 42px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .folio-right::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 18px;
+      pointer-events: none;
+    }
+
+    .university-header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .univ-name {
+      font-family: var(--font-title);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #486581;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .invitation-main-heading {
+      font-family: var(--font-script);
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--primary-navy);
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .invitation-sub-deg {
+      font-family: var(--font-title);
+      font-size: 12px;
+      letter-spacing: 1.2px;
+      color: #bf8f2c;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .honor-intro {
+      text-align: center;
+      font-size: 13px;
+      color: #475569;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      padding: 0 10px;
+    }
+
+    /* Event Details Grid */
+    .event-info-strip {
+      background: linear-gradient(135deg, #f0f7ff 0%, #e4f0fc 100%);
+      border: 1px solid #c9e1f8;
+      border-radius: 16px;
+      padding: 16px 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .event-info-block {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .event-icon-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid #bfdbfe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1e40af;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(30, 64, 175, 0.1);
+    }
+
+    .event-text-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 700;
+      color: #64748b;
+      margin-bottom: 2px;
+    }
+
+    .event-text-value {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--primary-navy);
+      line-height: 1.35;
+    }
+
+    /* Ceremony Agenda Table */
+    .agenda-mini-box {
+      margin-bottom: 20px;
+    }
+
+    .agenda-mini-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #1e3a8a;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .agenda-timeline-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .agenda-pill {
+      background: #ffffff;
+      border: 1px solid #d5e6f8;
+      border-radius: 10px;
+      padding: 8px 10px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    }
+
+    .agenda-time {
+      font-size: 12px;
+      font-weight: 800;
+      color: #1d4ed8;
+      margin-bottom: 2px;
+    }
+
+    .agenda-desc {
+      font-size: 10px;
+      color: #475569;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    /* Bottom QR & Floral Accent */
+    .folio-bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid #e2eef9;
+      padding-top: 14px;
+      margin-top: 5px;
+    }
+
+    .thankyou-text-box {
+      max-width: 320px;
+    }
+
+    .thankyou-script {
+      font-family: var(--font-script);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary-navy);
+      margin-bottom: 2px;
+    }
+
+    .thankyou-sub {
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    .qr-badge-inline {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #f8fbff;
+      border: 1px solid #cde2f8;
+      padding: 6px 12px 6px 8px;
+      border-radius: 12px;
+    }
+
+    .qr-badge-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 6px;
+      display: block;
+    }
+
+    .qr-badge-note {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--primary-navy);
+      line-height: 1.35;
+      max-width: 130px;
+    }
+
+    /* Action Controls Bar */
+    .controls-bar {
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+      color: #ffffff;
+      box-shadow: 0 6px 18px rgba(30, 64, 175, 0.28);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(30, 64, 175, 0.35);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--primary-navy);
+      border: 1px solid #c9e0f6;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+    .btn-secondary:hover {
+      background: #ffffff;
+      transform: translateY(-2px);
+      border-color: #93c5fd;
+    }
+
+    /* Gallery Modal (Popup xem album 8 ảnh kỷ niệm ngang/dọc) */
+    .gallery-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 29, 58, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    .gallery-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .gallery-modal-content {
+      background: #ffffff;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 1080px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 30px;
+      position: relative;
+    }
+
+    .gallery-grid-h {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .gallery-card-h {
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      border: 1px solid #dcebfa;
+    }
+
+    .gallery-card-h img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .gallery-card-h:hover img {
+      transform: scale(1.05);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      font-size: 28px;
+      color: #64748b;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .folio-card {
+        grid-template-columns: 1fr;
+      }
+      .folio-spine {
+        display: none;
+      }
+      .event-info-strip {
+        grid-template-columns: 1fr;
+      }
+      .agenda-timeline-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .gallery-grid-h {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Ambient Background -->
+  <div class="desktop-bg"></div>
+
+  <!-- Top Desktop Menu Bar -->
+  <header class="desktop-topbar">
+    <div class="topbar-left">
+      <div class="topbar-logo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1e40af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        <span>Lịch Máy Tính • Tháng 11/2026</span>
+      </div>
+      <div>Lễ Tốt Nghiệp Cẩm Tiên</div>
+    </div>
+    <div class="topbar-right">
+      <button class="btn-action btn-secondary" style="padding: 4px 12px; font-size: 12px;" onclick="toggleAudio()" id="btn-audio-top">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+        </svg>
+        <span>Nhạc Nền</span>
+      </button>
+      <div id="live-time">07:00:00</div>
+    </div>
+  </header>
+
+  <!-- Audio Player (Alex Warren - Ordinary) -->
+  <audio id="bgm" src="assets/bgm.mp3?v=3" loop preload="auto"></audio>
+
+  <!-- Main Scene Container -->
+  <main class="scene-container">
+
+    <!-- ========================================================
+         CẢNH 1: CỬA SỔ LỊCH MÁY TÍNH (BẤM VÀO NGÀY 21/11)
+         ======================================================== -->
+    <div class="calendar-window" id="calendar-window">
+      <!-- Window Controls -->
+      <div class="window-header">
+        <div class="window-dots">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+        </div>
+        <div class="window-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          Lịch Kỷ Niệm — Tháng 11 / 2026
+        </div>
+        <div style="width: 50px;"></div>
+      </div>
+
+      <!-- Calendar Body -->
+      <div class="calendar-body">
+        <div class="calendar-month-row">
+          <div class="calendar-month-name">THÁNG 11 • 2026</div>
+          <div class="calendar-year-sub">ĐẠI HỌC BÌNH DƯƠNG</div>
+        </div>
+
+        <div class="calendar-grid">
+          <!-- Headers: T2 -> CN -->
+          <div class="cal-header-day">T2</div>
+          <div class="cal-header-day">T3</div>
+          <div class="cal-header-day">T4</div>
+          <div class="cal-header-day">T5</div>
+          <div class="cal-header-day">T6</div>
+          <div class="cal-header-day weekend">T7</div>
+          <div class="cal-header-day weekend">CN</div>
+
+          <!-- Week 1: 01/11/2026 is Sunday -->
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell"><span class="cal-num">1</span></div>
+
+          <!-- Week 2: 2 -> 8 -->
+          <div class="cal-cell"><span class="cal-num">2</span></div>
+          <div class="cal-cell"><span class="cal-num">3</span></div>
+          <div class="cal-cell"><span class="cal-num">4</span></div>
+          <div class="cal-cell"><span class="cal-num">5</span></div>
+          <div class="cal-cell"><span class="cal-num">6</span></div>
+          <div class="cal-cell"><span class="cal-num">7</span></div>
+          <div class="cal-cell"><span class="cal-num">8</span></div>
+
+          <!-- Week 3: 9 -> 15 -->
+          <div class="cal-cell"><span class="cal-num">9</span></div>
+          <div class="cal-cell"><span class="cal-num">10</span></div>
+          <div class="cal-cell"><span class="cal-num">11</span></div>
+          <div class="cal-cell"><span class="cal-num">12</span></div>
+          <div class="cal-cell"><span class="cal-num">13</span></div>
+          <div class="cal-cell"><span class="cal-num">14</span></div>
+          <div class="cal-cell"><span class="cal-num">15</span></div>
+
+          <!-- Week 4: 16 -> 22 (NGÀY 21/11 LÀ THỨ BẢY ĐẶC BIỆT) -->
+          <div class="cal-cell"><span class="cal-num">16</span></div>
+          <div class="cal-cell"><span class="cal-num">17</span></div>
+          <div class="cal-cell"><span class="cal-num">18</span></div>
+          <div class="cal-cell"><span class="cal-num">19</span></div>
+          <div class="cal-cell"><span class="cal-num">20</span></div>
+          <!-- NGÀY 21/11 CLICK MỞ THIỆP NGANG -->
+          <div class="cal-cell event-day-21" id="day-21-btn" onclick="openInvitationFromCalendar()">
+            <span class="cal-num">21</span>
+            <div class="event-badge">🎓 Lễ Tốt Nghiệp</div>
+          </div>
+          <div class="cal-cell"><span class="cal-num">22</span></div>
+
+          <!-- Week 5: 23 -> 29 -->
+          <div class="cal-cell"><span class="cal-num">23</span></div>
+          <div class="cal-cell"><span class="cal-num">24</span></div>
+          <div class="cal-cell"><span class="cal-num">25</span></div>
+          <div class="cal-cell"><span class="cal-num">26</span></div>
+          <div class="cal-cell"><span class="cal-num">27</span></div>
+          <div class="cal-cell"><span class="cal-num">28</span></div>
+          <div class="cal-cell"><span class="cal-num">29</span></div>
+
+          <!-- Week 6: 30 -->
+          <div class="cal-cell"><span class="cal-num">30</span></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+          <div class="cal-cell empty"></div>
+        </div>
+
+        <!-- Banner gợi ý nhấn -->
+        <div class="click-hint-banner" onclick="openInvitationFromCalendar()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 9l6 6-6 6"></path>
+            <path d="M4 4v7a4 4 0 0 0 4 4h11"></path>
+          </svg>
+          Nhấn vào ngày <b>21/11/2026</b> trên lịch để mở Thiệp Mời Ngang
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ========================================================
+         CẢNH 2: THIỆP MỜI NGANG CAO CẤP (BẢN FOLIO 2 TRANG SONG SONG)
+         ======================================================== -->
+    <div class="horizontal-invitation-wrap" id="horizontal-invitation">
+      <div class="folio-card">
+        <div class="folio-spine"></div>
+
+        <!-- TRANG TRÁI: ẢNH CHÂN DUNG & DANH HIỆU TÂN CỬ NHÂN -->
+        <div class="folio-left">
+          <div class="portrait-box-horizontal">
+            <img src="assets/portrait_main.jpg" alt="Tân Cử Nhân Trương Thị Cẩm Tiên" class="portrait-img">
+            <img src="assets/seal_gold_transparent.png" alt="BDU Seal" class="seal-floating-mini">
+          </div>
+          <div class="grad-title-tag">TÂN CỬ NHÂN</div>
+          <h2 class="candidate-name-horizontal">Trương Thị Cẩm Tiên</h2>
+          <div class="candidate-major-horizontal">Quản Trị Kinh Doanh • Khóa K25</div>
+          <p class="quote-text-horizontal">
+            "Bốn năm giảng đường là một hành trình thanh xuân rực rỡ. Hôm nay, em tự hào đánh dấu một cột mốc trưởng thành với tấm bằng Cử nhân trên tay."
+          </p>
+        </div>
+
+        <!-- TRANG PHẢI: NỘI DUNG THIỆP MỜI TRANG TRỌNG (KHÔNG CÓ ĐẾM NGƯỢC) -->
+        <div class="folio-right">
+          <!-- Header -->
+          <div class="university-header">
+            <div class="univ-name">Trường Đại Học Bình Dương</div>
+            <h1 class="invitation-main-heading">Thiệp Mời Lễ Tốt Nghiệp</h1>
+            <div class="invitation-sub-deg">Cử Nhân Quản Trị Kinh Doanh • K25</div>
+          </div>
+
+          <!-- Lời ngỏ -->
+          <p class="honor-intro">
+            Trân trọng kính mời Quý Thầy Cô, Gia đình và Bạn bè thân yêu tới tham dự và chung vui cùng <b>Cẩm Tiên</b> trong ngày lễ tốt nghiệp trọng đại!
+          </p>
+
+          <!-- Thời Gian & Địa Điểm (Định dạng ngang tinh tế) -->
+          <div class="event-info-strip">
+            <!-- Khối Thời Gian -->
+            <div class="event-info-block">
+              <div class="event-icon-circle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              </div>
+              <div>
+                <div class="event-text-label">Thời Gian Tổ Chức</div>
+                <div class="event-text-value">07:00 SÁNG</div>
+                <div style="font-size: 12px; color: #1e40af; font-weight: 600;">Thứ Bảy, Ngày 21.11.2026</div>
+              </div>
+            </div>
+
+            <!-- Khối Địa Điểm -->
+            <div class="event-info-block">
+              <div class="event-icon-circle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </div>
+              <div>
+                <div class="event-text-label">Địa Điểm Tổ Chức</div>
+                <div class="event-text-value">HỘI TRƯỜNG A</div>
+                <div style="font-size: 11.5px; color: #475569;">Trường Đại Học Bình Dương<br>(504 Đại lộ Bình Dương, TP. Thủ Dầu Một)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lịch Trình Buổi Lễ -->
+          <div class="agenda-mini-box">
+            <div class="agenda-mini-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+              Chương Trình Buổi Lễ
+            </div>
+            <div class="agenda-timeline-row">
+              <div class="agenda-pill">
+                <div class="agenda-time">07:00</div>
+                <div class="agenda-desc">Đón tiếp & Chụp ảnh</div>
+              </div>
+              <div class="agenda-pill">
+                <div class="agenda-time">07:30</div>
+                <div class="agenda-desc">Khai mạc buổi lễ</div>
+              </div>
+              <div class="agenda-pill">
+                <div class="agenda-time">08:30</div>
+                <div class="agenda-desc">Trao bằng Cử nhân</div>
+              </div>
+              <div class="agenda-pill">
+                <div class="agenda-time">10:30</div>
+                <div class="agenda-desc">Bế mạc & Kỷ niệm</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chân Thiệp & Mã QR -->
+          <div class="folio-bottom-row">
+            <div class="thankyou-text-box">
+              <div class="thankyou-script">Sự hiện diện của bạn là niềm vinh hạnh!</div>
+              <div class="thankyou-sub">Trường Đại Học Bình Dương • Niên khóa 2022 – 2026</div>
+            </div>
+            <div class="qr-badge-inline">
+              <img src="assets/qr_camtien.png" alt="QR Code" class="qr-badge-img">
+              <div class="qr-badge-note">Quét mã gửi lời chúc cho Cẩm Tiên</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thanh Nút Thao Tác Quay Video / Xem Thêm -->
+      <div class="controls-bar">
+        <button class="btn-action btn-secondary" onclick="backToCalendar()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          Quay lại Lịch
+        </button>
+
+        <button class="btn-action btn-primary" onclick="openGalleryModal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>
+          Xem 8 Ảnh Kỷ Niệm
+        </button>
+
+        <button class="btn-action btn-secondary" onclick="runAutoPlayDemo()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          Tự Động Diễn Video Demo
+        </button>
+
+        <a href="index.html" class="btn-action btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 20h9"></path>
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+          </svg>
+          Vào Thiệp Dọc & Sổ Lưu Bút
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================================
+       MODAL XEM 8 ẢNH KỶ NIỆM (ĐỂ TIỆN QUAY VIDEO SHORT)
+       ======================================================== -->
+  <div class="gallery-modal" id="gallery-modal" onclick="closeGalleryModal(event)">
+    <div class="gallery-modal-content">
+      <button class="modal-close-btn" onclick="hideGalleryModal()">&times;</button>
+      <div style="text-align: center;">
+        <h3 style="font-family: var(--font-title); font-size: 20px; color: var(--primary-navy);">Album Ảnh Kỷ Niệm Tốt Nghiệp</h3>
+        <p style="font-size: 13px; color: #64748b; margin-top: 4px;">Khoảnh khắc thanh xuân rạng rỡ của tân Cử nhân Trương Thị Cẩm Tiên</p>
+      </div>
+
+      <div class="gallery-grid-h">
+        <!-- 4 Ảnh Ngang -->
+        <div class="gallery-card-h"><img src="assets/DSCF0281.JPG" alt="Kỷ niệm 1"></div>
+        <div class="gallery-card-h"><img src="assets/DSCF0247.JPG" alt="Kỷ niệm 2"></div>
+        <div class="gallery-card-h"><img src="assets/gallery_4.jpg" alt="Kỷ niệm 3"></div>
+        <div class="gallery-card-h"><img src="assets/gallery_5.jpg" alt="Kỷ niệm 4"></div>
+        <!-- 4 Ảnh Dọc -->
+        <div class="gallery-card-h"><img src="assets/gallery_2.jpg" alt="Kỷ niệm 5"></div>
+        <div class="gallery-card-h"><img src="assets/DSCF0264.JPG" alt="Kỷ niệm 6"></div>
+        <div class="gallery-card-h"><img src="assets/DSCF0243.JPG" alt="Kỷ niệm 7"></div>
+        <div class="gallery-card-h"><img src="assets/DSCF0259.JPG" alt="Kỷ niệm 8"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ========================================================
+       JAVASCRIPT
+       ======================================================== -->
+  <script>
+    // Live Clock on Topbar
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('live-time').innerText = `${h}:${m}:${s}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Audio Player
+    const bgm = document.getElementById('bgm');
+    let isPlaying = false;
+
+    function playAudio() {
+      bgm.muted = false;
+      bgm.play().then(() => {
+        isPlaying = true;
+      }).catch(e => console.log('Audio error:', e));
+    }
+
+    function toggleAudio() {
+      if (isPlaying) {
+        bgm.pause();
+        isPlaying = false;
+      } else {
+        playAudio();
+      }
+    }
+
+    // Fire Confetti Celebration
+    function fireCelebration() {
+      const colors = ['#1e40af', '#60a5fa', '#d4af37', '#fcf6ba', '#ffffff'];
+      confetti({
+        particleCount: 100,
+        spread: 90,
+        origin: { y: 0.6 },
+        colors: colors
+      });
+      setTimeout(() => {
+        confetti({
+          particleCount: 60,
+          angle: 60,
+          spread: 60,
+          origin: { x: 0.1, y: 0.6 },
+          colors: colors
+        });
+        confetti({
+          particleCount: 60,
+          angle: 120,
+          spread: 60,
+          origin: { x: 0.9, y: 0.6 },
+          colors: colors
+        });
+      }, 350);
+    }
+
+    // KỊCH BẢN CHÍNH: CLICK VÀO NGÀY 21/11 MỞ THIỆP NGANG
+    function openInvitationFromCalendar() {
+      const cal = document.getElementById('calendar-window');
+      const card = document.getElementById('horizontal-invitation');
+
+      // 1. Âm thanh nhạc nền bắt đầu cất lên
+      playAudio();
+
+      // 2. Hiệu ứng phóng to mượt mà và ẩn cửa sổ lịch
+      cal.classList.add('zoom-out');
+
+      // 3. Pháo hoa chúc mừng
+      fireCelebration();
+
+      // 4. Mở bung thiệp ngang sau 400ms
+      setTimeout(() => {
+        cal.style.display = 'none';
+        card.classList.add('active');
+      }, 400);
+    }
+
+    // Quay lại màn hình lịch máy tính
+    function backToCalendar() {
+      const cal = document.getElementById('calendar-window');
+      const card = document.getElementById('horizontal-invitation');
+
+      card.classList.remove('active');
+      setTimeout(() => {
+        cal.style.display = 'block';
+        cal.classList.remove('zoom-out');
+      }, 300);
+    }
+
+    // Chế độ tự động diễn kịch bản Video Demo
+    function runAutoPlayDemo() {
+      backToCalendar();
+      setTimeout(() => {
+        const day21 = document.getElementById('day-21-btn');
+        day21.style.transform = 'scale(1.15)';
+        setTimeout(() => {
+          openInvitationFromCalendar();
+        }, 1200);
+      }, 800);
+    }
+
+    // Gallery Modal
+    function openGalleryModal() {
+      document.getElementById('gallery-modal').classList.add('active');
+    }
+    function hideGalleryModal() {
+      document.getElementById('gallery-modal').classList.remove('active');
+    }
+    function closeGalleryModal(e) {
+      if (e.target && e.target.id === 'gallery-modal') {
+        hideGalleryModal();
+      }
+    }
+  </script>
+</body>
+
+</html>
