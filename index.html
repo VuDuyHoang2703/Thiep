@@ -51,17 +51,6 @@
       position: relative;
     }
 
-    /* Falling Petals Canvas */
-    #petals-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 99;
-    }
-
     .ambient-sky-glow {
       position: fixed;
       top: 0;
@@ -1584,8 +1573,6 @@
 
 <body>
 
-  <!-- Petals Canvas Animation -->
-  <canvas id="petals-canvas"></canvas>
   <div class="ambient-sky-glow"></div>
 
   <!-- Background Music: Ed Sheeran - Perfect -->
@@ -2057,15 +2044,6 @@
       </svg>
     </button>
 
-    <!-- Nút Bật/Tắt Hoa Rơi (Biểu tượng hoa tú cầu) -->
-    <button class="tool-btn" id="btn-petals" onclick="togglePetalFlow()" title="Bật hoặc Tắt hoa rơi"
-      aria-label="Bật hoặc Tắt hoa rơi">
-      <svg viewBox="0 0 24 24">
-        <path
-          d="M12 2a4 4 0 0 0-4 4c0 1.1.45 2.1 1.17 2.83A4 4 0 0 0 6 12a4 4 0 0 0 2.83 3.83A4 4 0 0 0 8 18a4 4 0 0 0 4 4 4 4 0 0 0 4-4c0-.7-.18-1.36-.5-1.94A4 4 0 0 0 18 12a4 4 0 0 0-2.5-3.69c.32-.58.5-1.24.5-1.94a4 4 0 0 0-4-4zm0 8a2 2 0 1 1 0 4 2 2 0 0 1 0-4z" />
-      </svg>
-    </button>
-
     <!-- Nút Chia Sẻ Thiệp (Biểu tượng chia sẻ) -->
     <button class="tool-btn" onclick="shareInvitation()" title="Chia sẻ thiệp mời" aria-label="Chia sẻ thiệp mời">
       <svg viewBox="0 0 24 24">
@@ -2246,87 +2224,6 @@
     }
     setInterval(refreshCountdown, 1000);
     refreshCountdown();
-
-    // Cánh hoa cẩm tú cầu bay lượn
-    const canvas = document.getElementById('petals-canvas');
-    const ctx = canvas.getContext('2d');
-    let petalsRunning = true;
-    let petals = [];
-
-    function setupCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', setupCanvas);
-    setupCanvas();
-
-    const petalPalette = [
-      'rgba(147, 197, 253, 0.75)',
-      'rgba(96, 165, 250, 0.8)',
-      'rgba(196, 181, 253, 0.75)',
-      'rgba(224, 242, 254, 0.8)',
-      'rgba(250, 232, 162, 0.6)'
-    ];
-
-    class HydrangeaPetal {
-      constructor() {
-        this.reinit();
-      }
-      reinit() {
-        this.x = Math.random() * canvas.width;
-        this.y = -20 - Math.random() * 40;
-        this.radius = 7 + Math.random() * 11;
-        this.vx = -1 + Math.random() * 2;
-        this.vy = 1.1 + Math.random() * 1.7;
-        this.deg = Math.random() * 360;
-        this.spin = -2 + Math.random() * 4;
-        this.shade = petalPalette[Math.floor(Math.random() * petalPalette.length)];
-        this.alpha = 0.5 + Math.random() * 0.45;
-      }
-      step() {
-        this.y += this.vy;
-        this.x += Math.sin(this.y * 0.02) + this.vx * 0.4;
-        this.deg += this.spin;
-        if (this.y > canvas.height + 25) this.reinit();
-      }
-      paint() {
-        ctx.save();
-        ctx.translate(this.x, this.y);
-        ctx.rotate((this.deg * Math.PI) / 180);
-        ctx.globalAlpha = this.alpha;
-        ctx.fillStyle = this.shade;
-        ctx.beginPath();
-        ctx.ellipse(0, 0, this.radius * 0.75, this.radius * 0.45, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      }
-    }
-
-    for (let i = 0; i < 35; i++) {
-      petals.push(new HydrangeaPetal());
-    }
-
-    function renderPetals() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      if (petalsRunning) {
-        petals.forEach(p => {
-          p.step();
-          p.paint();
-        });
-      }
-      requestAnimationFrame(renderPetals);
-    }
-    renderPetals();
-
-    function togglePetalFlow() {
-      petalsRunning = !petalsRunning;
-      const btn = document.getElementById('btn-petals');
-      if (petalsRunning) {
-        btn.classList.remove('off');
-      } else {
-        btn.classList.add('off');
-      }
-    }
 
     // Lightbox
     function showLightbox(src) {
