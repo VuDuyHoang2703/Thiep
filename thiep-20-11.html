@@ -52,7 +52,7 @@
 
     body {
       font-family: var(--font-family);
-      /* Nền sóng lụa xanh nước biển pha lê êm dịu, không chói mắt */
+      /* Nền sóng lụa xanh nước biển pha lê êm dịu, sang trọng */
       background: radial-gradient(circle at 50% 0%, #e0f4ff 0%, #cbe9ff 35%, #9fd5fc 70%, #76bffa 100%);
       color: var(--text-main);
       overflow-x: hidden;
@@ -261,12 +261,11 @@
       filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.08));
     }
 
-    /* Huy hiệu ngày hội ngộ 20/11 */
+    /* Huy hiệu ngày hội ngộ 20/11 - Không có icon */
     .gate-badge-date {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 7px 20px;
+      padding: 7px 22px;
       background: linear-gradient(135deg, #0077b6 0%, #0096c7 50%, #00b4d8 100%);
       border: 1px solid rgba(255, 235, 153, 0.7);
       border-radius: 50px;
@@ -279,7 +278,7 @@
       box-shadow: 0 6px 20px rgba(0, 119, 182, 0.35);
     }
 
-    /* TIÊU ĐỀ BÌA THIỆP ĐỒNG BỘ 100% */
+    /* Tiêu đề bìa thiệp đồng bộ */
     .gate-title-main {
       font-size: 20px;
       font-weight: 800;
@@ -305,14 +304,14 @@
       font-size: 13.5px;
       color: var(--text-muted);
       font-weight: 500;
-      margin-bottom: 22px;
+      margin-bottom: 24px;
       line-height: 1.55;
     }
 
-    /* Nút Ấn Mở Thiệp 3D Ngọc Thủy & Vàng Hoàng Gia */
+    /* Nút Ấn Mở Thiệp 3D */
     .gate-seal-btn {
-      width: 80px;
-      height: 80px;
+      width: 76px;
+      height: 76px;
       margin: 0 auto 16px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #48cae4 0%, #0096c7 50%, #005f9e 100%);
@@ -335,13 +334,11 @@
       transform: scale(1.08);
     }
 
-    .gate-seal-btn svg {
-      width: 36px;
-      height: 36px;
-      fill: none;
-      stroke: #ffffff;
-      stroke-width: 2.2;
-      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+    .gate-seal-text {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .gate-open-hint {
@@ -351,10 +348,7 @@
       letter-spacing: 0.8px;
       text-transform: uppercase;
       animation: hintBounce 1.8s infinite;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
+      text-align: center;
     }
 
     @keyframes oceanPulse {
@@ -398,8 +392,8 @@
       top: 18px;
       right: 18px;
       z-index: 100;
-      width: 46px;
-      height: 46px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(8px);
@@ -409,15 +403,14 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--ocean-azure);
       transition: transform 0.2s, background 0.2s;
     }
 
     .floating-audio-btn.playing {
-      animation: spinJewel 9s linear infinite;
-    }
-
-    @keyframes spinJewel {
-      100% { transform: rotate(360deg); }
+      background: #e3f4ff;
     }
 
     /* Thẻ Thiệp Chính (Main Card) */
@@ -477,7 +470,6 @@
     .event-badge-gold {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
       background: var(--gold-foil);
       border-radius: 50px;
       padding: 7px 22px;
@@ -490,7 +482,7 @@
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
     }
 
-    /* TIÊU ĐỀ THIỆP CHÍNH ĐỒNG BỘ */
+    /* Tiêu Đề Thiệp Chính Đồng Bộ */
     .header-title-vn {
       font-size: 26px;
       font-weight: 800;
@@ -503,13 +495,12 @@
     }
 
     .header-quote {
-      font-size: 15.5px;
+      font-size: 15px;
       font-style: italic;
       font-weight: 500;
       color: #fff3bf;
       line-height: 1.5;
       letter-spacing: 0.3px;
-      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
     }
 
     /* Lời Kính Mời Trân Trọng */
@@ -565,10 +556,6 @@
       letter-spacing: 1px;
       text-transform: uppercase;
       margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
     }
 
     .countdown-grid {
@@ -660,9 +647,6 @@
     .event-time-pill {
       font-size: 13.5px;
       font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
 
     .event-card-body {
@@ -678,39 +662,17 @@
     }
 
     .event-detail-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
       margin-bottom: 14px;
       font-size: 14px;
       line-height: 1.6;
       color: var(--text-muted);
     }
 
-    .event-icon-circle {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      background: linear-gradient(135deg, #e3f4ff 0%, #cbeaff 100%);
-      color: var(--ocean-azure);
-      border: 1px solid #bde7ff;
-    }
-
-    .event-card.evening .event-icon-circle {
-      color: #c59b27;
-      background: #fff8db;
-      border-color: #fde68a;
-    }
-
     .event-detail-content strong {
       color: var(--ocean-dark);
-      display: block;
+      display: inline-block;
       font-size: 14.5px;
-      margin-bottom: 2px;
+      margin-right: 6px;
     }
 
     .event-note-quote {
@@ -739,7 +701,6 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
       padding: 12px 18px;
       background: linear-gradient(135deg, #0077b6 0%, #0096c7 100%);
       color: #ffffff;
@@ -878,9 +839,6 @@
       font-weight: 800;
       color: var(--ocean-dark);
       margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
@@ -935,11 +893,7 @@
 
   <!-- NÚT ÂM THANH NỔI GÓC PHẢI -->
   <button class="floating-audio-btn" id="audioToggleBtn" onclick="toggleAudio()" title="Bật/Tắt Nhạc">
-    <svg id="musicIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0077b6" stroke-width="2.5">
-      <path d="M9 18V5l12-2v13"></path>
-      <circle cx="6" cy="18" r="3"></circle>
-      <circle cx="18" cy="16" r="3"></circle>
-    </svg>
+    Nhạc
   </button>
 
   <!-- ========================================================
@@ -967,7 +921,7 @@
       </div>
 
       <div class="gate-badge-date">
-        ✨ Tri Ân Thầy Cô • 20/11/2026
+        Tri Ân Thầy Cô • 20/11/2026
       </div>
 
       <h1 class="gate-title-main">
@@ -979,14 +933,11 @@
 
       <!-- Nút niêm phong chạm mở 3D Ngọc Thủy Hoàng Gia -->
       <div class="gate-seal-btn" title="Chạm để mở thiệp">
-        <svg viewBox="0 0 24 24">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-          <polyline points="22,6 12,13 2,6"></polyline>
-        </svg>
+        <span class="gate-seal-text">Mở Thiệp</span>
       </div>
 
       <div class="gate-open-hint">
-        <span>✨ Chạm vào màn hình để mở thiệp ✨</span>
+        Chạm vào màn hình để mở thiệp
       </div>
     </div>
   </div>
@@ -1004,7 +955,7 @@
         </div>
 
         <div class="event-badge-gold">
-          🌟 20.11.2026 • TRI ÂN NGÀY NHÀ GIÁO VIỆT NAM
+          20.11.2026 • TRI ÂN NGÀY NHÀ GIÁO VIỆT NAM
         </div>
 
         <h1 class="header-title-vn">THƯ MỜI HỘI NGỘ & TRI ÂN</h1>
@@ -1025,10 +976,6 @@
       <!-- ĐỒNG HỒ ĐẾM NGƯỢC XANH NƯỚC PHA LÊ -->
       <div class="countdown-wrapper">
         <div class="countdown-title">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <circle cx="12" cy="12" r="10"></circle>
-            <polyline points="12 6 12 12 16 14"></polyline>
-          </svg>
           Đếm ngược đến Ngày Hội Ngộ 20/11/2026
         </div>
         <div class="countdown-grid">
@@ -1061,10 +1008,6 @@
           <div class="event-card-header">
             <span class="event-tag-badge">Chương Trình 1 • Buổi Sáng</span>
             <div class="event-time-pill">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-              </svg>
               10:00 Sáng, Thứ Sáu 20/11/2026
             </div>
           </div>
@@ -1073,12 +1016,6 @@
             <h3 class="event-title">Buổi Gặp Gỡ & Họp Mặt Tri Ân Quý Thầy Cô</h3>
             
             <div class="event-detail-item">
-              <div class="event-icon-circle">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-              </div>
               <div class="event-detail-content">
                 <strong>Địa điểm:</strong>
                 Phòng IT — Tòa nhà Bcons Garden
@@ -1086,12 +1023,6 @@
             </div>
 
             <div class="event-detail-item">
-              <div class="event-icon-circle">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-              </div>
               <div class="event-detail-content">
                 <strong>Địa chỉ:</strong>
                 25a Phạm Hữu Lầu, Khu Phố Thống Nhất 1, Dĩ An, Hồ Chí Minh, Việt Nam
@@ -1101,9 +1032,6 @@
             <div class="event-actions-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=Bcons+Garden+25a+Phạm+Hữu+Lầu+Dĩ+An" 
                  target="_blank" rel="noopener noreferrer" class="btn-action-map">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                  <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
-                </svg>
                 Chỉ Đường Đến Bcons Garden
               </a>
             </div>
@@ -1115,10 +1043,6 @@
           <div class="event-card-header">
             <span class="event-tag-badge">Chương Trình 2 • Buổi Chiều Tối</span>
             <div class="event-time-pill">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-              </svg>
               17:30 Chiều, Thứ Sáu 20/11/2026
             </div>
           </div>
@@ -1127,15 +1051,6 @@
             <h3 class="event-title">Tiệc Thân Mật — Ban Giám Đốc Thân Mời Cả Nhà</h3>
 
             <div class="event-detail-item">
-              <div class="event-icon-circle">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                  <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
-                  <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
-                  <line x1="6" y1="1" x2="6" y2="4"></line>
-                  <line x1="10" y1="1" x2="10" y2="4"></line>
-                  <line x1="14" y1="1" x2="14" y2="4"></line>
-                </svg>
-              </div>
               <div class="event-detail-content">
                 <strong>Địa điểm:</strong>
                 Quán Dê Cúc Phương
@@ -1143,12 +1058,6 @@
             </div>
 
             <div class="event-detail-item">
-              <div class="event-icon-circle">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-              </div>
               <div class="event-detail-content">
                 <strong>Địa chỉ:</strong>
                 Số 222 Lý Thường Kiệt, KP Thống Nhất 1, P. Dĩ An, TP.HCM
@@ -1156,15 +1065,12 @@
             </div>
 
             <div class="event-note-quote">
-              🌷 "Ban Giám Đốc thân mời cả nhà tham dự tiệc. Hẹn gặp mọi người vào ngày mai!"
+              "Ban Giám Đốc thân mời cả nhà tham dự tiệc. Hẹn gặp mọi người vào chiều nay!"
             </div>
 
             <div class="event-actions-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=Quán+Dê+Cúc+Phương+222+Lý+Thường+Kiệt+Dĩ+An" 
                  target="_blank" rel="noopener noreferrer" class="btn-action-map gold-theme">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-                  <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
-                </svg>
                 Chỉ Đường Đến Quán Dê Cúc Phương
               </a>
             </div>
@@ -1218,7 +1124,7 @@
            ==================================================== -->
       <section class="gratitude-letter-box">
         <h4 class="letter-title">
-          💌 Tâm Thư Tri Ân Người Truyền Lửa
+          Tâm Thư Tri Ân Người Truyền Lửa
         </h4>
         <div class="letter-body">
           <p>
