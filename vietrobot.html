@@ -6,11 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Thư Mời Chào Mừng Ngày Nhà Giáo Việt Nam 20/11 — VietRobot Education J.S.C</title>
 
-  <!-- Google Fonts: Đẳng cấp Hoàng gia & Sang trọng -->
+  <!-- Google Fonts: Chuẩn Tiếng Việt 100% không lệch dấu, đồng bộ chữ to chữ nhỏ -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Charm:wght@700&family=Cinzel:wght@600;700;800;900&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,400;1,600;1,700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap"
     rel="stylesheet">
 
   <!-- Canvas Confetti -->
@@ -18,31 +18,29 @@
 
   <style>
     :root {
-      /* Bảng màu Xanh Nước Biển Hoàng Gia Sang Trọng (Royal Aqua & Crystal Ocean) */
-      --ocean-deep: #03254c;
-      --ocean-navy: #093a68;
-      --ocean-sapphire: #0d5c9c;
+      /* Bảng màu Xanh Nước Biển Hoàng Gia Sang Trọng (Royal Aqua & Sapphire) */
+      --ocean-dark: #032042;
+      --ocean-deep: #073b6c;
+      --ocean-navy: #0d528f;
       --ocean-azure: #0077b6;
       --water-vivid: #0096c7;
       --water-cyan: #00b4d8;
       --water-crystal: #48cae4;
-      --water-foam: #caf0f8;
-      --water-ice: #f0faff;
+      --water-foam: #e3f4ff;
+      --water-ice: #f2f9ff;
       
-      /* Vàng Kim Loại Hoàng Gia (Royal Metallic Gold) */
-      --gold-foil: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
-      --gold-glow: linear-gradient(135deg, #ffe066 0%, #ffc300 50%, #e08500 100%);
-      --gold-solid: #d4af37;
-      --gold-light: #fff8db;
+      /* Vàng Ánh Kim Hoàng Gia (Royal Metallic Gold) */
+      --gold-foil: linear-gradient(135deg, #d4af37 0%, #f6e27a 40%, #c59b27 70%, #fdf0a6 100%);
+      --gold-border: #d4af37;
+      --gold-solid: #c59b27;
+      --gold-soft: #fff9e6;
       
       --text-main: #0c2340;
-      --text-slate: #2c4a6f;
+      --text-muted: #3a5674;
       --white: #ffffff;
       
-      --font-body: 'Montserrat', sans-serif;
-      --font-serif: 'Playfair Display', serif;
-      --font-cinzel: 'Cinzel', serif;
-      --font-script: 'Charm', cursive;
+      /* ĐỒNG BỘ 1 HỆ FONT DUY NHẤT CHUẨN TIẾNG VIỆT */
+      --font-family: 'Be Vietnam Pro', 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     * {
@@ -53,18 +51,18 @@
     }
 
     body {
-      font-family: var(--font-body);
-      /* Nền sóng lụa xanh nước biển pha ánh ngọc trai */
-      background: radial-gradient(circle at 50% 0%, #d8f3dc 0%, #cce3de 5%, transparent 35%),
-                  linear-gradient(180deg, #e8f7ff 0%, #cbeaff 35%, #9dd6fc 70%, #6ec2fa 100%);
+      font-family: var(--font-family);
+      /* Nền sóng lụa xanh nước biển pha lê êm dịu, không chói mắt */
+      background: radial-gradient(circle at 50% 0%, #e0f4ff 0%, #cbe9ff 35%, #9fd5fc 70%, #76bffa 100%);
       color: var(--text-main);
       overflow-x: hidden;
       min-height: 100vh;
       position: relative;
+      line-height: 1.6;
     }
 
-    /* Hiệu ứng gợn nước lung linh phát sáng (Water Caustics Ambient) */
-    .ambient-water-lights {
+    /* Hiệu ứng gợn nước phát sáng lung linh ở nền */
+    .ambient-water-glow {
       position: fixed;
       top: 0;
       left: 0;
@@ -72,9 +70,9 @@
       height: 100%;
       pointer-events: none;
       background: 
-        radial-gradient(ellipse at 15% 15%, rgba(0, 180, 216, 0.3) 0%, transparent 45%),
-        radial-gradient(ellipse at 85% 25%, rgba(212, 175, 55, 0.25) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 60%, rgba(255, 255, 255, 0.7) 0%, transparent 60%);
+        radial-gradient(ellipse at 15% 15%, rgba(0, 180, 216, 0.28) 0%, transparent 45%),
+        radial-gradient(ellipse at 85% 25%, rgba(212, 175, 55, 0.22) 0%, transparent 45%),
+        radial-gradient(ellipse at 50% 65%, rgba(255, 255, 255, 0.65) 0%, transparent 60%);
       z-index: 1;
     }
 
@@ -101,14 +99,14 @@
       visibility: hidden;
     }
 
-    /* Cánh cửa xanh nước biển hoàng gia */
+    /* Cánh cửa xanh nước biển đại dương */
     .gate-door-left,
     .gate-door-right {
       position: absolute;
       top: 0;
       width: 50%;
       height: 100%;
-      background: linear-gradient(155deg, #0d3b66 0%, #004b87 40%, #006dae 75%, #008cc3 100%);
+      background: linear-gradient(155deg, #072a4d 0%, #00467e 40%, #0065a3 75%, #0087be 100%);
       transition: transform 1.25s cubic-bezier(0.25, 1, 0.3, 1);
       will-change: transform;
       overflow: hidden;
@@ -118,13 +116,13 @@
     .gate-door-left {
       left: 0;
       border-right: 3px solid #f6d365;
-      box-shadow: 20px 0 50px rgba(3, 37, 76, 0.5);
+      box-shadow: 20px 0 50px rgba(3, 32, 66, 0.5);
     }
 
     .gate-door-right {
       right: 0;
       border-left: 3px solid #f6d365;
-      box-shadow: -20px 0 50px rgba(3, 37, 76, 0.5);
+      box-shadow: -20px 0 50px rgba(3, 32, 66, 0.5);
     }
 
     .gate-overlay.opened .gate-door-left {
@@ -135,14 +133,14 @@
       transform: translateX(101%);
     }
 
-    /* Hoa văn viền vàng kim quý tộc bên trong cánh cửa */
+    /* Họa tiết viền chỉ vàng hoàng gia bên trong cánh cửa */
     .royal-door-filigree {
       position: absolute;
       top: 24px;
       bottom: 24px;
       width: calc(100% - 30px);
-      border: 1.5px solid rgba(254, 231, 142, 0.6);
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.2) inset;
+      border: 1.5px solid rgba(246, 211, 101, 0.5);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.15) inset;
       pointer-events: none;
     }
 
@@ -161,7 +159,7 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      opacity: 0.16;
+      opacity: 0.14;
       background: 
         radial-gradient(circle at 100% 50%, #48cae4 2px, transparent 2px),
         linear-gradient(135deg, rgba(255,255,255,0.2) 25%, transparent 25%) -20px 0,
@@ -187,11 +185,11 @@
       position: absolute;
       width: 100%;
       height: 2px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
     }
 
-    /* Khối Thiệp Trung Tâm Xanh Nước Biển & Vàng Kim Cực Sang */
+    /* Khối Thiệp Trung Tâm Xanh Nước Biển & Vàng Kim Sang Trọng */
     .gate-cover-card {
       position: absolute;
       top: 50%;
@@ -201,11 +199,11 @@
       width: 90%;
       max-width: 440px;
       background: linear-gradient(165deg, #ffffff 0%, #f4faff 50%, #e3f4ff 100%);
-      border-radius: 32px;
+      border-radius: 30px;
       padding: 38px 24px 34px;
       text-align: center;
       box-shadow: 
-        0 30px 80px rgba(3, 37, 76, 0.5),
+        0 30px 80px rgba(3, 32, 66, 0.5),
         0 0 0 3px #ffffff,
         0 0 0 6px #d4af37,
         0 0 35px rgba(0, 180, 216, 0.4);
@@ -215,7 +213,7 @@
     }
 
     .gate-overlay.opened .gate-cover-card {
-      transform: translate(-50%, -50%) scale(1.1);
+      transform: translate(-50%, -50%) scale(1.08);
       opacity: 0;
     }
 
@@ -249,47 +247,47 @@
       display: inline-block;
       padding: 14px 26px;
       background: #ffffff;
-      border-radius: 22px;
+      border-radius: 20px;
       box-shadow: 
         0 12px 35px rgba(0, 119, 182, 0.25),
-        0 0 0 2px rgba(212, 175, 55, 0.5);
+        0 0 0 2px rgba(212, 175, 55, 0.6);
       position: relative;
     }
 
     .gate-logo-img {
-      max-width: 225px;
+      max-width: 220px;
       height: auto;
       display: block;
       filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.08));
     }
 
-    /* Huy hiệu ngày hội ngộ 20/11 - Tông Xanh Ngọc Bích Nước Biển & Vàng */
+    /* Huy hiệu ngày hội ngộ 20/11 */
     .gate-badge-date {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 7px 22px;
+      padding: 7px 20px;
       background: linear-gradient(135deg, #0077b6 0%, #0096c7 50%, #00b4d8 100%);
       border: 1px solid rgba(255, 235, 153, 0.7);
       border-radius: 50px;
       color: #ffffff;
       font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
+      font-weight: 700;
+      letter-spacing: 1px;
       text-transform: uppercase;
       margin-bottom: 16px;
       box-shadow: 0 6px 20px rgba(0, 119, 182, 0.35);
     }
 
+    /* TIÊU ĐỀ BÌA THIỆP ĐỒNG BỘ 100% */
     .gate-title-main {
-      font-family: var(--font-serif);
-      font-size: 25px;
+      font-size: 20px;
       font-weight: 800;
-      color: var(--ocean-deep);
-      line-height: 1.35;
-      margin-bottom: 6px;
+      color: var(--ocean-dark);
+      line-height: 1.4;
+      margin-bottom: 4px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
     }
 
     .gate-title-gold {
@@ -297,33 +295,32 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: block;
-      font-size: 24px;
-      font-family: var(--font-serif);
+      font-size: 22px;
       font-weight: 900;
+      letter-spacing: 0.5px;
       margin-top: 4px;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
     }
 
     .gate-subtitle-sub {
-      font-size: 14px;
-      color: var(--text-slate);
-      font-weight: 600;
-      margin-bottom: 24px;
+      font-size: 13.5px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 22px;
       line-height: 1.55;
     }
 
     /* Nút Ấn Mở Thiệp 3D Ngọc Thủy & Vàng Hoàng Gia */
     .gate-seal-btn {
-      width: 84px;
-      height: 84px;
+      width: 80px;
+      height: 80px;
       margin: 0 auto 16px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #48cae4 0%, #0096c7 50%, #005f9e 100%);
       box-shadow: 
         0 14px 35px rgba(0, 119, 182, 0.5),
         0 0 0 5px #ffffff,
-        0 0 0 9px rgba(212, 175, 55, 0.8),
-        0 0 25px rgba(0, 180, 216, 0.6);
+        0 0 0 8px rgba(212, 175, 55, 0.8),
+        0 0 25px rgba(0, 180, 216, 0.5);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -339,8 +336,8 @@
     }
 
     .gate-seal-btn svg {
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       fill: none;
       stroke: #ffffff;
       stroke-width: 2.2;
@@ -348,10 +345,10 @@
     }
 
     .gate-open-hint {
-      font-size: 13.5px;
-      font-weight: 800;
+      font-size: 13px;
+      font-weight: 700;
       color: var(--ocean-azure);
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       text-transform: uppercase;
       animation: hintBounce 1.8s infinite;
       display: flex;
@@ -365,15 +362,15 @@
         box-shadow: 
           0 14px 35px rgba(0, 119, 182, 0.5),
           0 0 0 5px #ffffff,
-          0 0 0 9px rgba(212, 175, 55, 0.8),
-          0 0 25px rgba(0, 180, 216, 0.6);
+          0 0 0 8px rgba(212, 175, 55, 0.8),
+          0 0 25px rgba(0, 180, 216, 0.5);
       }
       50% {
         box-shadow: 
           0 18px 45px rgba(0, 119, 182, 0.7),
           0 0 0 6px #ffffff,
-          0 0 0 14px rgba(212, 175, 55, 0.4),
-          0 0 40px rgba(0, 180, 216, 0.9);
+          0 0 0 12px rgba(212, 175, 55, 0.4),
+          0 0 35px rgba(0, 180, 216, 0.8);
       }
     }
 
@@ -395,18 +392,18 @@
       padding: 20px 16px 60px;
     }
 
-    /* Nút Âm Thanh Nổi Pha Lê Xanh Nước Biển */
+    /* Nút Âm Thanh Nổi */
     .floating-audio-btn {
       position: fixed;
       top: 18px;
       right: 18px;
       z-index: 100;
-      width: 48px;
-      height: 48px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(8px);
-      box-shadow: 0 8px 25px rgba(3, 37, 76, 0.25), 0 0 0 2px var(--gold-solid);
+      box-shadow: 0 8px 25px rgba(3, 32, 66, 0.25), 0 0 0 2px var(--gold-border);
       border: 2px solid var(--water-cyan);
       display: flex;
       align-items: center;
@@ -423,12 +420,12 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Thẻ Thiệp Chính (Main Card) - Phong Cách Ngọc Trai & Thủy Tinh Cao Cấp */
+    /* Thẻ Thiệp Chính (Main Card) */
     .main-card {
       background: #ffffff;
-      border-radius: 30px;
+      border-radius: 28px;
       box-shadow: 
-        0 25px 70px rgba(3, 37, 76, 0.16),
+        0 25px 70px rgba(3, 32, 66, 0.16),
         0 0 0 2px rgba(255, 255, 255, 0.9),
         0 0 0 5px rgba(72, 202, 228, 0.35);
       overflow: hidden;
@@ -437,10 +434,10 @@
       padding-bottom: 16px;
     }
 
-    /* Banner Tiêu Đề Xanh Nước Biển Đại Dương (Sapphire Ocean Banner) */
+    /* Banner Tiêu Đề Xanh Nước Biển Đại Dương */
     .header-banner {
-      background: linear-gradient(145deg, #022b54 0%, #005f9e 45%, #008cc3 85%, #00b4d8 100%);
-      padding: 42px 20px 36px;
+      background: linear-gradient(145deg, #032042 0%, #005896 45%, #0087be 85%, #00b4d8 100%);
+      padding: 40px 20px 34px;
       text-align: center;
       color: #ffffff;
       position: relative;
@@ -462,16 +459,16 @@
     .brand-logo-wrap {
       background: #ffffff;
       display: inline-block;
-      padding: 14px 28px;
-      border-radius: 22px;
+      padding: 13px 26px;
+      border-radius: 20px;
       box-shadow: 
         0 12px 35px rgba(0, 0, 0, 0.2),
-        0 0 0 2px var(--gold-solid);
-      margin-bottom: 22px;
+        0 0 0 2px var(--gold-border);
+      margin-bottom: 20px;
     }
 
     .brand-logo {
-      height: 56px;
+      height: 54px;
       width: auto;
       display: block;
       object-fit: contain;
@@ -483,76 +480,78 @@
       gap: 8px;
       background: var(--gold-foil);
       border-radius: 50px;
-      padding: 8px 24px;
+      padding: 7px 22px;
       color: #1a1a1a;
-      font-size: 13.5px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
       text-transform: uppercase;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
     }
 
+    /* TIÊU ĐỀ THIỆP CHÍNH ĐỒNG BỘ */
     .header-title-vn {
-      font-family: var(--font-serif);
-      font-size: 32px;
+      font-size: 26px;
       font-weight: 800;
       letter-spacing: 0.5px;
       line-height: 1.35;
       color: #ffffff;
-      text-shadow: 0 3px 15px rgba(0, 20, 45, 0.4);
-      margin-bottom: 10px;
+      text-transform: uppercase;
+      text-shadow: 0 2px 12px rgba(0, 15, 35, 0.4);
+      margin-bottom: 8px;
     }
 
     .header-quote {
-      font-family: var(--font-script);
-      font-size: 24px;
+      font-size: 15.5px;
+      font-style: italic;
+      font-weight: 500;
       color: #fff3bf;
-      line-height: 1.4;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      line-height: 1.5;
+      letter-spacing: 0.3px;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
     }
 
     /* Lời Kính Mời Trân Trọng */
     .greeting-section {
-      padding: 34px 26px 22px;
+      padding: 32px 24px 20px;
       text-align: center;
     }
 
     .salutation-label {
-      font-size: 13.5px;
+      font-size: 12.5px;
       text-transform: uppercase;
-      letter-spacing: 2.5px;
+      letter-spacing: 2px;
       color: var(--water-vivid);
-      font-weight: 800;
+      font-weight: 700;
       margin-bottom: 8px;
     }
 
     .salutation-target {
-      font-family: var(--font-serif);
-      font-size: 25px;
+      font-size: 22px;
       font-weight: 800;
-      color: var(--ocean-deep);
-      margin-bottom: 16px;
+      color: var(--ocean-dark);
+      margin-bottom: 14px;
       line-height: 1.4;
     }
 
     .salutation-desc {
-      font-size: 15px;
-      line-height: 1.8;
-      color: var(--text-slate);
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: var(--text-muted);
       max-width: 550px;
       margin: 0 auto;
     }
 
     /* ========================================================
-       3. ĐỒNG HỒ ĐẾM NGƯỢC XANH NƯỚC PHA LÊ (CRYSTAL COUNTDOWN)
+       3. ĐỒNG HỒ ĐẾM NGƯỢC XANH NƯỚC (CRYSTAL COUNTDOWN)
        ======================================================== */
     .countdown-wrapper {
-      margin: 22px 26px;
+      margin: 20px 24px;
       background: linear-gradient(145deg, #e3f4ff 0%, #f4faff 100%);
       border: 2px solid #bde7ff;
-      border-radius: 24px;
-      padding: 24px 18px;
+      border-radius: 22px;
+      padding: 22px 16px;
       text-align: center;
       box-shadow: 
         0 10px 30px rgba(0, 119, 182, 0.12),
@@ -560,12 +559,12 @@
     }
 
     .countdown-title {
-      font-size: 13.5px;
-      font-weight: 800;
+      font-size: 13px;
+      font-weight: 700;
       color: var(--ocean-azure);
-      letter-spacing: 1.2px;
+      letter-spacing: 1px;
       text-transform: uppercase;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -575,31 +574,30 @@
     .countdown-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      max-width: 410px;
+      gap: 10px;
+      max-width: 400px;
       margin: 0 auto;
     }
 
     .countdown-cell {
       background: #ffffff;
-      padding: 15px 6px;
-      border-radius: 18px;
-      box-shadow: 0 6px 20px rgba(0, 119, 182, 0.12);
+      padding: 14px 6px;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 119, 182, 0.12);
       border: 1.5px solid #bde7ff;
     }
 
     .countdown-num {
-      font-family: var(--font-serif);
-      font-size: 29px;
+      font-size: 26px;
       font-weight: 800;
-      color: var(--ocean-deep);
+      color: var(--ocean-dark);
       line-height: 1;
       margin-bottom: 4px;
     }
 
     .countdown-lbl {
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 600;
       color: #5c7b9d;
       text-transform: uppercase;
     }
@@ -608,28 +606,28 @@
        4. HAI CHƯƠNG TRÌNH TRỌNG TÂM (VIP LUXURY GALA PASSES)
        ======================================================== */
     .events-container {
-      padding: 14px 24px 30px;
+      padding: 12px 22px 26px;
       display: flex;
       flex-direction: column;
-      gap: 26px;
+      gap: 24px;
     }
 
     .event-card {
       background: #ffffff;
-      border-radius: 26px;
-      box-shadow: 0 14px 35px rgba(3, 37, 76, 0.09);
+      border-radius: 24px;
+      box-shadow: 0 12px 32px rgba(3, 32, 66, 0.08);
       overflow: hidden;
       transition: transform 0.25s, box-shadow 0.25s;
       border: 2px solid #bde7ff;
     }
 
     .event-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 22px 50px rgba(0, 119, 182, 0.22);
+      transform: translateY(-3px);
+      box-shadow: 0 20px 45px rgba(0, 119, 182, 0.2);
     }
 
     .event-card-header {
-      padding: 20px 24px;
+      padding: 18px 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -642,57 +640,56 @@
       border-bottom: 2px solid #f6d365;
     }
 
-    /* Card 2: Xanh Đại Dương Nắng Chiều Hoàng Kim */
+    /* Card 2: Xanh Đại Dương Ánh Hoàng Kim */
     .event-card.evening .event-card-header {
       background: linear-gradient(135deg, #022b54 0%, #005f9e 60%, #ff8800 100%);
       border-bottom: 2px solid #f6d365;
     }
 
     .event-tag-badge {
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 1px;
       text-transform: uppercase;
       background: rgba(255, 255, 255, 0.22);
       border: 1px solid rgba(255, 255, 255, 0.4);
-      padding: 5px 14px;
+      padding: 4px 12px;
       border-radius: 50px;
     }
 
     .event-time-pill {
-      font-size: 14px;
-      font-weight: 800;
+      font-size: 13.5px;
+      font-weight: 700;
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
     .event-card-body {
-      padding: 26px 24px;
+      padding: 24px 22px;
     }
 
     .event-title {
-      font-family: var(--font-serif);
-      font-size: 22px;
+      font-size: 19px;
       font-weight: 800;
-      color: var(--ocean-deep);
-      margin-bottom: 18px;
+      color: var(--ocean-dark);
+      margin-bottom: 16px;
       line-height: 1.4;
     }
 
     .event-detail-item {
       display: flex;
       align-items: flex-start;
-      gap: 15px;
-      margin-bottom: 16px;
-      font-size: 14.5px;
+      gap: 14px;
+      margin-bottom: 14px;
+      font-size: 14px;
       line-height: 1.6;
-      color: var(--text-slate);
+      color: var(--text-muted);
     }
 
     .event-icon-circle {
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -704,59 +701,59 @@
     }
 
     .event-card.evening .event-icon-circle {
-      color: #d48b00;
+      color: #c59b27;
       background: #fff8db;
       border-color: #fde68a;
     }
 
     .event-detail-content strong {
-      color: var(--ocean-deep);
+      color: var(--ocean-dark);
       display: block;
-      font-size: 15px;
-      margin-bottom: 3px;
+      font-size: 14.5px;
+      margin-bottom: 2px;
     }
 
     .event-note-quote {
-      margin-top: 18px;
-      padding: 15px 20px;
+      margin-top: 16px;
+      padding: 14px 18px;
       background: linear-gradient(135deg, #fffcf0 0%, #fff7d6 100%);
-      border-left: 5px solid var(--gold-solid);
-      border-radius: 0 16px 16px 0;
-      font-size: 14.5px;
+      border-left: 4px solid var(--gold-border);
+      border-radius: 0 14px 14px 0;
+      font-size: 14px;
       color: #875000;
-      font-weight: 700;
+      font-weight: 600;
       line-height: 1.6;
-      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.12);
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.1);
     }
 
     .event-actions-bar {
-      margin-top: 22px;
+      margin-top: 20px;
       display: flex;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
     .btn-action-map {
       flex: 1;
-      min-width: 160px;
+      min-width: 150px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 9px;
-      padding: 13px 20px;
+      gap: 8px;
+      padding: 12px 18px;
       background: linear-gradient(135deg, #0077b6 0%, #0096c7 100%);
       color: #ffffff;
-      border-radius: 16px;
+      border-radius: 14px;
       text-decoration: none;
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 700;
-      box-shadow: 0 8px 25px rgba(0, 119, 182, 0.35);
+      box-shadow: 0 6px 20px rgba(0, 119, 182, 0.3);
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .btn-action-map.gold-theme {
-      background: linear-gradient(135deg, #093a68 0%, #005f9e 60%, #d48b00 100%);
-      box-shadow: 0 8px 25px rgba(9, 58, 104, 0.35);
+      background: linear-gradient(135deg, #093a68 0%, #005f9e 60%, #c59b27 100%);
+      box-shadow: 0 6px 20px rgba(9, 58, 104, 0.3);
     }
 
     .btn-action-map:hover {
@@ -767,52 +764,53 @@
        5. LỊCH TRÌNH CHI TIẾT NGÀY 20/11 (TIMELINE SANG TRỌNG)
        ======================================================== */
     .timeline-section {
-      padding: 30px 24px;
+      padding: 28px 22px;
       background: linear-gradient(180deg, #f7fbff 0%, #eef7ff 100%);
       border-top: 2px solid #e0f0fc;
     }
 
     .section-heading-center {
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 26px;
     }
 
     .section-badge {
       display: inline-block;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 2px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       color: var(--ocean-azure);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .section-title {
-      font-family: var(--font-serif);
-      font-size: 25px;
+      font-size: 22px;
       font-weight: 800;
-      color: var(--ocean-deep);
+      color: var(--ocean-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .timeline-steps {
       position: relative;
-      padding-left: 34px;
+      padding-left: 32px;
     }
 
     .timeline-steps::before {
       content: '';
       position: absolute;
-      left: 12px;
-      top: 12px;
-      bottom: 12px;
-      width: 3px;
+      left: 11px;
+      top: 10px;
+      bottom: 10px;
+      width: 2.5px;
       background: linear-gradient(to bottom, #00b4d8 0%, #0077b6 60%, #d4af37 100%);
       border-radius: 3px;
     }
 
     .timeline-step-item {
       position: relative;
-      margin-bottom: 26px;
+      margin-bottom: 24px;
     }
 
     .timeline-step-item:last-child {
@@ -821,26 +819,26 @@
 
     .timeline-dot {
       position: absolute;
-      left: -34px;
+      left: -32px;
       top: 3px;
-      width: 25px;
-      height: 25px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       background: #ffffff;
-      border: 4px solid #0096c7;
+      border: 3.5px solid #0096c7;
       box-shadow: 0 0 0 4px rgba(0, 180, 216, 0.25);
     }
 
     .timeline-step-item.evening-step .timeline-dot {
       border-color: #d4af37;
-      box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.3);
+      box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.25);
     }
 
     .timeline-time {
-      font-size: 13.5px;
-      font-weight: 800;
+      font-size: 13px;
+      font-weight: 700;
       color: var(--ocean-azure);
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .timeline-step-item.evening-step .timeline-time {
@@ -848,47 +846,48 @@
     }
 
     .timeline-title {
-      font-size: 16.5px;
-      font-weight: 800;
-      color: var(--ocean-deep);
-      margin-bottom: 4px;
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--ocean-dark);
+      margin-bottom: 3px;
     }
 
     .timeline-desc {
       font-size: 13.5px;
-      color: var(--text-slate);
-      line-height: 1.6;
+      color: var(--text-muted);
+      line-height: 1.55;
     }
 
     /* ========================================================
        6. TÂM THƯ TRI ÂN TỪ BAN GIÁM ĐỐC (HOÀNG GIA SANG TRỌNG)
        ======================================================== */
     .gratitude-letter-box {
-      margin: 28px 24px 20px;
-      padding: 32px 26px;
+      margin: 26px 22px 18px;
+      padding: 28px 24px;
       background: linear-gradient(155deg, #ffffff 0%, #f7fcff 60%, #eaf5fc 100%);
       border: 2px solid #bde7ff;
-      border-radius: 26px;
+      border-radius: 24px;
       box-shadow: 
-        0 14px 40px rgba(3, 37, 76, 0.08),
+        0 14px 40px rgba(3, 32, 66, 0.08),
         0 0 0 1px #ffffff inset;
       position: relative;
     }
 
     .letter-title {
-      font-family: var(--font-serif);
-      font-size: 21px;
+      font-size: 18.5px;
       font-weight: 800;
-      color: var(--ocean-deep);
+      color: var(--ocean-dark);
       margin-bottom: 16px;
       display: flex;
       align-items: center;
       gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .letter-body {
       font-size: 14.5px;
-      line-height: 1.85;
+      line-height: 1.8;
       color: #1e3a5f;
       margin-bottom: 20px;
     }
@@ -899,17 +898,18 @@
 
     .letter-signature {
       text-align: right;
-      font-family: var(--font-script);
-      font-size: 28px;
-      font-weight: 700;
+      font-size: 20px;
+      font-weight: 800;
       color: var(--ocean-azure);
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
     }
 
     .letter-sign-role {
       text-align: right;
-      font-size: 12.5px;
-      font-weight: 800;
-      color: var(--ocean-deep);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ocean-dark);
       text-transform: uppercase;
       letter-spacing: 0.8px;
     }
@@ -917,9 +917,9 @@
     /* Footer Bản Quyền Xanh Nước Biển */
     .footer-brand {
       text-align: center;
-      margin-top: 26px;
-      color: var(--ocean-deep);
-      font-size: 13px;
+      margin-top: 24px;
+      color: var(--ocean-dark);
+      font-size: 12.5px;
       font-weight: 600;
       line-height: 1.7;
       opacity: 0.9;
@@ -928,14 +928,14 @@
 </head>
 
 <body>
-  <div class="ambient-water-lights"></div>
+  <div class="ambient-water-glow"></div>
 
   <!-- ÂM THANH NỀN -->
   <audio id="bgm" src="assets/bgm.mp3" preload="auto" loop></audio>
 
   <!-- NÚT ÂM THANH NỔI GÓC PHẢI -->
   <button class="floating-audio-btn" id="audioToggleBtn" onclick="toggleAudio()" title="Bật/Tắt Nhạc">
-    <svg id="musicIcon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0077b6" stroke-width="2.5">
+    <svg id="musicIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0077b6" stroke-width="2.5">
       <path d="M9 18V5l12-2v13"></path>
       <circle cx="6" cy="18" r="3"></circle>
       <circle cx="18" cy="16" r="3"></circle>
