@@ -202,6 +202,10 @@
       border-radius: 30px;
       padding: 38px 24px 34px;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       box-shadow: 
         0 30px 80px rgba(3, 32, 66, 0.5),
         0 0 0 3px #ffffff,
@@ -432,6 +436,10 @@
       background: linear-gradient(145deg, #032042 0%, #005896 45%, #0087be 85%, #00b4d8 100%);
       padding: 40px 20px 34px;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       color: #ffffff;
       position: relative;
       overflow: hidden;
@@ -451,13 +459,13 @@
 
     .brand-logo-wrap {
       background: #ffffff;
-      display: inline-block;
+      display: block;
+      margin: 0 auto 16px auto;
       padding: 13px 26px;
       border-radius: 20px;
       box-shadow: 
         0 12px 35px rgba(0, 0, 0, 0.2),
         0 0 0 2px var(--gold-border);
-      margin-bottom: 20px;
     }
 
     .brand-logo {
@@ -469,6 +477,7 @@
 
     .event-badge-gold {
       display: inline-flex;
+      margin: 0 auto 16px auto;
       align-items: center;
       background: var(--gold-foil);
       border-radius: 50px;
@@ -478,7 +487,6 @@
       font-weight: 700;
       letter-spacing: 1px;
       text-transform: uppercase;
-      margin-bottom: 14px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
     }
 
