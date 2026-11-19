@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Thư Mời Chào Mừng Ngày Nhà Giáo Việt Nam 20/11 — VIET ROBOT Education</title>
+  <title>Thư Mời Chào Mừng Ngày Nhà Giáo Việt Nam 20/11 — VietRobot Education J.S.C</title>
 
-  <!-- Google Fonts: Sang trọng & Trang nhã -->
+  <!-- Google Fonts: Sang trọng, Hiện đại & Không lỗi dấu tiếng Việt -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Charm:wght@700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap"
     rel="stylesheet">
 
   <!-- Canvas Confetti -->
@@ -18,25 +18,24 @@
 
   <style>
     :root {
-      --vr-blue-primary: #00a0e9;
-      --vr-blue-dark: #0077b6;
-      --vr-navy-deep: #0a1e38;
-      --vr-slate: #1e293b;
-      --vr-charcoal: #2b2b2b;
-      --gold-bright: #d4af37;
-      --gold-soft: #fbf5df;
-      --gold-grad: linear-gradient(135deg, #c39a26 0%, #fae8a2 50%, #b8860b 100%);
-      --accent-rose: #e11d48;
-      --accent-rose-soft: #ffe4e6;
-      --sky-light: #e0f2fe;
-      --sky-pale: #f0f9ff;
+      /* Bảng màu tươi sáng, rực rỡ & tràn đầy năng lượng */
+      --vr-cyan: #00b4d8;
+      --vr-blue-vivid: #0096c7;
+      --vr-blue-deep: #0077b6;
+      --gold-sparkle: #ffb703;
+      --gold-sun: #ffc300;
+      --gold-deep: #d48b00;
+      --gold-grad: linear-gradient(135deg, #fff3bf 0%, #ffc300 40%, #ff9e00 80%, #d48b00 100%);
+      --coral-festive: #ff0054;
+      --coral-bright: #f72585;
+      --coral-grad: linear-gradient(135deg, #ff0054 0%, #ff5400 100%);
+      --text-main: #0f172a;
+      --text-slate: #334155;
       --white: #ffffff;
-      --card-shadow: 0 16px 40px rgba(10, 30, 56, 0.12);
-      --card-shadow-hover: 0 24px 50px rgba(0, 160, 233, 0.22);
-      --radius-main: 24px;
+      --radius-xl: 26px;
       --font-body: 'Montserrat', sans-serif;
-      --font-title: 'Playfair Display', serif;
-      --font-hand: 'Charm', cursive;
+      --font-serif: 'Playfair Display', serif;
+      --font-script: 'Charm', cursive;
     }
 
     * {
@@ -48,27 +47,31 @@
 
     body {
       font-family: var(--font-body);
-      background: linear-gradient(180deg, #dff0fd 0%, #bae6fd 30%, #7dd3fc 70%, #38bdf8 100%);
-      color: var(--vr-slate);
+      /* Nền sáng, tràn ngập ánh dương & bầu trời công nghệ */
+      background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 25%, #bae6fd 65%, #7dd3fc 100%);
+      color: var(--text-main);
       overflow-x: hidden;
       min-height: 100vh;
       position: relative;
     }
 
-    /* Vầng sáng nền dịu mắt */
-    .ambient-bg {
+    /* Hiệu ứng hào quang lấp lánh ở nền */
+    .ambient-sparkles {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
-      background: radial-gradient(circle at 50% 15%, rgba(255, 255, 255, 0.6) 0%, transparent 65%);
+      background: 
+        radial-gradient(circle at 15% 15%, rgba(255, 195, 0, 0.3) 0%, transparent 40%),
+        radial-gradient(circle at 85% 25%, rgba(0, 180, 216, 0.35) 0%, transparent 45%),
+        radial-gradient(circle at 50% 65%, rgba(255, 255, 255, 0.9) 0%, transparent 60%);
       z-index: 1;
     }
 
     /* ========================================================
-       1. CỔNG MỞ THIỆP 2 CÁNH (GATE-FOLD ENVELOPE)
+       1. CỔNG MỞ THIỆP 2 CÁNH SIÊU NỔI BẬT (LUXURY TECH GATE-FOLD)
        ======================================================== */
     .gate-overlay {
       position: fixed;
@@ -81,36 +84,39 @@
       display: flex;
       cursor: pointer;
       user-select: none;
-      transition: visibility 1.4s;
+      transition: opacity 0.5s ease 0.8s, visibility 0.5s ease 0.8s;
     }
 
-    .gate-overlay.hidden {
-      visibility: hidden;
+    .gate-overlay.opened {
       pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
     }
 
+    /* Cánh cửa phong thư trái & phải */
     .gate-door-left,
     .gate-door-right {
       position: absolute;
       top: 0;
       width: 50%;
       height: 100%;
-      background: linear-gradient(135deg, #f0f7ff 0%, #d8ecf8 50%, #cde5f7 100%);
-      transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+      background: linear-gradient(145deg, #ffffff 0%, #f4faff 50%, #e0f2fe 100%);
+      transition: transform 1.1s cubic-bezier(0.2, 0.8, 0.2, 1);
       will-change: transform;
       overflow: hidden;
+      z-index: 5;
     }
 
     .gate-door-left {
       left: 0;
-      border-right: 2px solid rgba(0, 160, 233, 0.8);
-      box-shadow: 15px 0 35px rgba(10, 30, 56, 0.25);
+      border-right: 3px solid #ffb703;
+      box-shadow: 15px 0 40px rgba(0, 119, 182, 0.3);
     }
 
     .gate-door-right {
       right: 0;
-      border-left: 2px solid rgba(212, 175, 55, 0.7);
-      box-shadow: -15px 0 35px rgba(10, 30, 56, 0.25);
+      border-left: 3px solid #ffb703;
+      box-shadow: -15px 0 40px rgba(0, 119, 182, 0.3);
     }
 
     .gate-overlay.opened .gate-door-left {
@@ -121,20 +127,62 @@
       transform: translateX(101%);
     }
 
-    /* Họa tiết phong thư công nghệ & tri ân */
-    .gate-tech-grid {
+    /* Viền chỉ vàng sang trọng bên trong cánh cửa */
+    .door-gold-border {
+      position: absolute;
+      top: 18px;
+      bottom: 18px;
+      width: calc(100% - 24px);
+      border: 2px dashed rgba(255, 183, 3, 0.6);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    .gate-door-left .door-gold-border {
+      left: 14px;
+      border-right: none;
+    }
+
+    .gate-door-right .door-gold-border {
+      right: 14px;
+      border-left: none;
+    }
+
+    /* Dải Ruy Băng Lụa Đỏ gắn liền vào từng cánh cửa (Mở bung sang 2 bên) */
+    .gate-door-ribbon {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      height: 60px;
+      transform: translateY(-50%);
+      background: linear-gradient(180deg, #ff0054 0%, #d90429 50%, #9b001c 100%);
+      box-shadow: 0 8px 25px rgba(217, 4, 41, 0.4), 0 0 0 2px #ffc300;
+      display: flex;
+      align-items: center;
+    }
+
+    .gate-door-ribbon::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      border-top: 2px dashed rgba(255, 240, 180, 0.85);
+    }
+
+    /* Họa tiết vi mạch phát sáng tinh tế trên bì thư */
+    .tech-circuit-lines {
       position: absolute;
       width: 100%;
       height: 100%;
-      opacity: 0.15;
+      opacity: 0.18;
       background-image: 
-        radial-gradient(#00a0e9 1px, transparent 1px),
-        linear-gradient(to right, rgba(0,160,233,0.06) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0,160,233,0.06) 1px, transparent 1px);
-      background-size: 24px 24px, 48px 48px, 48px 48px;
+        radial-gradient(#0096c7 1.5px, transparent 1.5px),
+        linear-gradient(to right, rgba(0,180,216,0.2) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,180,216,0.2) 1px, transparent 1px);
+      background-size: 26px 26px, 52px 52px, 52px 52px;
     }
 
-    /* Tấm thiệp trung tâm mặt bìa */
+    /* Khối Bìa Thiệp Trung Tâm Sang Trọng (Center Floating Emblem) */
     .gate-cover-card {
       position: absolute;
       top: 50%;
@@ -143,116 +191,167 @@
       z-index: 10;
       width: 90%;
       max-width: 440px;
-      background: rgba(255, 255, 255, 0.94);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: 28px;
-      padding: 36px 26px;
+      background: linear-gradient(165deg, #ffffff 0%, #fcfeff 60%, #f0f9ff 100%);
+      border-radius: 30px;
+      padding: 36px 24px 32px;
       text-align: center;
-      box-shadow: 0 24px 60px rgba(10, 30, 56, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
-      border: 2px solid rgba(0, 160, 233, 0.35);
-      transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.8s;
+      box-shadow: 
+        0 25px 65px rgba(0, 119, 182, 0.35),
+        0 0 0 3px #ffffff,
+        0 0 0 7px #ffb703;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.7s;
+      overflow: hidden;
     }
 
     .gate-overlay.opened .gate-cover-card {
-      transform: translate(-50%, -50%) scale(0.85);
+      transform: translate(-50%, -50%) scale(1.08);
       opacity: 0;
+    }
+
+    /* Hiệu ứng quét sáng lấp lánh (Shimmer Effect) */
+    .gate-cover-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -100%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        60deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.75) 50%,
+        transparent 70%
+      );
+      transform: rotate(25deg);
+      animation: cardShimmer 3.5s infinite linear;
       pointer-events: none;
     }
 
+    @keyframes cardShimmer {
+      0% { transform: translateX(-100%) rotate(25deg); }
+      100% { transform: translateX(100%) rotate(25deg); }
+    }
+
+    /* Khung Logo VietRobot nổi bật */
     .gate-logo-box {
       margin-bottom: 16px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display: inline-block;
+      padding: 14px 26px;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 180, 216, 0.25), 0 0 0 1.5px rgba(0, 180, 216, 0.35);
+      position: relative;
     }
 
     .gate-logo-img {
-      max-width: 220px;
+      max-width: 230px;
       height: auto;
-      filter: drop-shadow(0 4px 10px rgba(0, 160, 233, 0.2));
+      display: block;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
     }
 
+    /* Huy hiệu ngày hội ngộ 20/11 */
     .gate-badge-date {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 6px 16px;
-      background: linear-gradient(135deg, rgba(225, 29, 72, 0.1), rgba(0, 160, 233, 0.1));
-      border: 1px solid rgba(225, 29, 72, 0.25);
+      gap: 8px;
+      padding: 7px 22px;
+      background: linear-gradient(135deg, #ff0054 0%, #ff5400 100%);
       border-radius: 50px;
-      color: var(--accent-rose);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1px;
+      color: #ffffff;
+      font-size: 13.5px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       margin-bottom: 14px;
+      box-shadow: 0 6px 18px rgba(255, 0, 84, 0.35);
     }
 
     .gate-title-main {
-      font-family: var(--font-title);
+      font-family: var(--font-serif);
       font-size: 26px;
-      font-weight: 700;
-      color: var(--vr-navy-deep);
-      line-height: 1.3;
-      margin-bottom: 8px;
+      font-weight: 800;
+      color: #0077b6;
+      line-height: 1.35;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .gate-title-gold {
+      background: var(--gold-grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+      font-size: 24px;
+      margin-top: 4px;
     }
 
     .gate-subtitle-sub {
-      font-size: 13.5px;
+      font-size: 14px;
       color: #475569;
-      font-weight: 500;
-      margin-bottom: 24px;
+      font-weight: 600;
+      margin-bottom: 22px;
       line-height: 1.5;
     }
 
+    /* Nút Ấn Mở Thiệp 3D Lấp Lánh */
     .gate-seal-btn {
-      width: 78px;
-      height: 78px;
+      width: 82px;
+      height: 82px;
       margin: 0 auto 16px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #00a0e9 0%, #0077b6 100%);
-      box-shadow: 0 10px 25px rgba(0, 160, 233, 0.45), 0 0 0 5px rgba(255, 255, 255, 0.9);
+      background: linear-gradient(135deg, #ffc300 0%, #ff9e00 50%, #fb8500 100%);
+      box-shadow: 
+        0 12px 30px rgba(251, 133, 0, 0.45),
+        0 0 0 5px #ffffff,
+        0 0 0 9px rgba(255, 183, 3, 0.45);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       color: #ffffff;
-      animation: pulseGlow 2.4s infinite;
+      animation: sealPulse 2s infinite;
       transition: transform 0.25s;
     }
 
     .gate-seal-btn:hover {
-      transform: scale(1.06);
+      transform: scale(1.08);
     }
 
     .gate-seal-btn svg {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
+      stroke: #ffffff;
+      stroke-width: 2.2;
     }
 
     .gate-open-hint {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--vr-blue-dark);
-      letter-spacing: 0.5px;
-      animation: bounceHint 2s infinite;
+      font-size: 14px;
+      font-weight: 800;
+      color: #0077b6;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      animation: hintBounce 1.8s infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
     }
 
-    @keyframes pulseGlow {
+    @keyframes sealPulse {
       0%, 100% {
-        box-shadow: 0 10px 25px rgba(0, 160, 233, 0.45), 0 0 0 5px rgba(255, 255, 255, 0.9);
+        box-shadow: 0 12px 30px rgba(251, 133, 0, 0.45), 0 0 0 5px #ffffff, 0 0 0 9px rgba(255, 183, 3, 0.45);
       }
       50% {
-        box-shadow: 0 14px 35px rgba(0, 160, 233, 0.65), 0 0 0 9px rgba(0, 160, 233, 0.2);
+        box-shadow: 0 16px 42px rgba(251, 133, 0, 0.65), 0 0 0 6px #ffffff, 0 0 0 15px rgba(255, 183, 3, 0.2);
       }
     }
 
-    @keyframes bounceHint {
+    @keyframes hintBounce {
       0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
       40% { transform: translateY(-5px); }
       60% { transform: translateY(-2px); }
@@ -270,19 +369,18 @@
       padding: 20px 16px 60px;
     }
 
-    /* Thanh điều khiển âm thanh cố định góc trên */
+    /* Nút Âm Thanh Nổi */
     .floating-audio-btn {
       position: fixed;
       top: 18px;
       right: 18px;
       z-index: 100;
-      width: 44px;
-      height: 44px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 8px 20px rgba(10, 30, 56, 0.15);
-      border: 1px solid rgba(0, 160, 233, 0.3);
+      background: #ffffff;
+      box-shadow: 0 8px 25px rgba(0, 119, 182, 0.25);
+      border: 2px solid var(--vr-cyan);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -291,33 +389,33 @@
     }
 
     .floating-audio-btn.playing {
-      animation: spinRecord 10s linear infinite;
+      animation: spinMusic 8s linear infinite;
     }
 
-    @keyframes spinRecord {
+    @keyframes spinMusic {
       100% { transform: rotate(360deg); }
     }
 
-    /* Thẻ thiệp chính (Main Card) */
+    /* Thẻ Thiệp Chính (Main Card) */
     .main-card {
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(20px);
-      border-radius: var(--radius-main);
-      box-shadow: var(--card-shadow);
-      border: 1px solid rgba(255, 255, 255, 0.9);
+      background: #ffffff;
+      border-radius: var(--radius-xl);
+      box-shadow: 0 24px 60px rgba(0, 150, 199, 0.18);
+      border: 2px solid #bae6fd;
       overflow: hidden;
       margin-bottom: 24px;
       position: relative;
     }
 
-    /* Dải banner đầu thiệp */
+    /* Banner Tiêu Đề Tươi Sáng & Rạng Rỡ */
     .header-banner {
-      background: linear-gradient(135deg, #0a1e38 0%, #102e56 50%, #0077b6 100%);
-      padding: 34px 20px 30px;
+      background: linear-gradient(135deg, #0284c7 0%, #0096c7 45%, #00b4d8 100%);
+      padding: 38px 20px 32px;
       text-align: center;
       color: #ffffff;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 150, 199, 0.3);
     }
 
     .header-banner::before {
@@ -327,21 +425,21 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle, rgba(0, 160, 233, 0.25) 10%, transparent 40%);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 12%, transparent 45%);
       pointer-events: none;
     }
 
     .brand-logo-wrap {
       background: #ffffff;
       display: inline-block;
-      padding: 12px 24px;
-      border-radius: 18px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      padding: 14px 28px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
       margin-bottom: 20px;
     }
 
     .brand-logo {
-      height: 52px;
+      height: 55px;
       width: auto;
       display: block;
       object-fit: contain;
@@ -351,121 +449,123 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(212, 175, 55, 0.18);
-      border: 1px solid rgba(250, 232, 162, 0.5);
+      background: linear-gradient(135deg, #ffc300 0%, #fb8500 100%);
       border-radius: 50px;
-      padding: 6px 18px;
-      color: #ffd700;
-      font-size: 13px;
-      font-weight: 700;
+      padding: 7px 24px;
+      color: #ffffff;
+      font-size: 13.5px;
+      font-weight: 800;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 15px rgba(251, 133, 0, 0.35);
     }
 
     .header-title-vn {
-      font-family: var(--font-title);
-      font-size: 28px;
-      font-weight: 700;
+      font-family: var(--font-serif);
+      font-size: 30px;
+      font-weight: 800;
       letter-spacing: 0.5px;
       line-height: 1.35;
       color: #ffffff;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
       margin-bottom: 8px;
     }
 
     .header-quote {
-      font-family: var(--font-hand);
-      font-size: 21px;
-      color: #bde0fe;
+      font-family: var(--font-script);
+      font-size: 23px;
+      color: #fff3bf;
       line-height: 1.4;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     }
 
-    /* Lời kính mời trân trọng */
+    /* Lời Kính Mời Trân Trọng */
     .greeting-section {
-      padding: 30px 24px 20px;
+      padding: 32px 24px 20px;
       text-align: center;
     }
 
     .salutation-label {
-      font-size: 13px;
+      font-size: 13.5px;
       text-transform: uppercase;
       letter-spacing: 2px;
-      color: var(--vr-blue-primary);
-      font-weight: 700;
+      color: var(--vr-blue-vivid);
+      font-weight: 800;
       margin-bottom: 8px;
     }
 
     .salutation-target {
-      font-family: var(--font-title);
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--vr-navy-deep);
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 800;
+      color: #0077b6;
       margin-bottom: 16px;
       line-height: 1.4;
     }
 
     .salutation-desc {
-      font-size: 14.5px;
-      line-height: 1.7;
-      color: #475569;
-      max-width: 540px;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-slate);
+      max-width: 550px;
       margin: 0 auto;
     }
 
     /* ========================================================
-       3. ĐỒNG HỒ ĐẾM NGƯỢC (COUNTDOWN TIMER)
+       3. ĐỒNG HỒ ĐẾM NGƯỢC TƯƠI SÁNG (BRIGHT COUNTDOWN)
        ======================================================== */
     .countdown-wrapper {
       margin: 20px 24px;
-      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-      border: 1px solid rgba(0, 160, 233, 0.25);
-      border-radius: 20px;
-      padding: 20px 16px;
+      background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+      border: 2px solid #bae6fd;
+      border-radius: 22px;
+      padding: 22px 18px;
       text-align: center;
+      box-shadow: 0 8px 25px rgba(0, 180, 216, 0.12);
     }
 
     .countdown-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--vr-blue-dark);
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #0284c7;
       letter-spacing: 1px;
       text-transform: uppercase;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 8px;
     }
 
     .countdown-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      max-width: 380px;
+      gap: 12px;
+      max-width: 400px;
       margin: 0 auto;
     }
 
     .countdown-cell {
       background: #ffffff;
-      padding: 12px 6px;
-      border-radius: 14px;
-      box-shadow: 0 4px 15px rgba(0, 160, 233, 0.12);
-      border: 1px solid rgba(0, 160, 233, 0.15);
+      padding: 14px 6px;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 150, 199, 0.15);
+      border: 1.5px solid #bae6fd;
     }
 
     .countdown-num {
-      font-family: var(--font-title);
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--vr-blue-dark);
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 800;
+      color: #0077b6;
       line-height: 1;
       margin-bottom: 4px;
     }
 
     .countdown-lbl {
-      font-size: 11px;
-      font-weight: 600;
+      font-size: 11.5px;
+      font-weight: 700;
       color: #64748b;
       text-transform: uppercase;
     }
@@ -474,37 +574,36 @@
        4. HAI CHƯƠNG TRÌNH TRỌNG TÂM (2 CORE EVENTS)
        ======================================================== */
     .events-container {
-      padding: 10px 20px 24px;
+      padding: 12px 22px 28px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 24px;
     }
 
     .event-card {
       background: #ffffff;
-      border-radius: 20px;
-      border: 2px solid #e2e8f0;
-      box-shadow: 0 10px 25px rgba(10, 30, 56, 0.06);
+      border-radius: 22px;
+      border: 2px solid #e0f2fe;
+      box-shadow: 0 12px 30px rgba(0, 119, 182, 0.08);
       overflow: hidden;
-      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
-      position: relative;
+      transition: transform 0.25s, box-shadow 0.25s;
     }
 
     .event-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 16px 35px rgba(0, 160, 233, 0.16);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 45px rgba(0, 150, 199, 0.2);
     }
 
     .event-card.morning {
-      border-color: rgba(0, 160, 233, 0.4);
+      border-color: #7dd3fc;
     }
 
     .event-card.evening {
-      border-color: rgba(225, 29, 72, 0.35);
+      border-color: #fecdd3;
     }
 
     .event-card-header {
-      padding: 16px 20px;
+      padding: 18px 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -512,118 +611,122 @@
     }
 
     .event-card.morning .event-card-header {
-      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      background: linear-gradient(135deg, #0284c7 0%, #0096c7 100%);
     }
 
     .event-card.evening .event-card-header {
-      background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+      background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
     }
 
     .event-tag-badge {
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 800;
       letter-spacing: 1px;
       text-transform: uppercase;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 4px 12px;
+      background: rgba(255, 255, 255, 0.25);
+      padding: 5px 14px;
       border-radius: 50px;
     }
 
     .event-time-pill {
-      font-size: 13.5px;
-      font-weight: 700;
+      font-size: 14px;
+      font-weight: 800;
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
     .event-card-body {
-      padding: 22px 20px;
+      padding: 24px 22px;
     }
 
     .event-title {
-      font-family: var(--font-title);
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--vr-navy-deep);
-      margin-bottom: 14px;
-      line-height: 1.35;
+      font-family: var(--font-serif);
+      font-size: 21px;
+      font-weight: 800;
+      color: #0077b6;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .event-card.evening .event-title {
+      color: #be123c;
     }
 
     .event-detail-item {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 12px;
-      font-size: 14px;
-      line-height: 1.55;
+      gap: 14px;
+      margin-bottom: 14px;
+      font-size: 14.5px;
+      line-height: 1.6;
       color: #334155;
     }
 
     .event-icon-circle {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      background: #f1f5f9;
-      color: var(--vr-blue-dark);
+      background: #e0f2fe;
+      color: #0077b6;
     }
 
     .event-card.evening .event-icon-circle {
-      color: var(--accent-rose);
+      color: #e11d48;
       background: #ffe4e6;
     }
 
     .event-detail-content strong {
-      color: var(--vr-navy-deep);
+      color: #0f172a;
       display: block;
-      font-size: 14.5px;
+      font-size: 15px;
       margin-bottom: 2px;
     }
 
     .event-note-quote {
-      margin-top: 14px;
-      padding: 12px 16px;
+      margin-top: 16px;
+      padding: 14px 18px;
       background: #fff1f2;
-      border-left: 4px solid var(--accent-rose);
-      border-radius: 0 12px 12px 0;
-      font-size: 13.5px;
-      color: #881337;
-      font-weight: 600;
-      line-height: 1.5;
+      border-left: 5px solid #e11d48;
+      border-radius: 0 14px 14px 0;
+      font-size: 14px;
+      color: #9f1239;
+      font-weight: 700;
+      line-height: 1.6;
     }
 
     .event-actions-bar {
-      margin-top: 18px;
+      margin-top: 20px;
       display: flex;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
     }
 
     .btn-action-map {
       flex: 1;
-      min-width: 140px;
+      min-width: 150px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 11px 16px;
-      background: linear-gradient(135deg, #00a0e9 0%, #0284c7 100%);
+      padding: 12px 18px;
+      background: linear-gradient(135deg, #0284c7 0%, #0096c7 100%);
       color: #ffffff;
-      border-radius: 12px;
+      border-radius: 14px;
       text-decoration: none;
-      font-size: 13px;
-      font-weight: 600;
-      box-shadow: 0 6px 16px rgba(0, 160, 233, 0.3);
+      font-size: 13.5px;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(0, 150, 199, 0.35);
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .btn-action-map.rose-theme {
-      background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
-      box-shadow: 0 6px 16px rgba(225, 29, 72, 0.3);
+      background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+      box-shadow: 0 8px 20px rgba(225, 29, 72, 0.35);
     }
 
     .btn-action-map:hover {
@@ -634,51 +737,52 @@
        5. LỊCH TRÌNH CHI TIẾT NGÀY 20/11 (TIMELINE)
        ======================================================== */
     .timeline-section {
-      padding: 24px 20px;
-      background: #fafcfe;
-      border-top: 1px solid #eef2f6;
+      padding: 28px 22px;
+      background: linear-gradient(180deg, #f8fafc 0%, #f0f9ff 100%);
+      border-top: 2px solid #e2e8f0;
     }
 
     .section-heading-center {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 26px;
     }
 
     .section-badge {
       display: inline-block;
-      font-size: 11.5px;
+      font-size: 12px;
       font-weight: 800;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: var(--vr-blue-primary);
+      color: #0284c7;
       margin-bottom: 6px;
     }
 
     .section-title {
-      font-family: var(--font-title);
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--vr-navy-deep);
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 800;
+      color: #0077b6;
     }
 
     .timeline-steps {
       position: relative;
-      padding-left: 28px;
+      padding-left: 32px;
     }
 
     .timeline-steps::before {
       content: '';
       position: absolute;
-      left: 11px;
-      top: 8px;
-      bottom: 8px;
-      width: 2px;
-      background: linear-gradient(to bottom, #00a0e9, #e11d48);
+      left: 12px;
+      top: 10px;
+      bottom: 10px;
+      width: 3px;
+      background: linear-gradient(to bottom, #00b4d8 0%, #ffc300 50%, #f43f5e 100%);
+      border-radius: 3px;
     }
 
     .timeline-step-item {
       position: relative;
-      margin-bottom: 22px;
+      margin-bottom: 24px;
     }
 
     .timeline-step-item:last-child {
@@ -687,93 +791,93 @@
 
     .timeline-dot {
       position: absolute;
-      left: -28px;
+      left: -32px;
       top: 3px;
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       background: #ffffff;
-      border: 3px solid #00a0e9;
-      box-shadow: 0 0 0 3px rgba(0, 160, 233, 0.2);
+      border: 3.5px solid #00b4d8;
+      box-shadow: 0 0 0 4px rgba(0, 180, 216, 0.25);
     }
 
     .timeline-step-item.evening-step .timeline-dot {
-      border-color: #e11d48;
-      box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.2);
+      border-color: #f43f5e;
+      box-shadow: 0 0 0 4px rgba(244, 63, 94, 0.25);
     }
 
     .timeline-time {
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 800;
-      color: var(--vr-blue-dark);
+      color: #0284c7;
       margin-bottom: 4px;
     }
 
     .timeline-step-item.evening-step .timeline-time {
-      color: #be123c;
+      color: #e11d48;
     }
 
     .timeline-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--vr-navy-deep);
+      font-size: 16px;
+      font-weight: 800;
+      color: #0f172a;
       margin-bottom: 4px;
     }
 
     .timeline-desc {
-      font-size: 13px;
+      font-size: 13.5px;
       color: #64748b;
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
     /* ========================================================
        6. BỨC TÂM THƯ TRI ÂN TỪ BAN GIÁM ĐỐC
        ======================================================== */
     .gratitude-letter-box {
-      margin: 24px 20px;
-      padding: 26px 22px;
-      background: linear-gradient(135deg, #fffdfa 0%, #fefcf5 100%);
-      border: 1px solid rgba(212, 175, 55, 0.4);
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.1);
+      margin: 26px 22px;
+      padding: 28px 24px;
+      background: linear-gradient(145deg, #ffffff 0%, #fffdf5 100%);
+      border: 2px solid #fde68a;
+      border-radius: 22px;
+      box-shadow: 0 12px 30px rgba(251, 191, 36, 0.15);
       position: relative;
     }
 
     .letter-title {
-      font-family: var(--font-title);
-      font-size: 19px;
-      font-weight: 700;
-      color: #92400e;
-      margin-bottom: 14px;
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 800;
+      color: #b45309;
+      margin-bottom: 16px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
     .letter-body {
-      font-size: 14px;
-      line-height: 1.75;
+      font-size: 14.5px;
+      line-height: 1.8;
       color: #451a03;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     .letter-body p {
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .letter-signature {
       text-align: right;
-      font-family: var(--font-hand);
-      font-size: 23px;
+      font-family: var(--font-script);
+      font-size: 26px;
       font-weight: 700;
       color: #b45309;
     }
 
     .letter-sign-role {
       text-align: right;
-      font-size: 12px;
-      font-weight: 700;
-      color: #78350f;
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #92400e;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
@@ -782,109 +886,110 @@
        7. SỔ LƯU BÚT TRI ÂN THẦY CÔ (GUESTBOOK)
        ======================================================== */
     .guestbook-section {
-      padding: 28px 20px;
+      padding: 30px 22px;
       background: #ffffff;
-      border-top: 1px solid #eef2f6;
+      border-top: 2px solid #e2e8f0;
     }
 
     .guestbook-form-card {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 24px;
+      background: linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 2px solid #bae6fd;
+      border-radius: 20px;
+      padding: 22px;
+      margin-bottom: 26px;
+      box-shadow: 0 8px 25px rgba(0, 180, 216, 0.1);
     }
 
     .form-group {
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     .form-label {
       display: block;
-      font-size: 12.5px;
-      font-weight: 700;
-      color: #334155;
-      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 8px;
     }
 
     .form-input {
       width: 100%;
-      padding: 12px 14px;
-      border: 1px solid #cbd5e1;
-      border-radius: 12px;
+      padding: 13px 16px;
+      border: 2px solid #cbd5e1;
+      border-radius: 14px;
       font-family: var(--font-body);
-      font-size: 14px;
-      color: var(--vr-slate);
+      font-size: 14.5px;
+      color: var(--text-main);
       background: #ffffff;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     .form-input:focus {
       outline: none;
-      border-color: var(--vr-blue-primary);
-      box-shadow: 0 0 0 3px rgba(0, 160, 233, 0.2);
+      border-color: var(--vr-cyan);
+      box-shadow: 0 0 0 4px rgba(0, 180, 216, 0.25);
     }
 
-    /* Ô NHẬP LỜI CHÚC TỰ CO GIÃN THEO DÒNG (AUTO-EXPANDING TEXTAREA) */
+    /* Ô NHẬP LỜI CHÚC MẶC ĐỊNH 5 DÒNG - TỰ ĐỘNG GIÃN THEO NỘI DUNG */
     .form-textarea {
       width: 100%;
-      min-height: 120px; /* Mặc định 5 dòng hiển thị */
-      padding: 12px 14px;
-      border: 1px solid #cbd5e1;
-      border-radius: 12px;
+      min-height: 125px; /* Mặc định 5 dòng hiển thị */
+      padding: 13px 16px;
+      border: 2px solid #cbd5e1;
+      border-radius: 14px;
       font-family: var(--font-body);
-      font-size: 14px;
-      line-height: 1.5;
-      color: var(--vr-slate);
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: var(--text-main);
       background: #ffffff;
       resize: none; /* Không cần kéo tay thủ công */
-      overflow-y: hidden; /* Tự co giãn theo nội dung */
+      overflow-y: hidden; /* Tự co giãn tự động */
       transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     .form-textarea:focus {
       outline: none;
-      border-color: var(--vr-blue-primary);
-      box-shadow: 0 0 0 3px rgba(0, 160, 233, 0.2);
+      border-color: var(--vr-cyan);
+      box-shadow: 0 0 0 4px rgba(0, 180, 216, 0.25);
     }
 
     .btn-submit-wish {
       width: 100%;
-      padding: 13px 20px;
-      background: linear-gradient(135deg, #00a0e9 0%, #0077b6 100%);
+      padding: 14px 22px;
+      background: linear-gradient(135deg, #0284c7 0%, #0096c7 100%);
       color: #ffffff;
       border: none;
-      border-radius: 12px;
-      font-size: 14.5px;
-      font-weight: 700;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 800;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      box-shadow: 0 6px 18px rgba(0, 160, 233, 0.35);
+      gap: 10px;
+      box-shadow: 0 8px 22px rgba(0, 150, 199, 0.35);
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .btn-submit-wish:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 22px rgba(0, 160, 233, 0.45);
+      box-shadow: 0 10px 28px rgba(0, 150, 199, 0.45);
     }
 
-    /* DANH SÁCH LỜI CHÚC HIỂN THỊ TOÀN BỘ KHÔNG BỊ CUỘN */
+    /* DANH SÁCH LỜI CHÚC HIỂN THỊ TOÀN BỘ (NGƯỜI GỬI TRƯỚC Ở TRÊN CÙNG) */
     .wishes-feed-container {
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      /* Hiển thị toàn bộ, có thêm lời chúc thì tự động dài thêm */
+      gap: 16px;
     }
 
     .wish-bubble {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-left: 4px solid var(--vr-blue-primary);
-      border-radius: 14px;
-      padding: 14px 16px;
+      background: #ffffff;
+      border: 2px solid #e0f2fe;
+      border-left: 5px solid var(--vr-cyan);
+      border-radius: 16px;
+      padding: 16px 18px;
+      box-shadow: 0 4px 15px rgba(0, 119, 182, 0.06);
       animation: fadeInWish 0.4s ease;
     }
 
@@ -892,23 +997,24 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .wish-author {
-      font-weight: 700;
-      font-size: 14px;
-      color: var(--vr-navy-deep);
+      font-weight: 800;
+      font-size: 14.5px;
+      color: #0077b6;
     }
 
     .wish-time {
-      font-size: 11px;
+      font-size: 11.5px;
+      font-weight: 600;
       color: #94a3b8;
     }
 
     .wish-content {
-      font-size: 13.5px;
-      line-height: 1.6;
+      font-size: 14px;
+      line-height: 1.65;
       color: #334155;
       white-space: pre-wrap;
       word-break: break-word;
@@ -923,83 +1029,85 @@
        8. MÃ QR & LIÊN HỆ
        ======================================================== */
     .qr-share-section {
-      padding: 28px 20px 36px;
+      padding: 30px 22px 38px;
       background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
       text-align: center;
-      border-top: 1px solid #e2e8f0;
+      border-top: 2px solid #e2e8f0;
     }
 
     .qr-box-inner {
       display: inline-block;
-      padding: 14px;
+      padding: 16px;
       background: #ffffff;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 160, 233, 0.15);
-      border: 2px solid rgba(0, 160, 233, 0.3);
-      margin-bottom: 14px;
+      border-radius: 22px;
+      box-shadow: 0 12px 35px rgba(0, 150, 199, 0.2);
+      border: 3px solid #7dd3fc;
+      margin-bottom: 16px;
     }
 
     .qr-img {
-      width: 170px;
-      height: 170px;
+      width: 175px;
+      height: 175px;
       display: block;
     }
 
     .qr-caption {
-      font-size: 13.5px;
-      font-weight: 600;
+      font-size: 14px;
+      font-weight: 700;
       color: #475569;
-      margin-bottom: 16px;
-      line-height: 1.5;
+      margin-bottom: 18px;
+      line-height: 1.6;
     }
 
     .share-buttons-row {
       display: flex;
       justify-content: center;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
     }
 
     .btn-share {
-      padding: 10px 18px;
+      padding: 11px 20px;
       border-radius: 50px;
-      font-size: 13px;
-      font-weight: 600;
-      border: 1px solid #cbd5e1;
+      font-size: 13.5px;
+      font-weight: 700;
+      border: 2px solid #cbd5e1;
       background: #ffffff;
-      color: var(--vr-slate);
+      color: #1e293b;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      transition: background 0.2s;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: background 0.2s, transform 0.2s;
     }
 
     .btn-share:hover {
       background: #f1f5f9;
+      transform: translateY(-2px);
     }
 
-    /* Footer bản quyền */
+    /* Footer Bản Quyền */
     .footer-brand {
       text-align: center;
       margin-top: 24px;
-      color: #ffffff;
-      font-size: 12px;
-      line-height: 1.6;
-      opacity: 0.9;
+      color: #0369a1;
+      font-size: 12.5px;
+      font-weight: 600;
+      line-height: 1.7;
     }
   </style>
 </head>
 
 <body>
-  <div class="ambient-bg"></div>
+  <div class="ambient-sparkles"></div>
 
   <!-- ÂM THANH NỀN -->
   <audio id="bgm" src="assets/bgm.mp3" preload="auto" loop></audio>
 
   <!-- NÚT ÂM THANH NỔI GÓC PHẢI -->
   <button class="floating-audio-btn" id="audioToggleBtn" onclick="toggleAudio()" title="Bật/Tắt Nhạc">
-    <svg id="musicIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0077b6" stroke-width="2">
+    <svg id="musicIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0077b6" stroke-width="2.5">
       <path d="M9 18V5l12-2v13"></path>
       <circle cx="6" cy="18" r="3"></circle>
       <circle cx="18" cy="16" r="3"></circle>
@@ -1007,28 +1115,41 @@
   </button>
 
   <!-- ========================================================
-       CỔNG MỞ THIỆP 2 CÁNH (GATE-FOLD COVER)
+       CỔNG MỞ THIỆP 2 CÁNH SIÊU NỔI BẬT (LUXURY TECH GATE-FOLD)
        ======================================================== -->
   <div class="gate-overlay" id="gateOverlay" onclick="openGate()">
+    <!-- Cánh cửa bên trái -->
     <div class="gate-door-left">
-      <div class="gate-tech-grid"></div>
-    </div>
-    <div class="gate-door-right">
-      <div class="gate-tech-grid"></div>
+      <div class="tech-circuit-lines"></div>
+      <div class="door-gold-border"></div>
+      <div class="gate-door-ribbon"></div>
     </div>
 
+    <!-- Cánh cửa bên phải -->
+    <div class="gate-door-right">
+      <div class="tech-circuit-lines"></div>
+      <div class="door-gold-border"></div>
+      <div class="gate-door-ribbon"></div>
+    </div>
+
+    <!-- Khối bìa thiệp trung tâm nổi bật -->
     <div class="gate-cover-card">
       <div class="gate-logo-box">
-        <img src="assets/vietrobot_logo.png" alt="VIET ROBOT education" class="gate-logo-img">
+        <img src="assets/vietrobot_logo.png" alt="VietRobot Education J.S.C" class="gate-logo-img">
       </div>
 
       <div class="gate-badge-date">
-        🌷 Tri Ân Thầy Cô • 20/11/2026
+        ✨ Tri Ân Thầy Cô • 20/11/2026
       </div>
 
-      <h1 class="gate-title-main">THƯ MỜI CHÀO MỪNG<br>NGÀY NHÀ GIÁO VIỆT NAM</h1>
+      <h1 class="gate-title-main">
+        THƯ MỜI CHÀO MỪNG
+        <span class="gate-title-gold">NGÀY NHÀ GIÁO VIỆT NAM</span>
+      </h1>
+      
       <p class="gate-subtitle-sub">Tôn vinh những người gieo mầm đam mê Khoa học & Công nghệ Robotics</p>
 
+      <!-- Nút niêm phong chạm mở 3D -->
       <div class="gate-seal-btn" title="Chạm để mở thiệp">
         <svg viewBox="0 0 24 24">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -1036,7 +1157,9 @@
         </svg>
       </div>
 
-      <div class="gate-open-hint">Chạm vào màn hình để mở thiệp</div>
+      <div class="gate-open-hint">
+        <span>✨ Chạm vào màn hình để mở thiệp ✨</span>
+      </div>
     </div>
   </div>
 
@@ -1046,14 +1169,14 @@
   <main class="app-wrapper">
     <div class="main-card">
       
-      <!-- BANNER TIÊU ĐỀ -->
+      <!-- BANNER TIÊU ĐỀ TƯƠI SÁNG -->
       <header class="header-banner">
         <div class="brand-logo-wrap">
-          <img src="assets/vietrobot_logo.png" alt="VIET ROBOT Logo" class="brand-logo">
+          <img src="assets/vietrobot_logo.png" alt="VietRobot Logo" class="brand-logo">
         </div>
 
         <div class="event-badge-gold">
-          ✨ 20.11.2026 • TRI ÂN NGÀY NHÀ GIÁO VIỆT NAM
+          🌟 20.11.2026 • TRI ÂN NGÀY NHÀ GIÁO VIỆT NAM
         </div>
 
         <h1 class="header-title-vn">THƯ MỜI HỘI NGỘ & TRI ÂN</h1>
@@ -1063,9 +1186,9 @@
       <!-- LỜI KÍNH MỜI -->
       <section class="greeting-section">
         <div class="salutation-label">Trân trọng kính mời</div>
-        <h2 class="salutation-target">Quý Thầy Cô & Đội Ngũ Giáo Viên Viet Robot</h2>
+        <h2 class="salutation-target">Quý Thầy Cô & Đội Ngũ Giáo Viên VietRobot</h2>
         <p class="salutation-desc">
-          Nhân dịp <strong>Kỷ niệm Ngày Nhà Giáo Việt Nam 20/11</strong>, Ban Giám Đốc Công ty Cổ phần Giáo dục VIET ROBOT 
+          Nhân dịp <strong>Kỷ niệm Ngày Nhà Giáo Việt Nam 20/11</strong>, Ban Giám Đốc Công ty Cổ phần Giáo dục VietRobot 
           trân trọng kính mời toàn thể Quý Thầy Cô giáo, các Huấn luyện viên STEM Robotics và Cán bộ nhân viên 
           đến tham dự buổi gặp mặt thân mật và liên hoan chúc mừng.
         </p>
@@ -1074,7 +1197,7 @@
       <!-- ĐỒNG HỒ ĐẾM NGƯỢC ĐẾN NGÀY 20/11 -->
       <div class="countdown-wrapper">
         <div class="countdown-title">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <circle cx="12" cy="12" r="10"></circle>
             <polyline points="12 6 12 12 16 14"></polyline>
           </svg>
@@ -1110,7 +1233,7 @@
           <div class="event-card-header">
             <span class="event-tag-badge">Chương Trình 1 • Buổi Sáng</span>
             <div class="event-time-pill">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
               </svg>
@@ -1119,11 +1242,11 @@
           </div>
 
           <div class="event-card-body">
-            <h3 class="event-title">Buổi Gặp Gỡ & Trao Hoa Tri Ân Quý Thầy Cô</h3>
+            <h3 class="event-title">Buổi Gặp Gỡ & Họp Mặt Tri Ân Quý Thầy Cô</h3>
             
             <div class="event-detail-item">
               <div class="event-icon-circle">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                   <circle cx="12" cy="7" r="4"></circle>
                 </svg>
@@ -1136,7 +1259,7 @@
 
             <div class="event-detail-item">
               <div class="event-icon-circle">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                   <circle cx="12" cy="10" r="3"></circle>
                 </svg>
@@ -1150,7 +1273,7 @@
             <div class="event-actions-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=Bcons+Garden+25a+Phạm+Hữu+Lầu+Dĩ+An" 
                  target="_blank" rel="noopener noreferrer" class="btn-action-map">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                   <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
                 </svg>
                 Chỉ Đường Đến Bcons Garden
@@ -1164,7 +1287,7 @@
           <div class="event-card-header">
             <span class="event-tag-badge">Chương Trình 2 • Buổi Chiều Tối</span>
             <div class="event-time-pill">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
               </svg>
@@ -1177,7 +1300,7 @@
 
             <div class="event-detail-item">
               <div class="event-icon-circle">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                   <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
                   <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
                   <line x1="6" y1="1" x2="6" y2="4"></line>
@@ -1193,7 +1316,7 @@
 
             <div class="event-detail-item">
               <div class="event-icon-circle">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                   <circle cx="12" cy="10" r="3"></circle>
                 </svg>
@@ -1211,7 +1334,7 @@
             <div class="event-actions-bar">
               <a href="https://www.google.com/maps/search/?api=1&query=Quán+Dê+Cúc+Phương+222+Lý+Thường+Kiệt+Dĩ+An" 
                  target="_blank" rel="noopener noreferrer" class="btn-action-map rose-theme">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                   <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
                 </svg>
                 Chỉ Đường Đến Quán Dê Cúc Phương
@@ -1236,27 +1359,27 @@
             <div class="timeline-dot"></div>
             <div class="timeline-time">10:00 — SÁNG</div>
             <div class="timeline-title">Gặp gỡ & Đón tiếp tại Phòng IT Bcons Garden</div>
-            <div class="timeline-desc">Chào đón Quý Thầy Cô giáo, thưởng trà và trò chuyện giao lưu.</div>
+            <div class="timeline-desc">Chào đón Quý Thầy Cô giáo, thưởng trà và trò chuyện giao lưu gắn kết.</div>
           </div>
 
           <div class="timeline-step-item">
             <div class="timeline-dot"></div>
             <div class="timeline-time">10:30 — SÁNG</div>
-            <div class="timeline-title">Lời Tri Ân & Trao Tặng Hoa Tươi Thắm</div>
-            <div class="timeline-desc">Ban Giám Đốc gửi lời cảm ơn sâu sắc và trao gửi những bó hoa tươi cùng phần quà ý nghĩa.</div>
+            <div class="timeline-title">Lời Tri Ân & Chúc Mừng Ngày Nhà Giáo Việt Nam</div>
+            <div class="timeline-desc">Ban Giám Đốc gửi lời cảm ơn sâu sắc, lời chúc mừng ý nghĩa và trao gửi những phần quà kỷ niệm 20/11 ấm áp.</div>
           </div>
 
           <div class="timeline-step-item">
             <div class="timeline-dot"></div>
             <div class="timeline-time">11:15 — SÁNG</div>
             <div class="timeline-title">Chụp Ảnh Kỷ Niệm Tập Thể</div>
-            <div class="timeline-desc">Lưu giữ những khoảnh khắc đẹp và nụ cười rạng rỡ của gia đình Viet Robot.</div>
+            <div class="timeline-desc">Lưu giữ những khoảnh khắc đẹp và nụ cười rạng rỡ của gia đình VietRobot.</div>
           </div>
 
           <div class="timeline-step-item evening-step">
             <div class="timeline-dot"></div>
             <div class="timeline-time">17:30 — CHIỀU TỐI</div>
-            <div class="timeline-title">Tiệc Liên Hoan tại Quán Dê Cúc Phương</div>
+            <div class="timeline-title">Tiệc Liên Hoan Thân Mật tại Quán Dê Cúc Phương</div>
             <div class="timeline-desc">Khai tiệc liên hoan, nâng ly chúc mừng và gắn kết tình đồng đội thân ái.</div>
           </div>
         </div>
@@ -1277,11 +1400,11 @@
             Mỗi bài giảng, mỗi mô hình robot hoạt động trơn tru, mỗi ánh mắt hào hứng của các bạn nhỏ chính là kết tinh từ tình yêu thương, sự kiên nhẫn và lòng nhiệt huyết không ngừng nghỉ của Quý Thầy Cô.
           </p>
           <p>
-            Ban Giám Đốc VIET ROBOT xin trân trọng gửi lời cảm ơn chân thành nhất đến những cống hiến thầm lặng nhưng vô cùng lớn lao của Thầy Cô. Chúc Quý Thầy Cô luôn dồi dào sức khỏe, tràn đầy năng lượng sáng tạo và mãi giữ vững ngọn lửa đam mê trong sự nghiệp trồng người!
+            Ban Giám Đốc VietRobot xin trân trọng gửi lời cảm ơn chân thành nhất đến những cống hiến thầm lặng nhưng vô cùng lớn lao của Thầy Cô. Chúc Quý Thầy Cô luôn dồi dào sức khỏe, tràn đầy năng lượng sáng tạo và mãi giữ vững ngọn lửa đam mê trong sự nghiệp trồng người!
           </p>
         </div>
         <div class="letter-signature">Ban Giám Đốc</div>
-        <div class="letter-sign-role">Công Ty Cổ Phần Giáo Dục VIET ROBOT</div>
+        <div class="letter-sign-role">Công Ty Cổ Phần Giáo Dục VietRobot</div>
       </section>
 
       <!-- ====================================================
@@ -1303,12 +1426,12 @@
 
             <div class="form-group">
               <label class="form-label" for="wishContent">Lời chúc mừng Ngày Nhà Giáo Việt Nam 20/11:</label>
-              <!-- Ô tự co giãn theo nội dung (auto-expand textarea) -->
-              <textarea id="wishContent" class="form-textarea" placeholder="Nhập những lời chúc chân thành gửi đến Quý Thầy Cô và đại gia đình Viet Robot..." rows="5" required oninput="autoGrowTextarea(this)"></textarea>
+              <!-- Ô tự co giãn theo nội dung (auto-expand textarea) mặc định 5 dòng -->
+              <textarea id="wishContent" class="form-textarea" placeholder="Nhập những lời chúc chân thành gửi đến Quý Thầy Cô và đại gia đình VietRobot..." rows="5" required oninput="autoGrowTextarea(this)"></textarea>
             </div>
 
             <button type="submit" class="btn-submit-wish">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <line x1="22" y1="2" x2="11" y2="13"></line>
                 <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
               </svg>
@@ -1319,7 +1442,7 @@
 
         <!-- DANH SÁCH LỜI CHÚC (HIỂN THỊ TOÀN BỘ, LỜI CHÚC TRƯỚC Ở TRÊN CÙNG) -->
         <div class="wishes-feed-container" id="wishesFeed">
-          <!-- Dữ liệu được nạp tự động qua JavaScript -->
+          <!-- Nạp tự động qua JavaScript -->
         </div>
       </section>
 
@@ -1328,7 +1451,7 @@
            ==================================================== -->
       <section class="qr-share-section">
         <div class="qr-box-inner">
-          <img src="assets/qr_vietrobot.png" alt="Mã QR Thư Mời 20/11 Viet Robot" class="qr-img">
+          <img src="assets/qr_vietrobot.png" alt="Mã QR Thư Mời 20/11 VietRobot" class="qr-img">
         </div>
         <p class="qr-caption">
           Quét mã QR để mở thư mời trên điện thoại<br>
@@ -1337,7 +1460,7 @@
 
         <div class="share-buttons-row">
           <button class="btn-share" onclick="copyLink()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
               <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
               <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
             </svg>
@@ -1345,7 +1468,7 @@
           </button>
 
           <button class="btn-share" onclick="shareZalo()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
               <circle cx="18" cy="5" r="3"></circle>
               <circle cx="6" cy="12" r="3"></circle>
               <circle cx="18" cy="19" r="3"></circle>
@@ -1361,7 +1484,7 @@
 
     <!-- BẢN QUYỀN CHÂN TRANG -->
     <footer class="footer-brand">
-      <p><strong>CÔNG TY CỔ PHẦN GIÁO DỤC VIET ROBOT</strong></p>
+      <p><strong>CÔNG TY CỔ PHẦN GIÁO DỤC VIETROBOT</strong></p>
       <p>Kính chúc Quý Thầy Cô một mùa 20/11 thật nhiều niềm vui, sức khỏe & hạnh phúc!</p>
     </footer>
   </main>
@@ -1389,11 +1512,6 @@
 
       // Bắn pháo hoa chào mừng
       triggerCelebrationConfetti();
-
-      // Sau hiệu ứng ẩn hẳn overlay
-      setTimeout(() => {
-        overlay.classList.add('hidden');
-      }, 1300);
     }
 
     function triggerCelebrationConfetti() {
@@ -1406,7 +1524,7 @@
         }));
       }
 
-      fire(0.25, { spread: 26, startVelocity: 55, colors: ['#00a0e9', '#d4af37', '#e11d48'] });
+      fire(0.25, { spread: 26, startVelocity: 55, colors: ['#00b4d8', '#ffb703', '#ff0054'] });
       fire(0.2, { spread: 60, colors: ['#ffffff', '#38bdf8', '#ffd700'] });
       fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
       fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
@@ -1472,7 +1590,7 @@
     // ========================================================
     const DEFAULT_WISHES = [
       {
-        name: "Ban Giám Đốc Viet Robot",
+        name: "Ban Giám Đốc VietRobot",
         time: "08:00 20/11/2026",
         content: "Chúc toàn thể Quý Thầy Cô và các bạn Huấn luyện viên STEM Robotics một ngày 20/11 ngập tràn niềm vui, nhiệt huyết và luôn thành công trên con đường ươm mầm tài năng trẻ!"
       },
@@ -1484,7 +1602,7 @@
       {
         name: "Phòng Đào Tạo & R&D",
         time: "09:15 20/11/2026",
-        content: "Chúc mừng Ngày Nhà Giáo Việt Nam 20/11! Chúc đại gia đình Viet Robot ngày càng vững mạnh, lan tỏa tình yêu khoa học công nghệ tới hàng triệu học sinh khắp cả nước! 🌷🤖"
+        content: "Chúc mừng Ngày Nhà Giáo Việt Nam 20/11! Chúc đại gia đình VietRobot ngày càng vững mạnh, lan tỏa tình yêu khoa học công nghệ tới hàng triệu học sinh khắp cả nước! 🌷🤖"
       }
     ];
 
@@ -1588,7 +1706,7 @@
 
     function shareZalo() {
       const url = encodeURIComponent(window.location.href);
-      const title = encodeURIComponent("Thư Mời Chào Mừng Ngày Nhà Giáo Việt Nam 20/11 — VIET ROBOT Education");
+      const title = encodeURIComponent("Thư Mời Chào Mừng Ngày Nhà Giáo Việt Nam 20/11 — VietRobot Education J.S.C");
       window.open(`https://zalo.me/share?url=${url}&title=${title}`, '_blank');
     }
 
