@@ -198,6 +198,8 @@
       z-index: 10;
       width: 90%;
       max-width: 440px;
+      max-height: 92vh;
+      overflow-y: auto;
       background: linear-gradient(165deg, #ffffff 0%, #f4faff 50%, #e3f4ff 100%);
       border-radius: 30px;
       padding: 38px 24px 34px;
@@ -213,7 +215,7 @@
         0 0 35px rgba(0, 180, 216, 0.4);
       border: 1px solid rgba(255, 255, 255, 0.9);
       transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.7s;
-      overflow: hidden;
+      -webkit-overflow-scrolling: touch;
     }
 
     .gate-overlay.opened .gate-cover-card {
@@ -889,6 +891,339 @@
       font-weight: 600;
       line-height: 1.7;
       opacity: 0.9;
+    }
+
+    /* ========================================================
+       7. TỐI ƯU HÓA HOÀN HẢO CHO MÀN HÌNH ĐIỆN THOẠI (RESPONSIVE MOBILE)
+       ======================================================== */
+    @media (max-width: 600px) {
+      .app-wrapper {
+        padding: 12px 10px 40px;
+      }
+
+      .floating-audio-btn {
+        top: 12px;
+        right: 12px;
+        width: 38px;
+        height: 38px;
+        font-size: 10px;
+      }
+
+      /* Bìa mở thiệp trung tâm */
+      .gate-cover-card {
+        width: 92%;
+        max-height: 90vh;
+        padding: 22px 14px 18px;
+        border-radius: 20px;
+      }
+
+      .gate-logo-box {
+        padding: 8px 16px;
+        margin-bottom: 10px;
+        border-radius: 14px;
+      }
+
+      .gate-logo-img {
+        max-width: 155px;
+      }
+
+      .gate-badge-date {
+        font-size: 11px;
+        padding: 5px 14px;
+        margin-bottom: 10px;
+        letter-spacing: 0.5px;
+      }
+
+      .gate-title-main {
+        font-size: 15px;
+        letter-spacing: 0.5px;
+      }
+
+      .gate-title-gold {
+        font-size: 17px;
+        margin-top: 2px;
+      }
+
+      .gate-subtitle-sub {
+        font-size: 12px;
+        line-height: 1.45;
+        margin-bottom: 14px;
+      }
+
+      .gate-seal-btn {
+        width: 62px;
+        height: 62px;
+        margin-bottom: 10px;
+      }
+
+      .gate-seal-text {
+        font-size: 10.5px;
+      }
+
+      .gate-open-hint {
+        font-size: 11.5px;
+      }
+
+      /* Thẻ thiệp chính */
+      .main-card {
+        border-radius: 20px;
+      }
+
+      /* Header thiệp chính */
+      .header-banner {
+        padding: 24px 12px 20px;
+      }
+
+      .brand-logo-wrap {
+        padding: 9px 18px;
+        margin-bottom: 10px;
+        border-radius: 14px;
+      }
+
+      .brand-logo {
+        height: 40px;
+      }
+
+      .event-badge-gold {
+        font-size: 11px;
+        padding: 6px 14px;
+        margin-bottom: 10px;
+        letter-spacing: 0.5px;
+        text-align: center;
+        max-width: 100%;
+        line-height: 1.35;
+        white-space: normal;
+      }
+
+      .header-title-vn {
+        font-size: 19px;
+        letter-spacing: 0.3px;
+        margin-bottom: 6px;
+      }
+
+      .header-quote {
+        font-size: 13px;
+        padding: 0 4px;
+      }
+
+      /* Lời kính mời */
+      .greeting-section {
+        padding: 20px 12px 14px;
+      }
+
+      .salutation-label {
+        font-size: 11px;
+        margin-bottom: 6px;
+      }
+
+      .salutation-target {
+        font-size: 17.5px;
+        margin-bottom: 10px;
+        line-height: 1.35;
+      }
+
+      .salutation-desc {
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      /* Đếm ngược */
+      .countdown-wrapper {
+        margin: 12px 10px;
+        padding: 14px 8px;
+        border-radius: 16px;
+      }
+
+      .countdown-title {
+        font-size: 11.5px;
+        margin-bottom: 10px;
+      }
+
+      .countdown-grid {
+        gap: 6px;
+      }
+
+      .countdown-cell {
+        padding: 8px 3px;
+        border-radius: 12px;
+      }
+
+      .countdown-num {
+        font-size: 19px;
+      }
+
+      .countdown-lbl {
+        font-size: 9px;
+      }
+
+      /* Khối chương trình sự kiện */
+      .events-container {
+        padding: 8px 10px 16px;
+        gap: 14px;
+      }
+
+      .event-card {
+        border-radius: 18px;
+      }
+
+      /* Khắc phục lỗi co ép header thẻ trên điện thoại: xếp dọc ngay ngắn */
+      .event-card-header {
+        padding: 12px 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .event-tag-badge {
+        font-size: 10.5px;
+        padding: 3px 10px;
+        letter-spacing: 0.5px;
+      }
+
+      .event-time-pill {
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 1.4;
+      }
+
+      .event-card-body {
+        padding: 14px 12px;
+      }
+
+      .event-title {
+        font-size: 15.5px;
+        line-height: 1.4;
+        margin-bottom: 10px;
+      }
+
+      .event-detail-item {
+        font-size: 12.5px;
+        line-height: 1.5;
+        margin-bottom: 8px;
+      }
+
+      .event-detail-content strong {
+        font-size: 13px;
+      }
+
+      .event-note-quote {
+        margin-top: 10px;
+        padding: 9px 11px;
+        font-size: 12.5px;
+        line-height: 1.5;
+        border-radius: 0 10px 10px 0;
+      }
+
+      .event-actions-bar {
+        margin-top: 12px;
+      }
+
+      .btn-action-map {
+        min-width: 100%;
+        padding: 10px 12px;
+        font-size: 12.5px;
+        border-radius: 12px;
+      }
+
+      /* Timeline */
+      .timeline-section {
+        padding: 20px 12px;
+      }
+
+      .section-badge {
+        font-size: 10px;
+      }
+
+      .section-title {
+        font-size: 17px;
+      }
+
+      .timeline-steps {
+        padding-left: 24px;
+      }
+
+      .timeline-steps::before {
+        left: 7px;
+        width: 2px;
+      }
+
+      .timeline-dot {
+        left: -24px;
+        width: 16px;
+        height: 16px;
+        border-width: 3px;
+        top: 2px;
+      }
+
+      .timeline-time {
+        font-size: 11px;
+      }
+
+      .timeline-title {
+        font-size: 13.5px;
+        line-height: 1.4;
+      }
+
+      .timeline-desc {
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      /* Tâm thư */
+      .gratitude-letter-box {
+        margin: 14px 10px 10px;
+        padding: 16px 12px;
+        border-radius: 18px;
+      }
+
+      .letter-title {
+        font-size: 15.5px;
+        margin-bottom: 10px;
+      }
+
+      .letter-body {
+        font-size: 12.5px;
+        line-height: 1.6;
+        margin-bottom: 14px;
+      }
+
+      .letter-body p {
+        margin-bottom: 8px;
+      }
+
+      .letter-signature {
+        font-size: 16px;
+      }
+
+      .letter-sign-role {
+        font-size: 10.5px;
+      }
+
+      /* Footer */
+      .footer-brand {
+        margin-top: 16px;
+        font-size: 11px;
+        padding: 0 10px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .header-title-vn {
+        font-size: 17px;
+      }
+      .event-badge-gold {
+        font-size: 10px;
+        padding: 5px 10px;
+      }
+      .countdown-cell {
+        padding: 7px 2px;
+      }
+      .countdown-num {
+        font-size: 17px;
+      }
+      .countdown-lbl {
+        font-size: 8.5px;
+      }
     }
   </style>
 </head>
